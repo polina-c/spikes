@@ -20,7 +20,7 @@ class MyClass {
 }
 
 void x() {
-  final foo = MyClass();
+  final myClass = MyClass();
   // foo.dispose();
 }
 
