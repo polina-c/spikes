@@ -1,5 +1,7 @@
 import 'dart:core';
 
+// Get master channel to have it working.
+
 void nonDisposedObjectGarbageCollected(Object token) {
   print('$token garbage collected');
 }
@@ -21,11 +23,17 @@ class MyClass {
 
 void x() {
   final myClass = MyClass();
-  // foo.dispose();
+  // myClass.dispose();
 }
 
-void main() {
+void y() {
+  List<DateTime> l = [DateTime.now()];
+}
+
+void main() async {
   x();
-  while (true) {}
-  // long running program that does some GC
+  while (true) {
+    await Future.delayed(Duration(seconds: 1));
+    y();
+  }
 }
