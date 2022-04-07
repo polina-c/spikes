@@ -6,5 +6,5 @@ sequenceDiagram
 	leakDetector -> disposedNotGCed: add myClass token
 	
 	timer -> disposedNotGCed: checkForLeaks
-	Note right of disposedNotGCed -> for disposed long time ago:<br/>- output warning to console<br/>- send to DevTools<br/>- delete 
+	Note right of disposedNotGCed: for disposed long time ago:<br/>- output warning to console<br/>- send to DevTools<br/>- delete 
 ```
