@@ -3,6 +3,9 @@ sequenceDiagram
     participant myClass
     participant timer
     participant GC
+    participant leakDetector
+    participant finalizer (global)
+    participant disposedNotGCed (global)
 
     myClass ->>+ leakDetector: create
     leakDetector ->>- finalizer: register myClass
