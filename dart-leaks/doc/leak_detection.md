@@ -15,6 +15,6 @@ sequenceDiagram
     Note over disposedNotGCed: for disposed long time ago:<br/>- output missed GC warning to console<br/>- send to DevTools<br/>- delete
     GC ->>+ finalizer: finalize myClass
     finalizer ->>- disposedNotGCed: objectIsGCed
-    Note over disposedNotGCed: for disposed long time ago:<br/>- output warning to console<br/>- send to DevTools<br/>- delete
+    Note over disposedNotGCed: delete the object<br/>if it was not here:<br/>- output warning to console<br/>- send to DevTools
     	 
 ```
