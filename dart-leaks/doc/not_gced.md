@@ -1,5 +1,7 @@
 ```mermaid
 sequenceDiagram
+    participant myClass
+    participant timer
 	myClass ->> leakDetector: create
 	leakDetector ->> finalizer: register myClass
 	myClass ->> leakDetector: registerDisposal
