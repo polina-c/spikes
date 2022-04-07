@@ -4,8 +4,8 @@ sequenceDiagram
     participant timer
     participant GC
     participant leakDetector
-    participant finalizer (global)
-    participant disposedNotGCed (global)
+    participant finalizer as finalizer<br/>(global)
+    participant disposedNotGCed as disposedNotGCed<br/>(global)
 
     myClass ->>+ leakDetector: create
     leakDetector ->>- finalizer: register myClass
