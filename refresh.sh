@@ -1,11 +1,11 @@
-cd overflow
+cd ../overflow
 flutter pub upgrade
 cd - || exit
 
-cd memory_tools
+cd ../memory_tools
 flutter pub upgrade
 cd - || exit
 
-cd dart-leaks
+cd ../dart-leaks
 flutter pub upgrade
 cd - || exit
