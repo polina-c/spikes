@@ -10,9 +10,10 @@ dependencies:
   weak_map: ^2.0.4
   uuid: ^3.0.6
   memory_tools:
-    git:
-      url: git://github.com/polina-c/spikes.git
-      path: memory_tools
+    path: ../memory_tools
+#    git:
+#      url: git://github.com/polina-c/spikes.git
+#      path: memory_tools
 
 dev_dependencies:
   lints: ^1.0.0

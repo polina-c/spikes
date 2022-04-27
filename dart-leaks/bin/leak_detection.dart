@@ -5,11 +5,9 @@ import 'package:memory_tools/leak_detector.dart';
 
 class MyClass {
   late final leakDetector;
-  late String name;
 
   MyClass(Object token) {
     leakDetector = LeakDetector(this, token: token);
-    name = 'class-with-token-[$token]';
   }
 
   void dispose() {
