@@ -1,23 +1,23 @@
 // This is demo how leak detection works.
 // To run: `dart bin/leak_detection.dart`
 
-import 'package:memory_tools/leak_detector.dart';
+import 'package:memory_tools/leak_detector.dart' as leak_detector;
 
 class MyClass {
-  late final leakDetector;
+  Object _token;
 
-  MyClass(Object token) {
-    leakDetector = LeakDetector(this, token: token);
+  MyClass(this._token) {
+    leak_detector.startLeakDetector(this, token: this._token);
   }
 
   void dispose() {
-    leakDetector.registerDisposal();
+    leak_detector.registerDisposal(this, token: this._token);
   }
 }
 
 // Method that allocates, but does not dispose objects.
 void createAndNotDispose() {
-  final notDisposed = MyClass('Not disposed.');
+  final notDisposed = MyClass('not-disposed');
   // notDisposed.dispose();
 }
 
@@ -25,7 +25,7 @@ final oldSpaceObjects = <Object>[];
 
 // We need method that allocates objects, to trigger GC.
 void doSomeAllocationsInOldAndNewSpace() {
-  List<DateTime> l = List.filled(100, DateTime.now());
+  final l = List.filled(1000, DateTime.now());
   oldSpaceObjects.add(l);
   if (l.length > 100) oldSpaceObjects.removeAt(0);
 }
@@ -33,7 +33,7 @@ void doSomeAllocationsInOldAndNewSpace() {
 void main() async {
   createAndNotDispose();
 
-  final notGCed = MyClass('Not GCed');
+  final notGCed = MyClass('not-GCed');
   notGCed.dispose();
 
   // Wait for GC to trigger.
