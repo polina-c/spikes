@@ -1,7 +1,7 @@
 // This is demo how leak detection works.
 // To run: `dart bin/leak_detection.dart`
 
-import 'package:dart_leaks/leak_detector.dart';
+import 'package:memory_tools/leak_detector.dart';
 
 class MyClass {
   late final leakDetector;

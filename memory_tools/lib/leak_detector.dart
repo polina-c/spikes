@@ -1,4 +1,4 @@
-import 'package:dart_leaks/_object_registry.dart';
+import '_object_registry.dart';
 import 'package:uuid/uuid.dart';
 
 var _uuid = Uuid();
