@@ -1,6 +1,7 @@
-import 'dart:core';
+// This is demo how finalizer works.
+// To run: `dart bin/gc.dart`
 
-// Get master channel to have it working.
+import 'dart:core';
 
 void nonDisposedObjectGarbageCollected(Object token) {
   print('$token garbage collected');
@@ -21,19 +22,21 @@ class MyClass {
   }
 }
 
-void x() {
+// Method that allocates, but does not dispose objects.
+void createAndNotDispose() {
   final myClass = MyClass();
   // myClass.dispose();
 }
 
-void y() {
+// We need method that allocates objects, to trigger GC.
+void doSomeAllocations() {
   List<DateTime> l = [DateTime.now()];
 }
 
 void main() async {
-  x();
+  createAndNotDispose();
   while (true) {
     await Future.delayed(Duration(seconds: 1));
-    y();
+    doSomeAllocations();
   }
 }
