@@ -6,8 +6,8 @@ import '_primitives.dart';
 
 /// Global registry for the objects, which we want to track for leaking.
 class ObjectRegistry {
-  static const _timeToGC = Duration(seconds: 3);
-  static const _reportingPeriod = Duration(seconds: 3);
+  static const _timeToGC = Duration(seconds: 30);
+  static const _reportingPeriod = Duration(seconds: 1);
   final _disposedNotGCed = <Object, DateTime>{};
   final _notDisposedLeaks = <NotDisposedLeak>[];
   late Timer _timer;

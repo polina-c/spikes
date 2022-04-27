@@ -5,9 +5,11 @@ import 'package:dart_leaks/leak_detector.dart';
 
 class MyClass {
   late final leakDetector;
+  late String name;
 
   MyClass(Object token) {
     leakDetector = LeakDetector(this, token: token);
+    name = 'class-with-token-[$token]';
   }
 
   void dispose() {
@@ -17,23 +19,28 @@ class MyClass {
 
 // Method that allocates, but does not dispose objects.
 void createAndNotDispose() {
-  final myClass = MyClass("Not disposed.");
-  // myClass.dispose();
+  final notDisposed = MyClass('Not disposed.');
+  // notDisposed.dispose();
 }
 
+final oldSpaceObjects = <Object>[];
+
 // We need method that allocates objects, to trigger GC.
-void doSomeAllocations() {
-  List<DateTime> l = [DateTime.now()];
+void doSomeAllocationsInOldAndNewSpace() {
+  List<DateTime> l = List.filled(100, DateTime.now());
+  oldSpaceObjects.add(l);
+  if (l.length > 100) oldSpaceObjects.removeAt(0);
 }
 
 void main() async {
   createAndNotDispose();
-  final myClass = MyClass('Not GCed');
-  myClass.dispose();
+
+  final notGCed = MyClass('Not GCed');
+  notGCed.dispose();
 
   // Wait for GC to trigger.
   while (true) {
     await Future.delayed(Duration(seconds: 1));
-    doSomeAllocations();
+    doSomeAllocationsInOldAndNewSpace();
   }
 }
