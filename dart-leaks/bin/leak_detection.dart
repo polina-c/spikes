@@ -17,6 +17,7 @@ class MyClass {
 
 // Method that allocates, but does not dispose objects.
 void createAndNotDispose() {
+  // ignore: unused_local_variable
   final notDisposed = MyClass('not-disposed');
   // notDisposed.dispose();
 }

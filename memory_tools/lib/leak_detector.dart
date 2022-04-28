@@ -1,5 +1,4 @@
 import '_object_registry.dart';
-import 'package:uuid/uuid.dart';
 
 final _objectRegistry = ObjectRegistry();
 final _finalizer = Finalizer(_objectGarbageCollected);

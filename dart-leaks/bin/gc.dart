@@ -24,12 +24,14 @@ class MyClass {
 
 // Method that allocates, but does not dispose objects.
 void createAndNotDispose() {
+  // ignore: unused_local_variable
   final myClass = MyClass();
   // myClass.dispose();
 }
 
 // We need method that allocates objects, to trigger GC.
 void doSomeAllocations() {
+  // ignore: unused_local_variable
   List<DateTime> l = [DateTime.now()];
 }
 
