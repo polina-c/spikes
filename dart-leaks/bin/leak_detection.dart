@@ -22,24 +22,12 @@ void createAndNotDispose() {
   // notDisposed.dispose();
 }
 
-final oldSpaceObjects = <Object>[];
-
-// We need method that allocates objects, to trigger GC.
-void doSomeAllocationsInOldAndNewSpace() {
-  final l = List.filled(1000, DateTime.now());
-  oldSpaceObjects.add(l);
-  if (l.length > 100) oldSpaceObjects.removeAt(0);
-}
-
 void main() async {
   createAndNotDispose();
 
   final notGCed = MyClass('not-GCed');
   notGCed.dispose();
 
-  // Wait for GC to trigger.
-  while (true) {
-    await Future.delayed(Duration(seconds: 1));
-    doSomeAllocationsInOldAndNewSpace();
-  }
+  await leak_detector.forceGC();
+  leak_detector.dispose();
 }

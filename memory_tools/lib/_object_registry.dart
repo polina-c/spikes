@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import '_leak_reporter.dart';
+import '_reporter.dart';
 
 import '_primitives.dart';
 
