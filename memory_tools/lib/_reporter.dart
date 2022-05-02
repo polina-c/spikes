@@ -1,7 +1,6 @@
 import '_primitives.dart';
-import 'package:intl/intl.dart';
 
-final DateFormat formatter = DateFormat.Hms();
+import '_utils.dart';
 
 void reportLeaks(
   Iterable<NotGCedLeak> notGCed,
@@ -19,8 +18,4 @@ void reportLeaks(
     print('  ${notDisposed.length} GCed but not disposed objects(s):');
     for (var leak in notDisposed) print('    ${leak.token}');
   }
-}
-
-void printWithTime(String text) {
-  print('${formatter.format(DateTime.now())} $text');
 }

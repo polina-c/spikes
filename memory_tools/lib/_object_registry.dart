@@ -1,22 +1,35 @@
-import 'dart:async';
-
 import '_reporter.dart';
 
 import '_primitives.dart';
+import '_utils.dart';
+
+Object _getToken(Object object, Object? token) =>
+    token ?? identityHashCode(object);
 
 /// Global registry for the objects, which we want to track for leaking.
 class ObjectRegistry {
-  static const _timeToGC = Duration(seconds: 30);
-  static const _reportingPeriod = Duration(seconds: 1);
+  late Finalizer<Object> _finalizer;
   final _disposedNotGCed = <Object, DateTime>{};
   final _notDisposedLeaks = <NotDisposedLeak>[];
-  late Timer _timer;
 
   ObjectRegistry() {
-    _timer = Timer.periodic(_reportingPeriod, _collectAndReportLeaks);
+    _finalizer = Finalizer(_objectGarbageCollected);
   }
 
-  void registerDisposal(Object token) {
+  void _objectGarbageCollected(Object token) {
+    if (!_disposedNotGCed.containsKey(token)) {
+      _notDisposedLeaks.add(NotDisposedLeak(token));
+    }
+    _disposedNotGCed.remove(token);
+  }
+
+  startTracking(Object object, Object? token) {
+    token = _getToken(object, token);
+    _finalizer.attach(object, token);
+  }
+
+  void registerDisposal(Object object, Object? token) {
+    token = _getToken(object, token);
     assert(
       !_disposedNotGCed.containsKey(token),
       'Disposal for the object $token is registered twice.',
@@ -24,18 +37,11 @@ class ObjectRegistry {
     _disposedNotGCed[token] = DateTime.now();
   }
 
-  void registerGC(Object token) {
-    if (!_disposedNotGCed.containsKey(token)) {
-      _notDisposedLeaks.add(NotDisposedLeak(token));
-    }
-    _disposedNotGCed.remove(token);
-  }
-
-  void _collectAndReportLeaks(Timer timer) {
+  void collectAndReportLeaks() {
     final now = DateTime.now();
 
     bool shouldBeGCed(Object token) =>
-        _disposedNotGCed[token]!.add(_timeToGC).isBefore(now);
+        _disposedNotGCed[token]!.add(timeToGC).isBefore(now);
 
     final notGCedLeaks = _disposedNotGCed.keys
         .where((token) => shouldBeGCed(token))
@@ -49,6 +55,4 @@ class ObjectRegistry {
     reportLeaks(notGCedLeaks, _notDisposedLeaks);
     _notDisposedLeaks.clear();
   }
-
-  void dispose() => _timer.cancel();
 }

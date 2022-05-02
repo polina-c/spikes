@@ -1,13 +1,13 @@
 // This is demo how leak detection works.
 // To run: `dart bin/leak_detection.dart`
 
-import 'package:memory_tools/leak_detector.dart' as leak_detector;
+import 'package:memory_tools/app_leak_detector.dart' as leak_detector;
 
 class MyClass {
   Object _token;
 
   MyClass(this._token) {
-    leak_detector.startLeakDetector(this, token: this._token);
+    leak_detector.startTracking(this, token: this._token);
   }
 
   void dispose() {
@@ -28,6 +28,5 @@ void main() async {
   final notGCed = MyClass('not-GCed');
   notGCed.dispose();
 
-  await leak_detector.forceGC();
-  leak_detector.dispose();
+  await leak_detector.wrapUp();
 }
