@@ -1,7 +1,11 @@
+import 'primitives.dart';
+
+import '_globals.dart';
 import '_reporter.dart';
 
-import '_primitives.dart';
 import '_utils.dart';
+
+final objectRegistry = ObjectRegistry();
 
 Object _getToken(Object object, Object? token) =>
     token ?? identityHashCode(object);
@@ -17,6 +21,7 @@ class ObjectRegistry {
   }
 
   void _objectGarbageCollected(Object token) {
+    logger.fine('$token: GCed.');
     if (!_disposedNotGCed.containsKey(token)) {
       _notDisposedLeaks.add(NotDisposedLeak(token));
     }
@@ -24,11 +29,13 @@ class ObjectRegistry {
   }
 
   startTracking(Object object, Object? token) {
+    logger.fine('$token: started tracking.');
     token = _getToken(object, token);
     _finalizer.attach(object, token);
   }
 
   void registerDisposal(Object object, Object? token) {
+    logger.fine('$token: disposed.');
     token = _getToken(object, token);
     assert(
       !_disposedNotGCed.containsKey(token),
@@ -38,6 +45,10 @@ class ObjectRegistry {
   }
 
   void collectAndReportLeaks() {
+    reportLeaks(collectLeaks());
+  }
+
+  Leaks collectLeaks() {
     final now = DateTime.now();
 
     bool shouldBeGCed(Object token) =>
@@ -52,7 +63,9 @@ class ObjectRegistry {
       _disposedNotGCed.remove(leak.token);
     }
 
-    reportLeaks(notGCedLeaks, _notDisposedLeaks);
+    final notDisposed = [..._notDisposedLeaks];
     _notDisposedLeaks.clear();
+
+    return Leaks(notGCedLeaks, notDisposed);
   }
 }

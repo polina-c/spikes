@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:memory_tools/_globals.dart';
 
 final _oldSpaceObjects = <Object>[];
 
@@ -9,11 +10,9 @@ void _doSomeAllocationsInOldAndNewSpace() {
   if (_oldSpaceObjects.length > 100) _oldSpaceObjects.removeAt(0);
 }
 
-const timeToGC = Duration(seconds: 30);
-
 Future<void> forceGC() async {
   final start = DateTime.now();
-  printWithTime('Started waiting for GC.');
+  logger.fine('Started waiting for GC.');
 
   while (DateTime.now().isBefore(start.add(timeToGC))) {
     await Future.delayed(Duration(seconds: 1));
