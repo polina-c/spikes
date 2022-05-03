@@ -8,7 +8,7 @@ import '_utils.dart';
 final objectRegistry = ObjectRegistry();
 
 Object _getToken(Object object, Object? token) =>
-    token ?? identityHashCode(object);
+    token ?? '${object.runtimeType}.${identityHashCode(object)}';
 
 /// Global registry for the objects, which we want to track for leaking.
 class ObjectRegistry {
@@ -44,8 +44,10 @@ class ObjectRegistry {
     _disposedNotGCed[token] = DateTime.now();
   }
 
-  void collectAndReportLeaks() {
-    reportLeaks(collectLeaks());
+  Leaks collectAndReportLeaks() {
+    final result = collectLeaks();
+    reportLeaks(result);
+    return result;
   }
 
   Leaks collectLeaks() {

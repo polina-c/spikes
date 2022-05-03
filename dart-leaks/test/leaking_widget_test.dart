@@ -4,7 +4,9 @@ import 'package:memory_tools/test_leak_detector.dart' as leak_detector;
 
 void main() {
   setUp(() {
-    leak_detector.init(Duration(seconds: 2));
+    leak_detector.init(
+      timeToGC: Duration(seconds: 2),
+    );
   });
 
   testWidgets(

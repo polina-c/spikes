@@ -1,13 +1,17 @@
 import 'primitives.dart';
 
 import '_utils.dart';
+import '_globals.dart' as globals;
 
 void reportLeaks(
   Leaks leaks,
 ) {
   if (leaks.isEmpty) return;
 
-  printWithTime('Detected leaks:');
+  print(
+      'Detected ${leaks.notGCed.length} not GCed and ${leaks.notDisposed.length} not disposed.');
+
+  if (!globals.detailedOutput) return;
 
   if (!leaks.notGCed.isEmpty) {
     print('  ${leaks.notGCed.length} disposed but not GCed object(s):');

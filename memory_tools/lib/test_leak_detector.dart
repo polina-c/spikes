@@ -1,12 +1,15 @@
 import 'dart:async';
-import 'package:memory_tools/_globals.dart';
+import 'package:memory_tools/_globals.dart' as globals;
 import 'package:memory_tools/primitives.dart';
 
 import '_object_registry.dart';
 import '_utils.dart' as utils;
 
-void init(Duration timeToGCtoUse) {
-  timeToGC = timeToGCtoUse;
+void init(
+    {Duration timeToGC = const Duration(seconds: 5),
+    bool detailedOutput = false}) {
+  globals.timeToGC = timeToGC;
+  globals.detailedOutput = detailedOutput;
 }
 
 Future<Leaks> collectLeaks() async {
@@ -15,9 +18,8 @@ Future<Leaks> collectLeaks() async {
 }
 
 Future<void> wrapUp() async {
-  logger.fine('Wrapping up...');
-  objectRegistry.collectAndReportLeaks();
+  globals.logger.fine('Wrapping up...');
   await utils.forceGC();
   objectRegistry.collectAndReportLeaks();
-  logger.fine('Wrapped up.');
+  globals.logger.fine('Wrapped up.');
 }
