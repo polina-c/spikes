@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:memory_tools/_globals.dart' as globals;
+import 'package:memory_tools/_reporter.dart' as reporter;
 import 'package:memory_tools/primitives.dart';
 
 import '_object_registry.dart';
@@ -7,9 +8,10 @@ import '_utils.dart' as utils;
 
 void init(
     {Duration timeToGC = const Duration(seconds: 5),
-    bool detailedOutput = false}) {
+    String fileName = 'leaks_from_app.yaml'}) {
   globals.timeToGC = timeToGC;
-  globals.detailedOutput = detailedOutput;
+  globals.reportFileName = fileName;
+  reporter.clearFile();
 }
 
 Future<Leaks> collectLeaks() async {

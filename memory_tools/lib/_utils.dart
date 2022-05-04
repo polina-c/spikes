@@ -1,5 +1,6 @@
 import 'package:intl/intl.dart';
 import 'package:memory_tools/_globals.dart';
+import 'package:flutter/src/widgets/widget_inspector.dart';
 
 final _oldSpaceObjects = <Object>[];
 
@@ -15,7 +16,7 @@ Future<void> forceGC() async {
   logger.fine('Started waiting for GC.');
 
   while (DateTime.now().isBefore(start.add(timeToGC))) {
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(Duration(milliseconds: 10));
     _doSomeAllocationsInOldAndNewSpace();
   }
 }
@@ -23,4 +24,12 @@ Future<void> forceGC() async {
 final DateFormat _formatter = DateFormat.Hms();
 void printWithTime(String text) {
   print('${_formatter.format(DateTime.now())} $text');
+}
+
+String getCreationLocation(Object object) {
+  return describeCreationLocation(object) ?? 'location-not-detected';
+}
+
+String getCallStack() {
+  return StackTrace.current.toString();
 }

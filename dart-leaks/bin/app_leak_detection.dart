@@ -1,10 +1,10 @@
 // This is demo how leak detection works.
 // To run: `dart bin/app_leak_detection.dart`
 
-// Method that allocates, but does not dispose objects.
 import 'package:dart_leaks/tracked_class.dart';
 import 'package:memory_tools/app_leak_detector.dart' as leak_detector;
 
+/// Method that allocates, but does not dispose objects.
 void createAndNotDispose() {
   // ignore: unused_local_variable
   final notDisposed = MyTrackedClass('not-disposed');
@@ -12,7 +12,8 @@ void createAndNotDispose() {
 }
 
 void main() async {
-  leak_detector.init();
+  leak_detector.init(fileName: 'leaks_from_test_app.yaml');
+
   createAndNotDispose();
 
   final notGCed = MyTrackedClass('not-GCed');
