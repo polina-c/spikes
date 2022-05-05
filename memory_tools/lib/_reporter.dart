@@ -54,7 +54,7 @@ String _listOfTokensToYaml(String title, Iterable<Object> tokens) =>
         : '''$title:
   total: ${tokens.length}
   tokens:
-${tokens.map((e) => '    $e').join()}
+${tokens.map((e) => '    - $e\n').join()}
 ''';
 
 String _leakToYaml(ObjectInfo leak, String indent) {
