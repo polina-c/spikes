@@ -3,7 +3,7 @@ import 'dart:io';
 import 'primitives.dart';
 
 import '_globals.dart' as globals;
-import 'package:indent/indent.dart';
+// import 'package:indent/indent.dart';
 
 String _folderName = '/Users/polinach/Documents/';
 
@@ -12,8 +12,14 @@ void reportLeaks(
 ) {
   if (leaks.isEmpty) return;
 
-  print(
-      'Detected ${leaks.notGCed.length + leaks.notDisposed.length}: ${leaks.notGCed.length} not GCed and ${leaks.notDisposed.length} not disposed.');
+  int notGCed = leaks.notGCed.length;
+  int notDisposed = leaks.notDisposed.length;
+  int falsePositives = leaks.falsePositives.length;
+
+  print('Detected ${notGCed + notDisposed + falsePositives}:'
+      ' $notGCed not GCed,'
+      ' $notDisposed not disposed and'
+      ' $falsePositives false positives.');
 
   outputLeaks(leaks);
 }
@@ -29,29 +35,42 @@ Future<void> clearFile() async {
 }
 
 String _leaksToYaml(Leaks leaks) =>
-    _listToYaml('not-disposed', leaks.notDisposed) +
-    _listToYaml('not-gced', leaks.notGCed);
+    _listOfLeaksToYaml('not-disposed', leaks.notDisposed) +
+    _listOfLeaksToYaml('not-gced', leaks.notGCed) +
+    _listOfTokensToYaml('false-positives', leaks.falsePositives);
 
-String _listToYaml(String title, Iterable<Leak> leaks) => leaks.length == 0
-    ? ''
-    : '''$title:
+String _listOfLeaksToYaml(String title, Iterable<ObjectInfo> leaks) =>
+    leaks.length == 0
+        ? ''
+        : '''$title:
   total: ${leaks.length}
   objects:
 ${leaks.map((e) => _leakToYaml(e, '    ')).join()}
 ''';
 
-String _leakToYaml(Leak leak, String indent) {
-  return '''$indent${leak.token}:
-$indent  creationLocation: ${leak.info.creationLocation}
-$indent  registrationTime: ${leak.info.registrationTime}
-$indent  disposedAfter: ${leak.info.disposedAfter}
-$indent  gcedAfter: ${leak.info.gcedAfter}
-$indent  call-stacks:
-$indent    registrationCallStack: '
-${leak.info.registrationCallStack.indent(indent.length + 6)}
-$indent    '
-$indent    disposalCallStack: '
-${(leak.info.disposalCallStack ?? '').indent(indent.length + 6)}
-$indent    '
+String _listOfTokensToYaml(String title, Iterable<Object> tokens) =>
+    tokens.length == 0
+        ? ''
+        : '''$title:
+  total: ${tokens.length}
+  tokens:
+${tokens.map((e) => '    $e').join()}
 ''';
+
+String _leakToYaml(ObjectInfo leak, String indent) {
+  return '''$indent${leak.token}:
+$indent  creationLocation: ${leak.creationLocation}
+$indent  registrationTime: ${leak.registrationTime}
+$indent  disposedAfter: ${leak.disposedAfter}
+$indent  gcedAfter: ${leak.gcedAfter}
+''';
+
+// $indent  call-stacks:
+// $indent    registrationCallStack: '
+// ${leak.registrationCallStack.indent(indent.length + 6)}
+// $indent    '
+// $indent    disposalCallStack: '
+// ${(leak.disposalCallStack ?? '').indent(indent.length + 6)}
+// $indent    '
+// ''';
 }

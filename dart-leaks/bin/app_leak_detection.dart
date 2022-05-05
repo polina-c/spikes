@@ -12,8 +12,10 @@ void createAndNotDispose() {
 }
 
 void main() async {
-  leak_detector.init(fileName: 'leaks_from_test_app.yaml');
-
+  leak_detector.init(
+    fileName: 'leaks_from_test_app.yaml',
+    timeToGC: Duration(seconds: 5),
+  );
   createAndNotDispose();
 
   final notGCed = MyTrackedClass('not-GCed');

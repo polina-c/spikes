@@ -1,7 +1,6 @@
 import 'package:dart_leaks/tracked_class.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
-import 'package:flutter/src/widgets/widget_inspector.dart';
 
 final log = Logger('leak-detector');
 

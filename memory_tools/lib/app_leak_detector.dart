@@ -6,9 +6,9 @@ import '_utils.dart' as utils;
 
 Timer? _timer;
 
-void init({required String fileName}) {
+void init({required String fileName, required Duration timeToGC}) {
   globals.reportFileName = fileName;
-  globals.timeToGC = Duration(seconds: 30);
+  globals.timeToGC = Duration(seconds: 60);
   reporter.clearFile();
 
   _timer ??= Timer.periodic(

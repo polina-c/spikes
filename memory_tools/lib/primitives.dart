@@ -1,29 +1,48 @@
-import 'package:indent/indent.dart';
-
-class Leak {
-  final Object token;
-  final ObjectInfo info;
-  Leak(this.token, this.info);
-}
-
 class Leaks {
-  final List<Leak> notGCed;
-  final List<Leak> notDisposed;
+  final List<ObjectInfo> notGCed;
+  final List<ObjectInfo> notDisposed;
+  final List<Object> falsePositives;
 
-  Leaks(this.notGCed, this.notDisposed);
+  Leaks(this.notGCed, this.notDisposed, this.falsePositives);
 
-  bool get isEmpty => notGCed.isEmpty && notDisposed.isEmpty;
+  bool get isEmpty =>
+      notGCed.isEmpty && notDisposed.isEmpty && falsePositives.isEmpty;
 }
 
 class ObjectInfo {
+  final Object token;
+
   final DateTime registrationTime;
+
   final String creationLocation;
+
   final String registrationCallStack;
 
   String? disposalCallStack;
-  Duration? disposedAfter;
-  Duration? gcedAfter;
+
+  Duration? _disposedAfter;
+  Duration? get disposedAfter => _disposedAfter;
+  void setDisposedNow() {
+    if (_disposedAfter != null) throw 'The object $token disposed twice.';
+    if (_gcedAfter != null)
+      throw 'The object $token should not be disposed after being GCed.';
+    _disposedAfter = DateTime.now().difference(registrationTime);
+  }
+
+  Duration? _gcedAfter;
+  Duration? get gcedAfter => _gcedAfter;
+  void setGCedNow() {
+    if (_gcedAfter != null) throw 'The object $token GCed twice.';
+    _gcedAfter = DateTime.now().difference(registrationTime);
+  }
+
+  bool get isGCed => _gcedAfter != null;
+  bool get isDisposed => _disposedAfter != null;
 
   ObjectInfo(
-      this.registrationTime, this.creationLocation, this.registrationCallStack);
+    this.token,
+    this.registrationTime,
+    this.creationLocation,
+    this.registrationCallStack,
+  );
 }

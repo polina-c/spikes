@@ -3,9 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:logging/logging.dart';
 import 'package:memory_tools/_globals.dart';
 import 'package:memory_tools/_reporter.dart';
-import 'package:memory_tools/primitives.dart';
 import 'package:memory_tools/test_leak_detector.dart' as leak_detector;
-import 'dart:io';
 
 void main() {
   Logger.root.level = Level.FINE;
