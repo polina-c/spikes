@@ -1,5 +1,5 @@
 import 'package:intl/intl.dart';
-import 'package:memory_tools/_globals.dart';
+import 'package:memory_tools/src/_globals.dart';
 import 'package:flutter/src/widgets/widget_inspector.dart';
 
 final _oldSpaceObjects = <Object>[];

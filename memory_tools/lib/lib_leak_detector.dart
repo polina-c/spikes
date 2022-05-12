@@ -1,4 +1,4 @@
-import '_object_registry.dart';
+import 'src/_object_registry.dart';
 
 void startTracking(Object object, {Object? token}) {
   objectRegistry.startTracking(object, token);

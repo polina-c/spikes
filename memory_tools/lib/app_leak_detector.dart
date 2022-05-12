@@ -1,14 +1,14 @@
 import 'dart:async';
-import '_globals.dart' as globals;
-import '_object_registry.dart';
-import '_reporter.dart' as reporter;
-import '_utils.dart' as utils;
+import 'src/_globals.dart' as globals;
+import 'src/_object_registry.dart';
+import 'src/_reporter.dart' as reporter;
+import 'src/_utils.dart' as utils;
 
 Timer? _timer;
 
-void init({required String fileName, required Duration timeToGC}) {
+void init({required String? fileName, required Duration timeToGC}) {
   globals.reportFileName = fileName;
-  globals.timeToGC = Duration(seconds: 60);
+  globals.timeToGC = timeToGC;
   reporter.clearFile();
 
   _timer ??= Timer.periodic(

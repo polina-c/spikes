@@ -1,15 +1,15 @@
 import 'package:dart_leaks/leaking_widget.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:logging/logging.dart';
-import 'package:memory_tools/_globals.dart';
-import 'package:memory_tools/_reporter.dart';
+// import 'package:memory_tools/_globals.dart';
+// import 'package:memory_tools/_reporter.dart';
 import 'package:memory_tools/test_leak_detector.dart' as leak_detector;
 
 void main() {
   Logger.root.level = Level.FINE;
-  logger.onRecord.listen((record) {
-    print('${record.level.name}: ${record.time}: ${record.message}');
-  });
+  // logger.onRecord.listen((record) {
+  //   print('${record.level.name}: ${record.time}: ${record.message}');
+  // });
 
   setUp(() {
     leak_detector.init(
@@ -28,7 +28,7 @@ void main() {
   tearDown(() async {
     final leaks = await leak_detector.collectLeaks();
 
-    await outputLeaks(leaks);
+    // await outputLeaks(leaks);
 
     expect(leaks.notGCed.length, 1);
     expect(leaks.notDisposed.length, 1);

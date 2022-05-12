@@ -7,6 +7,8 @@ import '_globals.dart' as globals;
 
 String _folderName = '/Users/polinach/Documents/';
 
+int _totalNotFalseNotGCed = 0;
+
 void reportLeaks(
   Leaks leaks,
 ) {
@@ -16,21 +18,28 @@ void reportLeaks(
   int notDisposed = leaks.notDisposed.length;
   int falsePositives = leaks.falsePositives.length;
 
-  print('Detected ${notGCed + notDisposed + falsePositives}:'
+  _totalNotFalseNotGCed += notGCed - falsePositives;
+
+  print('New ${notGCed + notDisposed + falsePositives}:'
       ' $notGCed not GCed,'
       ' $notDisposed not disposed and'
-      ' $falsePositives false positives.');
+      ' $falsePositives false positives.'
+      ' Total not GCed: $_totalNotFalseNotGCed.');
 
   outputLeaks(leaks);
 }
 
 Future<void> outputLeaks(Leaks leaks) async {
-  var file = await File(_folderName + globals.reportFileName);
+  final fileName = globals.reportFileName;
+  if (fileName == null) return;
+  var file = await File(_folderName + fileName);
   await file.writeAsString(_leaksToYaml(leaks), mode: FileMode.append);
 }
 
 Future<void> clearFile() async {
-  var file = await File(_folderName + globals.reportFileName);
+  final fileName = globals.reportFileName;
+  if (fileName == null) return;
+  var file = await File(_folderName + fileName);
   await file.writeAsString('');
 }
 

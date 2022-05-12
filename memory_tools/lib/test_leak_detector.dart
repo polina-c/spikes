@@ -1,10 +1,10 @@
 import 'dart:async';
-import 'package:memory_tools/_globals.dart' as globals;
-import 'package:memory_tools/_reporter.dart' as reporter;
-import 'package:memory_tools/primitives.dart';
+import 'package:memory_tools/src/_globals.dart' as globals;
+import 'package:memory_tools/src/_reporter.dart' as reporter;
+import 'package:memory_tools/src/primitives.dart';
 
-import '_object_registry.dart';
-import '_utils.dart' as utils;
+import 'src/_object_registry.dart';
+import 'src/_utils.dart' as utils;
 
 void init(
     {Duration timeToGC = const Duration(seconds: 5),
