@@ -77,7 +77,8 @@ class _ObjectRegistry {
     _assertIntegrity(info);
   }
 
-  Leaks collectAndReportLeaks() {
+  Future<Leaks> forceGCandReportLeaks() async {
+    await utils.forceGC();
     final result = collectLeaks();
     reportLeaks(result);
     return result;

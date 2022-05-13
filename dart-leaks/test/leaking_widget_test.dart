@@ -11,26 +11,26 @@ void main() {
   //   print('${record.level.name}: ${record.time}: ${record.message}');
   // });
 
-  setUp(() {
-    leak_detector.init(
-      timeToGC: Duration(seconds: 5),
-    );
-  });
-
-  testWidgets(
-    'Leaks are detected for LeakingWidget.',
-    (tester) async {
-      await tester.pumpWidget(LeakingWidget());
-      await tester.pump(const Duration(seconds: 1));
-    },
-  );
-
-  tearDown(() async {
-    final leaks = await leak_detector.collectLeaks();
-
-    // await outputLeaks(leaks);
-
-    expect(leaks.notGCed.length, 1);
-    expect(leaks.notDisposed.length, 1);
-  });
+  // setUp(() {
+  //   leak_detector.init(
+  //     timeToGC: Duration(seconds: 5),
+  //   );
+  // });
+  //
+  // testWidgets(
+  //   'Leaks are detected for LeakingWidget.',
+  //   (tester) async {
+  //     await tester.pumpWidget(LeakingWidget());
+  //     await tester.pump(const Duration(seconds: 1));
+  //   },
+  // );
+  //
+  // tearDown(() async {
+  //   final leaks = await leak_detector.collectLeaks();
+  //
+  //   // await outputLeaks(leaks);
+  //
+  //   expect(leaks.notGCed.length, 1);
+  //   expect(leaks.notDisposed.length, 1);
+  // });
 }

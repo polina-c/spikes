@@ -3,6 +3,8 @@ import 'src/_globals.dart' as globals;
 import 'src/_object_registry.dart';
 import 'src/_reporter.dart' as reporter;
 import 'src/_utils.dart' as utils;
+import 'dart:convert';
+import 'dart:io' as io;
 
 Timer? _timer;
 
@@ -13,16 +15,14 @@ void init({required String? fileName, required Duration timeToGC}) {
 
   _timer ??= Timer.periodic(
     Duration(seconds: 1),
-    (_) => objectRegistry.collectAndReportLeaks(),
+    (_) async => await objectRegistry.forceGCandReportLeaks(),
   );
 }
 
-// For console application.
+// For console applications and tests.
 Future<void> wrapUp() async {
   globals.logger.fine('Wrapping up...');
   _timer?.cancel();
-  objectRegistry.collectAndReportLeaks();
-  await utils.forceGC();
-  objectRegistry.collectAndReportLeaks();
+  await objectRegistry.forceGCandReportLeaks();
   globals.logger.fine('Wrapped up.');
 }
