@@ -1,48 +1,69 @@
+import '_globals.dart';
+
 class Leaks {
   final List<ObjectInfo> notGCed;
   final List<ObjectInfo> notDisposed;
-  final List<Object> falsePositives;
+  final List<ObjectInfo> gcedLate;
 
-  Leaks(this.notGCed, this.notDisposed, this.falsePositives);
+  Leaks(this.notGCed, this.notDisposed, this.gcedLate);
 
   bool get isEmpty =>
-      notGCed.isEmpty && notDisposed.isEmpty && falsePositives.isEmpty;
+      notGCed.isEmpty && notDisposed.isEmpty && gcedLate.isEmpty;
+
+  bool sameSize(Leaks? previous) {
+    if (previous == null) return false;
+    return previous.gcedLate.length == gcedLate.length &&
+        previous.notGCed.length == notGCed.length &&
+        previous.notDisposed.length == notDisposed.length;
+  }
 }
 
 class ObjectInfo {
   final Object token;
 
-  final DateTime registrationTime;
+  final DateTime registration;
 
   final String creationLocation;
 
-  final String registrationCallStack;
-
-  String? disposalCallStack;
-
-  Duration? _disposedAfter;
-  Duration? get disposedAfter => _disposedAfter;
+  Duration? _disposed;
+  Duration? get disposed => _disposed;
   void setDisposedNow() {
-    if (_disposedAfter != null) throw 'The object $token disposed twice.';
-    if (_gcedAfter != null)
+    if (_disposed != null) throw 'The object $token disposed twice.';
+    if (_gced != null)
       throw 'The object $token should not be disposed after being GCed.';
-    _disposedAfter = DateTime.now().difference(registrationTime);
+    _disposed = DateTime.now().difference(registration);
   }
 
-  Duration? _gcedAfter;
-  Duration? get gcedAfter => _gcedAfter;
+  Duration? _gced;
+  Duration? get gced => _gced;
   void setGCedNow() {
-    if (_gcedAfter != null) throw 'The object $token GCed twice.';
-    _gcedAfter = DateTime.now().difference(registrationTime);
+    if (_gced != null) throw 'The object $token GCed twice.';
+    _gced = DateTime.now().difference(registration);
   }
 
-  bool get isGCed => _gcedAfter != null;
-  bool get isDisposed => _disposedAfter != null;
+  bool get isGCed => _gced != null;
+  bool get isDisposed => _disposed != null;
+
+  bool get isGCedLateLeak {
+    if (_disposed == null || _gced == null) return false;
+    return (_gced! - _disposed!).compareTo(timeToGC) > 0;
+  }
+
+  bool get isNotGCedLeak {
+    if (_disposed == null) return false;
+    if (_gced != null) return false;
+    final timeSinceDisposal =
+        DateTime.now().difference(registration) - _disposed!;
+    return timeSinceDisposal.compareTo(timeToGC) > 0;
+  }
+
+  bool get isNotDisposedLeak {
+    return isGCed && !isDisposed;
+  }
 
   ObjectInfo(
     this.token,
-    this.registrationTime,
+    this.registration,
     this.creationLocation,
-    this.registrationCallStack,
   );
 }

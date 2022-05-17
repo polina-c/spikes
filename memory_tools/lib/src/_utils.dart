@@ -1,6 +1,5 @@
 import 'package:intl/intl.dart';
 import 'package:memory_tools/src/_globals.dart';
-import 'package:flutter/src/widgets/widget_inspector.dart';
 
 final _oldSpaceObjects = <Object>[];
 
@@ -24,10 +23,6 @@ Future<void> forceGC() async {
 final DateFormat _formatter = DateFormat.Hms();
 void printWithTime(String text) {
   print('${_formatter.format(DateTime.now())} $text');
-}
-
-String getCreationLocation(Object object) {
-  return describeCreationLocation(object) ?? 'location-not-detected';
 }
 
 String getCallStack() {

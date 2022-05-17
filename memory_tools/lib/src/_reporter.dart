@@ -3,50 +3,57 @@ import 'dart:io';
 import 'primitives.dart';
 
 import '_globals.dart' as globals;
-// import 'package:indent/indent.dart';
+import 'dart:developer';
 
-String _folderName = '/Users/polinach/Documents/';
-
-int _totalNotFalseNotGCed = 0;
+Leaks? _previous;
 
 void reportLeaks(
   Leaks leaks,
 ) {
   if (leaks.isEmpty) return;
+  reportToDevTools(leaks);
+
+  if (leaks.sameSize(_previous)) return;
 
   int notGCed = leaks.notGCed.length;
   int notDisposed = leaks.notDisposed.length;
-  int falsePositives = leaks.falsePositives.length;
+  int gcedLate = leaks.gcedLate.length;
 
-  _totalNotFalseNotGCed += notGCed - falsePositives;
-
-  print('New ${notGCed + notDisposed + falsePositives}:'
+  print('${notGCed + notDisposed + gcedLate} leaks:'
+      ' $notDisposed not disposed,'
       ' $notGCed not GCed,'
-      ' $notDisposed not disposed and'
-      ' $falsePositives false positives.'
-      ' Total not GCed: $_totalNotFalseNotGCed.');
+      ' $gcedLate GCed late.');
 
-  outputLeaks(leaks);
+  _previous = leaks;
 }
 
-Future<void> outputLeaks(Leaks leaks) async {
-  final fileName = globals.reportFileName;
-  if (fileName == null) return;
-  var file = await File(_folderName + fileName);
-  await file.writeAsString(_leaksToYaml(leaks), mode: FileMode.append);
+void reportToDevTools(Leaks leaks) {
+  postEvent('MemoryLeaks', _leaksToJson(leaks));
 }
 
-Future<void> clearFile() async {
-  final fileName = globals.reportFileName;
-  if (fileName == null) return;
-  var file = await File(_folderName + fileName);
-  await file.writeAsString('');
-}
+Map<String, dynamic> _leaksToJson(Leaks leaks) => {
+      'not-gced': _listOfLeaksToJson(leaks.notGCed),
+      'gced-late': _listOfLeaksToJson(leaks.gcedLate),
+      'not-disposed': _listOfLeaksToJson(leaks.notDisposed),
+    };
+
+Map<String, dynamic> _listOfLeaksToJson(Iterable<ObjectInfo> leaks) => {
+      'total': leaks.length,
+      'leaks': leaks.map((e) => _leakToJson(e)).toList(growable: false)
+    };
+
+Map<String, dynamic> _leakToJson(ObjectInfo leak) => {
+      'token': leak.token,
+      'creationLocation': leak.creationLocation,
+      'registration': leak.registration.toString(),
+      'disposed': leak.disposed.toString(),
+      'gced': leak.gced.toString(),
+    };
 
 String _leaksToYaml(Leaks leaks) =>
     _listOfLeaksToYaml('not-disposed', leaks.notDisposed) +
     _listOfLeaksToYaml('not-gced', leaks.notGCed) +
-    _listOfTokensToYaml('false-positives', leaks.falsePositives);
+    _listOfTokensToYaml('gced-late', leaks.gcedLate);
 
 String _listOfLeaksToYaml(String title, Iterable<ObjectInfo> leaks) =>
     leaks.length == 0
@@ -69,17 +76,8 @@ ${tokens.map((e) => '    - $e\n').join()}
 String _leakToYaml(ObjectInfo leak, String indent) {
   return '''$indent${leak.token}:
 $indent  creationLocation: ${leak.creationLocation}
-$indent  registrationTime: ${leak.registrationTime}
-$indent  disposedAfter: ${leak.disposedAfter}
-$indent  gcedAfter: ${leak.gcedAfter}
+$indent  registrationTime: ${leak.registration}
+$indent  disposedAfter: ${leak.disposed}
+$indent  gcedAfter: ${leak.gced}
 ''';
-
-// $indent  call-stacks:
-// $indent    registrationCallStack: '
-// ${leak.registrationCallStack.indent(indent.length + 6)}
-// $indent    '
-// $indent    disposalCallStack: '
-// ${(leak.disposalCallStack ?? '').indent(indent.length + 6)}
-// $indent    '
-// ''';
 }

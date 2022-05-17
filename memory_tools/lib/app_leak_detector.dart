@@ -8,21 +8,16 @@ import 'dart:io' as io;
 
 Timer? _timer;
 
-void init({required String? fileName, required Duration timeToGC}) {
-  globals.reportFileName = fileName;
+void init(
+    {required String Function(Object object) objectLocationGetter,
+    required Duration timeToGC}) {
+  globals.objectLocationGetter = objectLocationGetter;
   globals.timeToGC = timeToGC;
-  reporter.clearFile();
 
   _timer ??= Timer.periodic(
     Duration(seconds: 1),
-    (_) async => await objectRegistry.forceGCandReportLeaks(),
+    (_) => reporter.reportLeaks(objectRegistry.collectLeaks()),
   );
-}
 
-// For console applications and tests.
-Future<void> wrapUp() async {
-  globals.logger.fine('Wrapping up...');
-  _timer?.cancel();
-  await objectRegistry.forceGCandReportLeaks();
-  globals.logger.fine('Wrapped up.');
+  globals.leakTrackingEnabled = true;
 }
