@@ -1,14 +1,11 @@
 import 'primitives.dart';
 
-import '_globals.dart' as config;
-import '_reporter.dart';
-
-import '_utils.dart' as utils;
+import '_config.dart' as config;
 
 final objectRegistry = _ObjectRegistry();
 
 Object _getToken(Object object, Object? token) =>
-    token ?? '${object.runtimeType}.${identityHashCode(object)}';
+    token ?? identityHashCode(object);
 
 /// Global registry for the objects, which we want to track for leaking.
 class _ObjectRegistry {
@@ -52,6 +49,7 @@ class _ObjectRegistry {
       token,
       DateTime.now(),
       config.objectLocationGetter(object),
+      object.runtimeType,
     );
 
     _notGCed[token] = info;

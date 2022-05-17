@@ -1,5 +1,5 @@
 import 'package:intl/intl.dart';
-import 'package:memory_tools/src/_globals.dart';
+import 'package:memory_tools/src/_config.dart';
 
 final _oldSpaceObjects = <Object>[];
 

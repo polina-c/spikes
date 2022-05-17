@@ -1,4 +1,4 @@
-import '_globals.dart';
+import '_config.dart';
 
 class Leaks {
   final List<ObjectInfo> notGCed;
@@ -20,7 +20,7 @@ class Leaks {
 
 class ObjectInfo {
   final Object token;
-
+  final Type type;
   final DateTime registration;
 
   final String creationLocation;
@@ -65,5 +65,6 @@ class ObjectInfo {
     this.token,
     this.registration,
     this.creationLocation,
+    this.type,
   );
 }

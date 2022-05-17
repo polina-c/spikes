@@ -1,23 +1,22 @@
 import 'dart:async';
-import 'src/_globals.dart' as globals;
+import 'src/_config.dart' as config;
 import 'src/_object_registry.dart';
 import 'src/_reporter.dart' as reporter;
-import 'src/_utils.dart' as utils;
-import 'dart:convert';
-import 'dart:io' as io;
 
 Timer? _timer;
 
-void init(
-    {required String Function(Object object) objectLocationGetter,
-    required Duration timeToGC}) {
-  globals.objectLocationGetter = objectLocationGetter;
-  globals.timeToGC = timeToGC;
+void init({
+  required String Function(Object object) objectLocationGetter,
+  Duration timeToGC = const Duration(seconds: 15),
+  Duration tick = const Duration(seconds: 1),
+}) {
+  config.objectLocationGetter = objectLocationGetter;
+  config.timeToGC = timeToGC;
 
   _timer ??= Timer.periodic(
-    Duration(seconds: 1),
+    tick,
     (_) => reporter.reportLeaks(objectRegistry.collectLeaks()),
   );
 
-  globals.leakTrackingEnabled = true;
+  config.leakTrackingEnabled = true;
 }

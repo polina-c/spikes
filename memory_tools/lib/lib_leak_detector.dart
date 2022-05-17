@@ -1,5 +1,5 @@
 import 'src/_object_registry.dart';
-import 'src/_globals.dart';
+import 'src/_config.dart';
 
 void startTracking(Object object, {Object? token}) {
   if (leakTrackingEnabled) objectRegistry.startTracking(object, token);
