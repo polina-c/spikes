@@ -18,27 +18,65 @@ class Leaks {
   }
 }
 
+enum GCEvent {
+  oldGC,
+  newGC,
+}
+
+/// Keeps timeline of GC cycles.
+///
+/// In the current implementation, an unreachable new-space object can require
+/// up to two new-space GC followed by an old-space GC to be reclaimed
+/// (to break an intergenerational cycle), and an unreachable old-space object
+/// can require up to two old-space GCs to be reclaimed (can be floating
+/// garbage captured by the incremental barrier).
+class GCTime {
+  int _cyclesPassed = 0;
+
+  static const _cycleEvents = [
+    GCEvent.newGC,
+    GCEvent.oldGC,
+    GCEvent.newGC,
+    GCEvent.oldGC
+  ];
+  int _eventsPassed = 0;
+
+  void registerGCEvent(Set<GCEvent> event) {
+    if (event.contains(_cycleEvents[_eventsPassed])) _eventsPassed++;
+    if (_eventsPassed == _cycleEvents.length) {
+      _cyclesPassed++;
+      _eventsPassed = 0;
+    }
+  }
+
+  /// Number of current GC cycle.
+  GCMoment get now => _cyclesPassed;
+}
+
+GCDuration _notGCedTimeToDeclareLeak = 2;
+
+typedef GCDuration = int;
+typedef GCMoment = int;
+
 class ObjectInfo {
   final Object token;
   final Type type;
-  final DateTime registration;
-
   final String creationLocation;
 
-  Duration? _disposed;
-  Duration? get disposed => _disposed;
-  void setDisposedNow() {
+  GCMoment? _disposed;
+  GCMoment? get disposed => _disposed;
+  void setDisposed(GCMoment value) {
     if (_disposed != null) throw 'The object $token disposed twice.';
     if (_gced != null)
       throw 'The object $token should not be disposed after being GCed.';
-    _disposed = DateTime.now().difference(registration);
+    _disposed = value;
   }
 
-  Duration? _gced;
-  Duration? get gced => _gced;
-  void setGCedNow() {
+  GCMoment? _gced;
+  GCMoment? get gced => _gced;
+  void setGCed(GCMoment value) {
     if (_gced != null) throw 'The object $token GCed twice.';
-    _gced = DateTime.now().difference(registration);
+    _gced = value;
   }
 
   bool get isGCed => _gced != null;
@@ -46,15 +84,13 @@ class ObjectInfo {
 
   bool get isGCedLateLeak {
     if (_disposed == null || _gced == null) return false;
-    return (_gced! - _disposed!).compareTo(timeToGC) > 0;
+    return _gced! - _disposed! >= _notGCedTimeToDeclareLeak;
   }
 
-  bool get isNotGCedLeak {
+  bool isNotGCedLeak(GCMoment now) {
     if (_disposed == null) return false;
     if (_gced != null) return false;
-    final timeSinceDisposal =
-        DateTime.now().difference(registration) - _disposed!;
-    return timeSinceDisposal.compareTo(timeToGC) > 0;
+    return now - _disposed! >= _notGCedTimeToDeclareLeak;
   }
 
   bool get isNotDisposedLeak {
@@ -63,7 +99,6 @@ class ObjectInfo {
 
   ObjectInfo(
     this.token,
-    this.registration,
     this.creationLocation,
     this.type,
   );

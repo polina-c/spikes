@@ -10,6 +10,7 @@ Object _getToken(Object object, Object? token) =>
 /// Global registry for the objects, which we want to track for leaking.
 class _ObjectRegistry {
   late Finalizer<Object> _finalizer;
+  final _gcTime = GCTime();
 
   final _notGCed = <Object, ObjectInfo>{};
   final _gcedLateLeaks = <ObjectInfo>{};
@@ -27,7 +28,7 @@ class _ObjectRegistry {
     _assertIntegrity(info);
 
     config.logger.fine('$token: GCed.');
-    info.setGCedNow();
+    info.setGCed(_gcTime.now);
 
     _notGCed.remove(token);
     if (info.isGCedLateLeak) {
@@ -47,7 +48,6 @@ class _ObjectRegistry {
 
     ObjectInfo info = ObjectInfo(
       token,
-      DateTime.now(),
       config.objectLocationGetter(object),
       object.runtimeType,
     );
@@ -62,7 +62,7 @@ class _ObjectRegistry {
     final info = _notGCed[token]!;
     _assertIntegrity(info);
 
-    info.setDisposedNow();
+    info.setDisposed(_gcTime.now);
 
     _assertIntegrity(info);
   }
@@ -77,7 +77,7 @@ class _ObjectRegistry {
       _gcedLateLeaks.contains(info) ==
           (info.isDisposed &&
               info.isGCed &&
-              (info.gced! - info.disposed! > config.timeToGC)),
+              (info.gced! - info.disposed! >= 2)),
       '${_gcedLateLeaks.contains(info)}, ${info.isDisposed}, ${info.isGCed},'
       ' ${info.gced} - ${info.disposed} > ${config.timeToGC}',
     );
@@ -91,7 +91,8 @@ class _ObjectRegistry {
   Leaks collectLeaks() {
     _assertIntegrityForAll();
 
-    final notGCedLeaks = _notGCed.values.where((info) => info.isNotGCedLeak);
+    final notGCedLeaks =
+        _notGCed.values.where((info) => info.isNotGCedLeak(_gcTime.now));
 
     return Leaks(
       [...notGCedLeaks],
@@ -104,5 +105,10 @@ class _ObjectRegistry {
     for (var info in _notGCed.values) _assertIntegrity(info);
     for (var info in _gcedLateLeaks) _assertIntegrity(info);
     for (var info in _gcedNotDisposedLeaks) _assertIntegrity(info);
+  }
+
+  void registerGC({required bool oldSpace, required bool newSpace}) {
+    if (_notGCed.length == 0) return;
+    // print('registered: $oldSpace, $newSpace');
   }
 }

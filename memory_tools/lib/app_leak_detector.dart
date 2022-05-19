@@ -2,6 +2,7 @@ import 'dart:async';
 import 'src/_config.dart' as config;
 import 'src/_object_registry.dart';
 import 'src/_reporter.dart' as reporter;
+import 'dart:developer' as developer;
 
 Timer? _timer;
 
@@ -19,4 +20,12 @@ void init({
   );
 
   config.leakTrackingEnabled = true;
+
+  developer.registerExtension('ext.app-gc-event', (method, parameters) async {
+    objectRegistry.registerGC(
+      oldSpace: parameters.containsKey('old'),
+      newSpace: parameters.containsKey('new'),
+    );
+    return developer.ServiceExtensionResponse.result('ok');
+  });
 }

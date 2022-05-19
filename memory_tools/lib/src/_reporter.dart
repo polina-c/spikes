@@ -69,7 +69,6 @@ String _leakToYaml(ObjectInfo leak, String indent) {
   return '''$indent${leak.type}:
 $indent  token: ${leak.token}
 $indent  creationLocation: ${leak.creationLocation}
-$indent  registrationTime: ${leak.registration}
 $indent  disposedAfter: ${leak.disposed}
 $indent  gcedAfter: ${leak.gced}
 ''';
