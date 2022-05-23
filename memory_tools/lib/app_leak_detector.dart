@@ -16,11 +16,14 @@ void init({
 
   _timer ??= Timer.periodic(
     tick,
-    (_) => reporter.reportLeaks(objectRegistry.collectLeaks()),
+    (_) {
+      reporter.reportLeaks(objectRegistry.collectLeaks());
+    },
   );
 
   config.leakTrackingEnabled = true;
 
+  // We need the extension to receive GC events from flutter_tools.
   developer.registerExtension('ext.app-gc-event', (method, parameters) async {
     objectRegistry.registerGC(
       oldSpace: parameters.containsKey('old'),
