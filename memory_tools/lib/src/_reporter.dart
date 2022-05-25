@@ -1,34 +1,19 @@
+import 'package:memory_tools/src/_config.dart';
+
 import 'primitives.dart';
 import 'dart:developer';
 
-Leaks? _previous;
+LeakSummary? _previous;
 
-void reportLeaks(
-  Leaks leaks,
-) {
-  if (leaks.isEmpty) return;
-
-  int notGCed = leaks.notGCed.length;
-  int notDisposed = leaks.notDisposed.length;
-  int gcedLate = leaks.gcedLate.length;
-
-  final summary = '${notGCed + notDisposed + gcedLate} leaks:'
-      ' $notDisposed not disposed,'
-      ' $notGCed not GCed,'
-      ' $gcedLate GCed late.';
-
-  reportToDevTools(summary, leaks);
-
-  if (leaks.sameSize(_previous)) return;
-  print(summary);
-  _previous = leaks;
+void reportLeaks(LeakSummary leakSummary) {
+  if (leakSummary.equals(_previous)) return;
+  _previous = leakSummary;
+  logger.info(leakSummary.toMessage());
+  reportToDevTools(leakSummary);
 }
 
-void reportToDevTools(String summary, Leaks leaks) {
-  postEvent('MemoryLeaks', {
-    'summary': summary,
-    'details': _leaksToYaml(leaks),
-  });
+void reportToDevTools(LeakSummary summary) {
+  postEvent('memory_leaks_summary', summary.toJson());
 }
 
 // Map<String, dynamic> _leaksToJson(Leaks leaks) => {

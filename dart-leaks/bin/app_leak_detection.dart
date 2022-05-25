@@ -16,7 +16,6 @@ void main() async {
   leak_detector.init(
     objectLocationGetter: (object) =>
         describeCreationLocation(object) ?? 'location-not-detected',
-    timeToGC: Duration(seconds: 5),
   );
   createAndNotDispose();
 

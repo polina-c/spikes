@@ -7,6 +7,8 @@ final objectRegistry = _ObjectRegistry();
 Object _getToken(Object object, Object? token) =>
     token ?? identityHashCode(object);
 
+int _cyclesToGC = 2;
+
 /// Global registry for the objects, which we want to track for leaking.
 class _ObjectRegistry {
   late Finalizer<Object> _finalizer;
@@ -77,9 +79,9 @@ class _ObjectRegistry {
       _gcedLateLeaks.contains(info) ==
           (info.isDisposed &&
               info.isGCed &&
-              (info.gced! - info.disposed! >= 2)),
+              (info.gced! - info.disposed! >= _cyclesToGC)),
       '${_gcedLateLeaks.contains(info)}, ${info.isDisposed}, ${info.isGCed},'
-      ' ${info.gced} - ${info.disposed} > ${config.timeToGC}',
+      ' ${info.gced} - ${info.disposed} > ${_cyclesToGC}',
     );
 
     assert(
@@ -88,17 +90,17 @@ class _ObjectRegistry {
         '${_gcedNotDisposedLeaks.contains(info)}, ${info.isGCed}, ${!info.isDisposed}');
   }
 
-  Leaks collectLeaks() {
+  LeakSummary collectLeaksSummary() {
     _assertIntegrityForAll();
 
-    final notGCedLeaks =
-        _notGCed.values.where((info) => info.isNotGCedLeak(_gcTime.now));
+    final notGCedLeaksCount =
+        _notGCed.values.where((info) => info.isNotGCedLeak(_gcTime.now)).length;
 
-    return Leaks(
-      [...notGCedLeaks],
-      [..._gcedNotDisposedLeaks],
-      [..._gcedLateLeaks],
-    );
+    return LeakSummary({
+      LeakType.notDisposed: _gcedNotDisposedLeaks.length,
+      LeakType.notGCed: notGCedLeaksCount,
+      LeakType.gcedLate: _gcedLateLeaks.length,
+    });
   }
 
   void _assertIntegrityForAll() {

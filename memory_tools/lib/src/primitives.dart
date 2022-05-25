@@ -1,4 +1,40 @@
 import '_config.dart';
+import 'package:collection/collection.dart';
+
+enum LeakType {
+  notDisposed,
+  notGCed,
+  gcedLate,
+}
+
+_parseLeakType(String source) =>
+    LeakType.values.firstWhere((e) => e.toString() == source);
+
+class LeakSummary {
+  final Map<LeakType, int> totals;
+
+  LeakSummary(this.totals);
+
+  bool get isEmpty => totals.values.sum == 0;
+
+  String toMessage() {
+    return 'Not disposed: ${totals[LeakType.notDisposed]}, '
+        'not GCed: ${totals[LeakType.notDisposed]}, '
+        'GCed late: ${totals[LeakType.notDisposed]}, '
+        'total: ${totals.values.sum}.';
+  }
+
+  bool equals(LeakSummary? other) {
+    if (other == null) return false;
+    return MapEquality().equals(this.totals, other.totals);
+  }
+
+  factory LeakSummary.fromJson(Map<String, dynamic> json) => LeakSummary(json
+      .map((key, value) => MapEntry(_parseLeakType(key), int.parse(value))));
+
+  Map<String, dynamic> toJson() =>
+      totals.map((key, value) => MapEntry(key.toString(), value.toString()));
+}
 
 class Leaks {
   final List<ObjectInfo> notGCed;

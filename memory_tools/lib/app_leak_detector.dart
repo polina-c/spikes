@@ -1,4 +1,7 @@
 import 'dart:async';
+import 'package:intl/intl.dart';
+import 'package:logging/logging.dart';
+
 import 'src/_config.dart' as config;
 import 'src/_object_registry.dart';
 import 'src/_reporter.dart' as reporter;
@@ -8,20 +11,18 @@ Timer? _timer;
 
 void init({
   required String Function(Object object) objectLocationGetter,
-  Duration timeToGC = const Duration(seconds: 15),
   Duration tick = const Duration(seconds: 1),
+  bool configureLogging = false,
+  Level logLevel = Level.INFO,
 }) {
   config.objectLocationGetter = objectLocationGetter;
-  config.timeToGC = timeToGC;
 
   _timer ??= Timer.periodic(
     tick,
     (_) {
-      reporter.reportLeaks(objectRegistry.collectLeaks());
+      reporter.reportLeaks(objectRegistry.collectLeaksSummary());
     },
   );
-
-  config.leakTrackingEnabled = true;
 
   // We need the extension to receive GC events from flutter_tools.
   developer.registerExtension('ext.app-gc-event', (method, parameters) async {
@@ -31,4 +32,16 @@ void init({
     );
     return developer.ServiceExtensionResponse.result('ok');
   });
+
+  if (configureLogging) {
+    Logger.root.level = logLevel; // defaults to Level.INFO
+    Logger.root.onRecord.listen((record) {
+      final DateFormat _formatter = DateFormat.Hms();
+      print(
+          '${record.level.name}: ${_formatter.format(record.time)}: ${record.message}');
+    });
+  }
+
+  config.leakTrackingEnabled = true;
+  config.logger.info('Leak detector initialized.');
 }
