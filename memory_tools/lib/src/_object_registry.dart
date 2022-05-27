@@ -1,25 +1,42 @@
-import 'primitives.dart';
-
+import '_gc_time.dart';
+import 'leaks.dart';
 import '_config.dart' as config;
+import 'package:meta/meta.dart';
 
-final objectRegistry = _ObjectRegistry();
+final objectRegistry = ObjectRegistry();
 
 Object _getToken(Object object, Object? token) =>
     token ?? identityHashCode(object);
 
-int _cyclesToGC = 2;
-
 /// Global registry for the objects, which we want to track for leaking.
-class _ObjectRegistry {
+@visibleForTesting
+class ObjectRegistry {
   late Finalizer<Object> _finalizer;
-  final _gcTime = GCTime();
+  late GCTime _gcTime;
 
   final _notGCed = <Object, ObjectInfo>{};
   final _gcedLateLeaks = <ObjectInfo>{};
   final _gcedNotDisposedLeaks = <ObjectInfo>{};
 
-  _ObjectRegistry() {
-    _finalizer = Finalizer(_objectGarbageCollected);
+  /// The parameters are injected for testing purposes.
+  ObjectRegistry({
+    Finalizer<Object> Function(Function(Object token) gcEventHandler)?
+        finalizerBuilder,
+    GCTime? gcTime,
+  }) {
+    finalizerBuilder ??= (handler) => Finalizer<Object>(handler);
+    _finalizer = finalizerBuilder(_objectGarbageCollected);
+
+    _gcTime = gcTime ?? GCTime();
+  }
+
+  @visibleForTesting
+  void reset() {
+    _gcTime.reset();
+
+    _notGCed.clear();
+    _gcedLateLeaks.clear();
+    _gcedNotDisposedLeaks.clear();
   }
 
   void _objectGarbageCollected(Object token) {
@@ -79,9 +96,9 @@ class _ObjectRegistry {
       _gcedLateLeaks.contains(info) ==
           (info.isDisposed &&
               info.isGCed &&
-              (info.gced! - info.disposed! >= _cyclesToGC)),
+              (info.gced! - info.disposed! >= cyclesToDeclareLeakIfNotGCed)),
       '${_gcedLateLeaks.contains(info)}, ${info.isDisposed}, ${info.isGCed},'
-      ' ${info.gced} - ${info.disposed} > ${_cyclesToGC}',
+      ' ${info.gced} - ${info.disposed} < ${cyclesToDeclareLeakIfNotGCed}',
     );
 
     assert(
@@ -111,6 +128,5 @@ class _ObjectRegistry {
 
   void registerGC({required bool oldSpace, required bool newSpace}) {
     if (_notGCed.length == 0) return;
-    // print('registered: $oldSpace, $newSpace');
   }
 }

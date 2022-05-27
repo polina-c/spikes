@@ -1,15 +1,15 @@
 import 'package:memory_tools/src/_config.dart';
 
-import 'primitives.dart';
+import 'leaks.dart';
 import 'dart:developer';
 
 LeakSummary? _previous;
 
 void reportLeaks(LeakSummary leakSummary) {
+  reportToDevTools(leakSummary);
   if (leakSummary.equals(_previous)) return;
   _previous = leakSummary;
   logger.info(leakSummary.toMessage());
-  reportToDevTools(leakSummary);
 }
 
 void reportToDevTools(LeakSummary summary) {
