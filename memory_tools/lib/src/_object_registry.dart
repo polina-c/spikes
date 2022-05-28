@@ -1,3 +1,6 @@
+import 'package:logging/logging.dart';
+
+import '_config.dart';
 import '_gc_time.dart';
 import 'leaks.dart';
 import '_config.dart' as config;
@@ -126,7 +129,20 @@ class ObjectRegistry {
     for (var info in _gcedNotDisposedLeaks) _assertIntegrity(info);
   }
 
-  void registerGC({required bool oldSpace, required bool newSpace}) {
+  void registerGCEvent({required bool oldSpace, required bool newSpace}) {
+    _gcTime.registerGCEvent({
+      if (oldSpace) GCEvent.oldGC,
+      if (newSpace) GCEvent.newGC,
+    });
     if (_notGCed.length == 0) return;
+
+    logStatus(Level.INFO);
+  }
+
+  // var _previousGCTime = 0;
+  // var _previousNotGCed = 0;
+  void logStatus(Level level) {
+    logger.log(
+        level, 'status: gc time: ${_gcTime.now}, not GCed: ${_notGCed.length}');
   }
 }

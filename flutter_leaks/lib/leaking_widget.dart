@@ -1,6 +1,7 @@
-import 'package:dart_leaks/tracked_class.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
+
+import 'tracked_class.dart';
 
 final log = Logger('leak-detector');
 
@@ -27,10 +28,13 @@ class _LeakingWidgetState extends State<LeakingWidget> {
       _disposedAndGCed.dispose();
       log.fine('leaking widget cleaned up');
     }
-    return MaterialApp(
-      home: Scaffold(
-        body: Checkbox(value: true, onChanged: (_) {}),
+    return Column(children: [
+      const SizedBox(
+        width: 100,
+        height: 100,
+        child: Text('I am leaking widget'),
       ),
-    );
+      Checkbox(value: true, onChanged: (_) {}),
+    ]);
   }
 }

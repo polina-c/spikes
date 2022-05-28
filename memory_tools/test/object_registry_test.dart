@@ -17,13 +17,13 @@ void main() {
   // Object, that was just attached to mockFinalizer.
   var lastAttachedObject;
   late Function(Object token) registerGC;
-  late ObjectRegistry objectRegistry;
+  late ObjectRegistry testObjectRegistry;
 
   init(objectLocationGetter: (object) => 'location of $object');
   when(mockFinalizer.attach(any, any)).thenAnswer((invocation) {
     lastAttachedObject = invocation.positionalArguments[0];
   });
-  objectRegistry = ObjectRegistry(
+  testObjectRegistry = ObjectRegistry(
     finalizerBuilder: (handler) {
       registerGC = handler;
       return mockFinalizer;
@@ -37,25 +37,25 @@ void main() {
     });
 
     test('attaches object to finalizer', () {
-      objectRegistry.startTracking('my object', 'my token');
+      testObjectRegistry.startTracking('my object', 'my token');
       expect(lastAttachedObject, 'my object');
     });
 
     test('reports zero leaks', () {
-      objectRegistry.reset();
-      final summary = objectRegistry.collectLeaksSummary();
+      testObjectRegistry.reset();
+      final summary = testObjectRegistry.collectLeaksSummary();
       expect(summary.totals.values.sum, 0);
     });
 
     test('declares not-GC-ed leak', () {
-      objectRegistry.reset();
+      testObjectRegistry.reset();
       final myObject = 'my object';
       final myToken = 'my token';
-      objectRegistry.startTracking(myObject, myToken);
-      objectRegistry.registerDisposal(myObject, myToken);
+      testObjectRegistry.startTracking(myObject, myToken);
+      testObjectRegistry.registerDisposal(myObject, myToken);
       _registerGCEvents(8, gcTime);
       expect(gcTime.now, 3);
-      final leaks = objectRegistry.collectLeaksSummary();
+      final leaks = testObjectRegistry.collectLeaksSummary();
       expect(leaks.totals.values.sum, 1);
       expect(leaks.totals[LeakType.notGCed], 1);
     });

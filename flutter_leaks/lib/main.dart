@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
 import 'dart:developer' as developer;
 
+import 'package:memory_tools/app_leak_detector.dart' as leak_detector;
+
+import 'leaking_widget.dart';
+
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  leak_detector.init(
+    objectLocationGetter: (object) =>
+        describeCreationLocation(object) ?? 'location-not-detected',
+    configureLogging: true,
+    //logLevel: Level.FINE,
+  );
+
   runApp(const MyApp());
 }
 
@@ -29,25 +41,11 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class AMyClass {
-  final content = ['hello'];
-}
-
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  final myObject = AMyClass();
-
-  void sendAnObjectToDevTools() {
-    print('sending object ${identityHashCode(myObject)} to DevTools...');
-    developer.postEvent('TrackedObject', <String, Object>{
-      'hash': identityHashCode(myObject),
-    });
-  }
-
   @override
   initState() {
-    myObject.content.add(', leak tracking!');
     super.initState();
   }
 
@@ -66,11 +64,8 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            MaterialButton(
-              onPressed: sendAnObjectToDevTools,
-              child: const Text('send object to devtools'),
-            ),
             const Text(
               'You have pushed the button this many times:',
             ),
@@ -78,6 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            LeakingWidget(),
           ],
         ),
       ),

@@ -21,8 +21,8 @@ class LeakSummary {
 
   String toMessage() {
     return 'Not disposed: ${totals[LeakType.notDisposed]}, '
-        'not GCed: ${totals[LeakType.notDisposed]}, '
-        'GCed late: ${totals[LeakType.notDisposed]}, '
+        'not GCed: ${totals[LeakType.notGCed]}, '
+        'GCed late: ${totals[LeakType.gcedLate]}, '
         'total: ${totals.values.sum}.';
   }
 
