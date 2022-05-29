@@ -41,7 +41,7 @@ class GCTime {
   }
 }
 
-// Theoretically it should be 2...
+// Theoretically it should be 2, but practically 2 gives false positives.
 const GCDuration cyclesToDeclareLeakIfNotGCed = 3;
 
 typedef GCDuration = int;

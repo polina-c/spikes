@@ -123,6 +123,16 @@ class ObjectRegistry {
     });
   }
 
+  Leaks collectLeaks() {
+    final notGCedLeaks =
+        _notGCed.values.where((info) => info.isNotGCedLeak(_gcTime.now));
+    return Leaks(
+      notDisposed: _gcedNotDisposedLeaks.toList(),
+      notGCed: notGCedLeaks.toList(),
+      gcedLate: _gcedLateLeaks.toList(),
+    );
+  }
+
   void _assertIntegrityForAll() {
     for (var info in _notGCed.values) _assertIntegrity(info);
     for (var info in _gcedLateLeaks) _assertIntegrity(info);

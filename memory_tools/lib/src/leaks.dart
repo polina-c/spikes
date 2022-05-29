@@ -43,7 +43,11 @@ class Leaks {
   final List<ObjectInfo> notDisposed;
   final List<ObjectInfo> gcedLate;
 
-  Leaks(this.notGCed, this.notDisposed, this.gcedLate);
+  Leaks({
+    required this.notDisposed,
+    required this.notGCed,
+    required this.gcedLate,
+  });
 
   bool get isEmpty =>
       notGCed.isEmpty && notDisposed.isEmpty && gcedLate.isEmpty;
