@@ -41,7 +41,8 @@ class GCTime {
   }
 }
 
-const GCDuration cyclesToDeclareLeakIfNotGCed = 2;
+// Theoretically it should be 2...
+const GCDuration cyclesToDeclareLeakIfNotGCed = 3;
 
 typedef GCDuration = int;
 typedef GCMoment = int;

@@ -24,6 +24,7 @@ void init({
     },
   );
 
+  print('registering extension');
   // We need the extension to receive GC events from flutter_tools.
   developer.registerExtension('ext.app-gc-event', (method, parameters) async {
     objectRegistry.registerGCEvent(
