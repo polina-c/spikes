@@ -1,6 +1,5 @@
 import 'package:memory_tools/src/_gc_time.dart';
 
-import '_config.dart';
 import 'package:collection/collection.dart';
 
 enum LeakType {
@@ -64,6 +63,8 @@ class ObjectInfo {
   final Object token;
   final Type type;
   final String creationLocation;
+  final int theIdentityHashCode;
+  final WeakReference weakReference;
 
   GCMoment? _disposed;
   GCMoment? get disposed => _disposed;
@@ -102,6 +103,10 @@ class ObjectInfo {
   ObjectInfo(
     this.token,
     this.creationLocation,
-    this.type,
-  );
+    Object object,
+  )   : this.type = object.runtimeType,
+        this.theIdentityHashCode = identityHashCode(object),
+        this.weakReference = WeakReference(object);
+
+  Object? restoreObject() => this.weakReference.target;
 }

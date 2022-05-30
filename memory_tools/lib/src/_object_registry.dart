@@ -2,7 +2,7 @@ import 'package:logging/logging.dart';
 
 import '_config.dart';
 import '_gc_time.dart';
-import 'leaks.dart';
+import 'model.dart';
 import '_config.dart' as config;
 import 'package:meta/meta.dart';
 
@@ -18,6 +18,7 @@ class ObjectRegistry {
   late GCTime _gcTime;
 
   final _notGCed = <Object, ObjectInfo>{};
+  final _notGCedByCode = <int, ObjectInfo>{};
   final _gcedLateLeaks = <ObjectInfo>{};
   final _gcedNotDisposedLeaks = <ObjectInfo>{};
 
@@ -40,6 +41,7 @@ class ObjectRegistry {
     _notGCed.clear();
     _gcedLateLeaks.clear();
     _gcedNotDisposedLeaks.clear();
+    _notGCedByCode.clear();
   }
 
   void _objectGarbageCollected(Object token) {
@@ -53,6 +55,7 @@ class ObjectRegistry {
     info.setGCed(_gcTime.now);
 
     _notGCed.remove(token);
+    _notGCedByCode.remove(info.theIdentityHashCode);
     if (info.isGCedLateLeak) {
       _gcedLateLeaks.add(info);
     } else if (info.isNotDisposedLeak) {
@@ -71,10 +74,11 @@ class ObjectRegistry {
     ObjectInfo info = ObjectInfo(
       token,
       config.objectLocationGetter(object),
-      object.runtimeType,
+      object,
     );
 
     _notGCed[token] = info;
+    _notGCedByCode[identityHashCode(object)] = info;
     _assertIntegrity(info);
   }
 
@@ -144,11 +148,12 @@ class ObjectRegistry {
       if (oldSpace) GCEvent.oldGC,
       if (newSpace) GCEvent.newGC,
     });
-    if (_notGCed.length == 0) return;
   }
 
   void logStatus(Level level) {
     logger.log(
         level, 'status: gc time: ${_gcTime.now}, not GCed: ${_notGCed.length}');
   }
+
+  Object? getNotGCedObject(int identityHashCode) {}
 }

@@ -1,6 +1,6 @@
 import 'package:memory_tools/src/_config.dart';
 
-import 'leaks.dart';
+import 'model.dart';
 import 'dart:developer';
 
 LeakSummary? _previous;

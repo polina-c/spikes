@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:memory_tools/app_leak_detector.dart';
 import 'package:memory_tools/src/_gc_time.dart';
-import 'package:memory_tools/src/leaks.dart';
+import 'package:memory_tools/src/model.dart';
 import 'package:memory_tools/src/testing/generated.mocks.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
