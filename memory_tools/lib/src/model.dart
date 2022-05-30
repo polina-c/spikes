@@ -107,6 +107,4 @@ class ObjectInfo {
   )   : this.type = object.runtimeType,
         this.theIdentityHashCode = identityHashCode(object),
         this.weakReference = WeakReference(object);
-
-  Object? restoreObject() => this.weakReference.target;
 }
