@@ -1,3 +1,4 @@
+import 'package:memory_tools/model.dart';
 import 'package:memory_tools/src/_gc_time.dart';
 
 import 'package:collection/collection.dart';
@@ -38,30 +39,73 @@ class LeakSummary {
 }
 
 class Leaks {
-  final List<ObjectInfo> notGCed;
-  final List<ObjectInfo> notDisposed;
-  final List<ObjectInfo> gcedLate;
+  final Map<LeakType, List<ObjectReport>> leaks;
 
-  Leaks({
-    required this.notDisposed,
-    required this.notGCed,
-    required this.gcedLate,
-  });
-
-  bool get isEmpty =>
-      notGCed.isEmpty && notDisposed.isEmpty && gcedLate.isEmpty;
-
-  bool sameSize(Leaks? previous) {
-    if (previous == null) return false;
-    return previous.gcedLate.length == gcedLate.length &&
-        previous.notGCed.length == notGCed.length &&
-        previous.notDisposed.length == notDisposed.length;
-  }
+  Leaks(this.leaks);
 
   factory Leaks.fromJson(Map<String, dynamic> json) =>
-      Leaks(notDisposed: [], notGCed: [], gcedLate: []);
+      Leaks(json.map((key, value) => MapEntry(
+          _parseLeakType(key),
+          (value as List)
+              .cast<Map<String, dynamic>>()
+              .map((e) => ObjectReport.fromJson(e))
+              .toList(growable: false))));
 
-  Map<String, dynamic> toJson() => {'Leaks': 'toJson'};
+  Map<String, dynamic> toJson() => leaks.map(
+        (key, value) =>
+            MapEntry(key.toString(), value.map((e) => e.toJson()).toList()),
+      );
+}
+
+class ObjectReport {
+  final String token;
+  final String type;
+  final String creationLocation;
+  final int theIdentityHashCode;
+  String? retainingPath;
+  String? gcRootType;
+
+  ObjectReport({
+    required this.token,
+    required this.type,
+    required this.creationLocation,
+    required this.theIdentityHashCode,
+  });
+
+  factory ObjectReport.fromJson(Map<String, dynamic> json) => ObjectReport(
+        token: json['token'],
+        type: json['type'],
+        creationLocation: json['creationLocation'],
+        theIdentityHashCode: json['theIdentityHashCode'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'token': token,
+        'type': type,
+        'creationLocation': creationLocation,
+        'theIdentityHashCode': theIdentityHashCode,
+      };
+
+  static String iterableToYaml(String title, Iterable<ObjectReport> leaks) {
+    if (leaks.length == 0) return '';
+
+    return '''$title:
+  total: ${leaks.length}
+  objects:
+${leaks.map((e) => e.toYaml('    ')).join()}
+''';
+  }
+
+  String toYaml(String indent) {
+    return '''$indent${type}:
+$indent  token: ${token}
+$indent  type: ${type}
+$indent  creationLocation: ${creationLocation}
+$indent  identityHashCode: ${theIdentityHashCode}
+$indent  retainingPath: ${retainingPath}
+$indent  gcRootType: ${gcRootType}
+''';
+  }
 }
 
 class ObjectInfo {
@@ -70,7 +114,6 @@ class ObjectInfo {
   final String creationLocation;
   final int theIdentityHashCode;
   final WeakReference weakReference;
-  String? retainingPath;
 
   GCMoment? _disposed;
   GCMoment? get disposed => _disposed;
@@ -113,4 +156,10 @@ class ObjectInfo {
   )   : this.type = object.runtimeType,
         this.theIdentityHashCode = identityHashCode(object),
         this.weakReference = WeakReference(object);
+
+  ObjectReport toObjectReport() => ObjectReport(
+      token: token.toString(),
+      type: type.toString(),
+      creationLocation: creationLocation,
+      theIdentityHashCode: theIdentityHashCode);
 }

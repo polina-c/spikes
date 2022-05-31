@@ -130,11 +130,12 @@ class ObjectRegistry {
   Leaks collectLeaks() {
     final notGCedLeaks =
         _notGCed.values.where((info) => info.isNotGCedLeak(_gcTime.now));
-    return Leaks(
-      notDisposed: _gcedNotDisposedLeaks.toList(),
-      notGCed: notGCedLeaks.toList(),
-      gcedLate: _gcedLateLeaks.toList(),
-    );
+    return Leaks({
+      LeakType.notDisposed:
+          _gcedNotDisposedLeaks.map((e) => e.toObjectReport()).toList(),
+      LeakType.notGCed: notGCedLeaks.map((e) => e.toObjectReport()).toList(),
+      LeakType.gcedLate: _gcedLateLeaks.map((e) => e.toObjectReport()).toList(),
+    });
   }
 
   void _assertIntegrityForAll() {

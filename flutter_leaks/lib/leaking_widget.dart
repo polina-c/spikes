@@ -5,29 +5,43 @@ import 'tracked_class.dart';
 
 final log = Logger('leak-detector');
 
-MyTrackedClass? notGCed = null;
+class MyClass {
+  MyTrackedClass? notGCed1 = MyTrackedClass('not-GCed1');
+  MyTrackedClass? notGCed2 = MyTrackedClass('not-GCed2');
+
+  void dispose() {
+    notGCed1?.dispose();
+    notGCed2?.dispose();
+  }
+}
 
 class LeakingWidget extends StatefulWidget {
-  LeakingWidget({Key? key}) : super(key: key) {
-    notGCed ??= MyTrackedClass('not-GCed');
-  }
+  LeakingWidget({Key? key}) : super(key: key);
 
   @override
   State<LeakingWidget> createState() => _LeakingWidgetState();
 }
 
 class _LeakingWidgetState extends State<LeakingWidget> {
+  bool _isCleaned = false;
   MyTrackedClass? _notDisposed = MyTrackedClass('not-disposed');
-  final _disposedAndGCed = MyTrackedClass('disposed-and-GCed');
+  MyTrackedClass? _disposedAndGCed = MyTrackedClass('disposed-and-GCed');
+  // ignore: unnecessary_nullable_for_final_variable_declarations
+  final MyClass? _notGCed = MyClass();
 
   @override
   Widget build(BuildContext context) {
-    if (_notDisposed != null) {
+    if (!_isCleaned) {
       _notDisposed = null;
-      notGCed?.dispose();
-      _disposedAndGCed.dispose();
-      log.fine('leaking widget cleaned up');
+
+      _notGCed?.dispose();
+
+      _disposedAndGCed?.dispose();
+      _disposedAndGCed = null;
+
+      _isCleaned = true;
     }
+
     return Column(children: [
       const SizedBox(
         width: 100,
