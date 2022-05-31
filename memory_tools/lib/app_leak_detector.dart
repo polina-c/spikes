@@ -2,10 +2,13 @@ import 'dart:async';
 import 'package:intl/intl.dart';
 import 'package:logging/logging.dart';
 
+import 'model.dart';
 import 'src/_config.dart' as config;
 import 'src/_object_registry.dart';
 import 'src/_reporter.dart' as reporter;
 import 'dart:developer' as developer;
+
+import 'src/_reporter.dart';
 
 Timer? _timer;
 
@@ -20,7 +23,7 @@ void init({
   _timer ??= Timer.periodic(
     tick,
     (_) {
-      reporter.reportLeaks(objectRegistry.collectLeaksSummary());
+      reporter.reportLeaksSummary(objectRegistry.collectLeaksSummary());
     },
   );
 
@@ -45,4 +48,12 @@ void init({
 
   config.leakTrackingEnabled = true;
   config.logger.info('Leak detector initialized.');
+}
+
+void sendLeaks() {
+  reportLeaks(objectRegistry.collectLeaks());
+}
+
+Object? getNotGCedObject(int identityHashCode) {
+  return objectRegistry.getNotGCedObject(identityHashCode);
 }

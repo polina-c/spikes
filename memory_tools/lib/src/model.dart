@@ -57,6 +57,11 @@ class Leaks {
         previous.notGCed.length == notGCed.length &&
         previous.notDisposed.length == notDisposed.length;
   }
+
+  factory Leaks.fromJson(Map<String, dynamic> json) =>
+      Leaks(notDisposed: [], notGCed: [], gcedLate: []);
+
+  Map<String, dynamic> toJson() => {'Leaks': 'toJson'};
 }
 
 class ObjectInfo {
@@ -65,6 +70,7 @@ class ObjectInfo {
   final String creationLocation;
   final int theIdentityHashCode;
   final WeakReference weakReference;
+  String? retainingPath;
 
   GCMoment? _disposed;
   GCMoment? get disposed => _disposed;

@@ -5,15 +5,15 @@ import 'dart:developer';
 
 LeakSummary? _previous;
 
-void reportLeaks(LeakSummary leakSummary) {
-  reportToDevTools(leakSummary);
+void reportLeaksSummary(LeakSummary leakSummary) {
+  postEvent('memory_leaks_summary', leakSummary.toJson());
   if (leakSummary.equals(_previous)) return;
   _previous = leakSummary;
   logger.info(leakSummary.toMessage());
 }
 
-void reportToDevTools(LeakSummary summary) {
-  postEvent('memory_leaks_summary', summary.toJson());
+void reportLeaks(Leaks leaks) {
+  postEvent('memory_leaks_details', leaks.toJson());
 }
 
 // Map<String, dynamic> _leaksToJson(Leaks leaks) => {
