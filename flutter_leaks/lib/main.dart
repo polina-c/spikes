@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:developer' as developer;
 
 import 'package:memory_tools/app_leak_detector.dart' as leak_detector;
 
