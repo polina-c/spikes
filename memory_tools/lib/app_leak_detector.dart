@@ -50,9 +50,10 @@ void init({
   config.logger.info('Leak detector initialized.');
 }
 
-bool sendLeaks() {
+void sendLeaks() {
+  print('!!!!!!! reporting leaks...');
   reportLeaks(objectRegistry.collectLeaks());
-  return true;
+  print('!!!!!!! reported leaks...');
 }
 
 Object? getNotGCedObject(int identityHashCode) {

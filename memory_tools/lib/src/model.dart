@@ -63,7 +63,6 @@ class ObjectReport {
   final String creationLocation;
   final int theIdentityHashCode;
   String? retainingPath;
-  String? gcRootType;
 
   ObjectReport({
     required this.token,
@@ -103,7 +102,6 @@ $indent  type: ${type}
 $indent  creationLocation: ${creationLocation}
 $indent  identityHashCode: ${theIdentityHashCode}
 $indent  retainingPath: ${retainingPath}
-$indent  gcRootType: ${gcRootType}
 ''';
   }
 }
