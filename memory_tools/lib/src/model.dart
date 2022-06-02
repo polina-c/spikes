@@ -85,8 +85,8 @@ class ObjectReport {
         'theIdentityHashCode': theIdentityHashCode,
       };
 
-  static String iterableToYaml(String title, Iterable<ObjectReport> leaks) {
-    if (leaks.length == 0) return '';
+  static String iterableToYaml(String title, Iterable<ObjectReport>? leaks) {
+    if (leaks == null || leaks.length == 0) return '';
 
     return '''$title:
   total: ${leaks.length}
