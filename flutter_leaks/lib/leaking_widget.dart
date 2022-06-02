@@ -6,12 +6,11 @@ import 'tracked_class.dart';
 final log = Logger('leak-detector');
 
 class MyClass {
-  MyTrackedClass? notGCed1 = MyTrackedClass('not-GCed1');
-  MyTrackedClass? notGCed2 = MyTrackedClass('not-GCed2');
+  MyTrackedClass? notGCed1 = MyTrackedClass(
+      token: 'not-GCed1', child: MyTrackedClass(token: 'not-GCed2'));
 
   void dispose() {
     notGCed1?.dispose();
-    notGCed2?.dispose();
   }
 }
 
@@ -24,8 +23,8 @@ class LeakingWidget extends StatefulWidget {
 
 class _LeakingWidgetState extends State<LeakingWidget> {
   bool _isCleaned = false;
-  MyTrackedClass? _notDisposed = MyTrackedClass('not-disposed');
-  MyTrackedClass? _disposedAndGCed = MyTrackedClass('disposed-and-GCed');
+  MyTrackedClass? _notDisposed = MyTrackedClass(token: 'not-disposed');
+  MyTrackedClass? _disposedAndGCed = MyTrackedClass(token: 'disposed-and-GCed');
   // ignore: unnecessary_nullable_for_final_variable_declarations
   final MyClass? _notGCed = MyClass();
 
@@ -42,7 +41,7 @@ class _LeakingWidgetState extends State<LeakingWidget> {
       _isCleaned = true;
 
       print('notGCed1: ${identityHashCode(_notGCed!.notGCed1)}');
-      print('notGCed2: ${identityHashCode(_notGCed!.notGCed2)}');
+      print('notGCed2: ${identityHashCode(_notGCed!.notGCed1!.child)}');
       print('parent: ${identityHashCode(_notGCed)}');
     }
 

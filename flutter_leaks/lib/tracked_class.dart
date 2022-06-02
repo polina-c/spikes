@@ -1,13 +1,15 @@
 import 'package:memory_tools/lib_leak_detector.dart' as leak_detector;
 
 class MyTrackedClass {
-  Object _token;
+  final Object token;
+  final MyTrackedClass? child;
 
-  MyTrackedClass(this._token) {
-    leak_detector.startTracking(this, token: this._token);
+  MyTrackedClass({required this.token, this.child}) {
+    leak_detector.startTracking(this, token: token);
   }
 
   void dispose() {
-    leak_detector.registerDisposal(this, token: this._token);
+    child?.dispose();
+    leak_detector.registerDisposal(this, token: token);
   }
 }
