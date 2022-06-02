@@ -85,13 +85,17 @@ class ObjectReport {
         'theIdentityHashCode': theIdentityHashCode,
       };
 
-  static String iterableToYaml(String title, Iterable<ObjectReport>? leaks) {
+  static String iterableToYaml(
+    String title,
+    Iterable<ObjectReport>? leaks, {
+    String indent = '',
+  }) {
     if (leaks == null || leaks.length == 0) return '';
 
     return '''$title:
-  total: ${leaks.length}
-  objects:
-${leaks.map((e) => e.toYaml('    ')).join()}
+$indent  total: ${leaks.length}
+$indent  objects:
+${leaks.map((e) => e.toYaml('$indent    ')).join()}
 ''';
   }
 
