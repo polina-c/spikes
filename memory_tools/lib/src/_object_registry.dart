@@ -100,12 +100,8 @@ class ObjectRegistry {
     }
 
     assert(
-      _gcedLateLeaks.contains(info) ==
-          (info.isDisposed &&
-              info.isGCed &&
-              (info.gced! - info.disposed! >= cyclesToDeclareLeakIfNotGCed)),
-      '${_gcedLateLeaks.contains(info)}, ${info.isDisposed}, ${info.isGCed},'
-      ' ${info.gced} - ${info.disposed} < ${cyclesToDeclareLeakIfNotGCed}',
+      _gcedLateLeaks.contains(info) == info.isGCedLateLeak,
+      '${_gcedLateLeaks.contains(info)}, ${info.isDisposed}, ${info.isGCed},',
     );
 
     assert(

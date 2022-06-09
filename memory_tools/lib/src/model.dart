@@ -3,6 +3,13 @@ import 'package:memory_tools/src/_gc_time.dart';
 
 import 'package:collection/collection.dart';
 
+typedef GCDuration = int;
+typedef GCMoment = int;
+
+// Theoretically it should be 2, but practically 2 gives false positives.
+const GCDuration cyclesToDeclareLeakIfNotGCed = 3;
+const Duration timeToDeclareLeakIfNotGCed = Duration(seconds: 1);
+
 enum LeakType {
   notDisposed,
   notGCed,
@@ -69,6 +76,7 @@ class ObjectReport {
     required this.type,
     required this.creationLocation,
     required this.theIdentityHashCode,
+    this.retainingPath,
   });
 
   factory ObjectReport.fromJson(Map<String, dynamic> json) => ObjectReport(
@@ -76,6 +84,7 @@ class ObjectReport {
         type: json['type'],
         creationLocation: json['creationLocation'],
         theIdentityHashCode: json['theIdentityHashCode'],
+        retainingPath: json['retainingPath'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -83,6 +92,7 @@ class ObjectReport {
         'type': type,
         'creationLocation': creationLocation,
         'theIdentityHashCode': theIdentityHashCode,
+        'retainingPath': retainingPath,
       };
 
   static String iterableToYaml(
@@ -117,20 +127,22 @@ class ObjectInfo {
   final int theIdentityHashCode;
   final WeakReference weakReference;
 
+  DateTime? _disposedTime;
   GCMoment? _disposed;
-  GCMoment? get disposed => _disposed;
   void setDisposed(GCMoment value) {
     if (_disposed != null) throw 'The object $token disposed twice.';
     if (_gced != null)
       throw 'The object $token should not be disposed after being GCed.';
     _disposed = value;
+    _disposedTime = DateTime.now();
   }
 
+  DateTime? _gcedTime;
   GCMoment? _gced;
-  GCMoment? get gced => _gced;
   void setGCed(GCMoment value) {
     if (_gced != null) throw 'The object $token GCed twice.';
     _gced = value;
+    _gcedTime = DateTime.now();
   }
 
   bool get isGCed => _gced != null;
@@ -138,13 +150,26 @@ class ObjectInfo {
 
   bool get isGCedLateLeak {
     if (_disposed == null || _gced == null) return false;
-    return _gced! - _disposed! >= cyclesToDeclareLeakIfNotGCed;
+    assert(_gcedTime != null);
+    return _shouldDeclareGCLeak(_disposed, _disposedTime, _gced!, _gcedTime!);
   }
 
   bool isNotGCedLeak(GCMoment now) {
-    if (_disposed == null) return false;
     if (_gced != null) return false;
-    return now - _disposed! >= cyclesToDeclareLeakIfNotGCed;
+    return _shouldDeclareGCLeak(_disposed, _disposedTime, now, DateTime.now());
+  }
+
+  static bool _shouldDeclareGCLeak(
+    GCMoment? disposed,
+    DateTime? disposedTime,
+    GCMoment gced,
+    DateTime gcedTime,
+  ) {
+    assert((disposed == null) == (disposedTime == null));
+    if (disposed == null || disposedTime == null) return false;
+
+    return gced - disposed >= cyclesToDeclareLeakIfNotGCed &&
+        gcedTime.difference(disposedTime) >= timeToDeclareLeakIfNotGCed;
   }
 
   bool get isNotDisposedLeak {

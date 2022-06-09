@@ -1,5 +1,7 @@
 import 'package:meta/meta.dart';
 
+import '../model.dart';
+
 enum GCEvent {
   oldGC,
   newGC,
@@ -40,9 +42,3 @@ class GCTime {
     _eventsPassed = 0;
   }
 }
-
-// Theoretically it should be 2, but practically 2 gives false positives.
-const GCDuration cyclesToDeclareLeakIfNotGCed = 3;
-
-typedef GCDuration = int;
-typedef GCMoment = int;
