@@ -1,3 +1,4 @@
+import 'package:compute/compute.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -29,6 +30,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  String _computeStatus = 'Computation not started.';
 
   void _incrementCounter() {
     setState(() {
@@ -46,6 +48,18 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            MaterialButton(
+              child: const Text('Compute'),
+              onPressed: () async {
+                setState(() => _computeStatus = 'Computation  started.');
+                print('started');
+                await Future.delayed(const Duration(milliseconds: 1));
+                heavyCompute(const Duration(seconds: 10));
+                print('done');
+                setState(() => _computeStatus = 'Computation  done.');
+              },
+            ),
+            Text(_computeStatus),
             const Text(
               'You have pushed the button this many times:',
             ),

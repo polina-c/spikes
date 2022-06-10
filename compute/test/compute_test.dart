@@ -6,6 +6,6 @@ import 'package:compute/main.dart';
 
 void main() {
   test('Compute', () {
-    heavyCompute(Duration(seconds: 5));
+    heavyCompute(const Duration(seconds: 5));
   });
 }
