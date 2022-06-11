@@ -70,6 +70,7 @@ class ObjectReport {
   final String creationLocation;
   final int theIdentityHashCode;
   String? retainingPath;
+  Map<String, dynamic>? retainers;
 
   ObjectReport({
     required this.token,
@@ -77,6 +78,7 @@ class ObjectReport {
     required this.creationLocation,
     required this.theIdentityHashCode,
     this.retainingPath,
+    this.retainers,
   });
 
   factory ObjectReport.fromJson(Map<String, dynamic> json) => ObjectReport(
@@ -85,6 +87,7 @@ class ObjectReport {
         creationLocation: json['creationLocation'],
         theIdentityHashCode: json['theIdentityHashCode'],
         retainingPath: json['retainingPath'],
+        retainers: json['retainers'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -93,6 +96,7 @@ class ObjectReport {
         'creationLocation': creationLocation,
         'theIdentityHashCode': theIdentityHashCode,
         'retainingPath': retainingPath,
+        'retainers': retainers,
       };
 
   static String iterableToYaml(
@@ -116,7 +120,17 @@ $indent  type: ${type}
 $indent  creationLocation: ${creationLocation}
 $indent  identityHashCode: ${theIdentityHashCode}
 $indent  retainingPath: ${retainingPath}
+$indent  retainers: ${_retainersToYaml(retainers, '$indent  ')}
 ''';
+  }
+
+  static String _retainersToYaml(
+      Map<String, dynamic>? theRetainers, String indent) {
+    if (theRetainers == null || theRetainers.isEmpty) return ' null';
+    return theRetainers.keys
+        .map((e) =>
+            '\n$indent$e:${_retainersToYaml(theRetainers[e], '$indent  ')}')
+        .join();
   }
 }
 
