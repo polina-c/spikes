@@ -120,7 +120,7 @@ $indent  type: ${type}
 $indent  creationLocation: ${creationLocation}
 $indent  identityHashCode: ${theIdentityHashCode}
 $indent  retainingPath: ${retainingPath}
-$indent  retainers: ${_retainersToYaml(retainers, '$indent  ')}
+$indent  retainers: ${_retainersToYaml(retainers, '$indent    ')}
 ''';
   }
 
