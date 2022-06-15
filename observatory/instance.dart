@@ -14,6 +14,7 @@ class MyClass {
 
 main() {
   final myObject = MyClass();
+  print(identityHashCode(myObject));
   new Timer.periodic(const Duration(seconds: 1), (Timer t) {
     //print(tick ? 'tick' : 'tock');
     myObject.tick = false;
