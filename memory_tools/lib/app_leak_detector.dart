@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:intl/intl.dart';
 import 'package:logging/logging.dart';
+import 'package:memory_tools/src/_utils.dart';
 
 import 'model.dart';
 import 'src/_config.dart' as config;
@@ -58,7 +59,8 @@ void sendLeaks() {
 }
 
 // Initiated by DevTools with 'eval'.
-void triggerGC() {
+void triggerGC() async {
   print('!!!!!!! triggering GC...');
+  Iterable.generate(3).forEach((_) async => await forceGC());
   print('!!!!!!! triggered GC.');
 }
