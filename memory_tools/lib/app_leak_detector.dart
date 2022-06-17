@@ -55,7 +55,3 @@ void sendLeaks() {
   reportLeaks(objectRegistry.collectLeaks());
   print('!!!!!!! reported leaks...');
 }
-
-Object? getNotGCedObject(int identityHashCode) {
-  return objectRegistry.getNotGCedObject(identityHashCode);
-}

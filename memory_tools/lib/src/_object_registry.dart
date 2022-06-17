@@ -151,7 +151,4 @@ class ObjectRegistry {
     logger.log(
         level, 'status: gc time: ${_gcTime.now}, not GCed: ${_notGCed.length}');
   }
-
-  Object? getNotGCedObject(int identityHashCode) =>
-      _notGCedByCode[identityHashCode]?.weakReference.target;
 }

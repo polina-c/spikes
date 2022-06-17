@@ -46,9 +46,13 @@ class LeakSummary {
 }
 
 class Leaks {
-  final Map<LeakType, List<ObjectReport>> leaks;
+  final Map<LeakType, List<ObjectReport>> byType;
 
-  Leaks(this.leaks);
+  Leaks(this.byType);
+
+  List<ObjectReport> get notGCed => byType[LeakType.notGCed] ?? [];
+  List<ObjectReport> get notDisposed => byType[LeakType.notDisposed] ?? [];
+  List<ObjectReport> get gcedLate => byType[LeakType.gcedLate] ?? [];
 
   factory Leaks.fromJson(Map<String, dynamic> json) =>
       Leaks(json.map((key, value) => MapEntry(
@@ -58,7 +62,7 @@ class Leaks {
               .map((e) => ObjectReport.fromJson(e))
               .toList(growable: false))));
 
-  Map<String, dynamic> toJson() => leaks.map(
+  Map<String, dynamic> toJson() => byType.map(
         (key, value) =>
             MapEntry(key.toString(), value.map((e) => e.toJson()).toList()),
       );
@@ -114,14 +118,24 @@ ${leaks.map((e) => e.toYaml('$indent    ')).join()}
   }
 
   String toYaml(String indent) {
-    return '''$indent${type}:
+    final result = StringBuffer();
+    result.write('''$indent${type}:
 $indent  token: ${token}
 $indent  type: ${type}
 $indent  creationLocation: ${creationLocation}
 $indent  identityHashCode: ${theIdentityHashCode}
-$indent  retainingPath: ${retainingPath}
-$indent  retainers: ${_retainersToYaml(retainers, '$indent    ')}
-''';
+''');
+    if (retainingPath != null) {
+      result.write('''$indent  retainingPath: ${retainingPath}
+''');
+    }
+
+    if (retainers?.isNotEmpty ?? false) {
+      String retainersYaml = _retainersToYaml(retainers, '$indent    ');
+      result.write('''$indent  retainers: $retainersYaml
+''');
+    }
+    return result.toString();
   }
 
   static String _retainersToYaml(
@@ -139,7 +153,6 @@ class ObjectInfo {
   final Type type;
   final String creationLocation;
   final int theIdentityHashCode;
-  final WeakReference weakReference;
 
   DateTime? _disposedTime;
   GCMoment? _disposed;
@@ -195,8 +208,7 @@ class ObjectInfo {
     this.creationLocation,
     Object object,
   )   : this.type = object.runtimeType,
-        this.theIdentityHashCode = identityHashCode(object),
-        this.weakReference = WeakReference(object);
+        this.theIdentityHashCode = identityHashCode(object);
 
   ObjectReport toObjectReport() => ObjectReport(
       token: token.toString(),
