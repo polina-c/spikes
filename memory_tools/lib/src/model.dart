@@ -74,6 +74,7 @@ class ObjectReport {
   final String creationLocation;
   final int theIdentityHashCode;
   String? retainingPath;
+  List<String>? detailedPath;
   Map<String, dynamic>? retainers;
 
   ObjectReport({
@@ -119,21 +120,20 @@ ${leaks.map((e) => e.toYaml('$indent    ')).join()}
 
   String toYaml(String indent) {
     final result = StringBuffer();
-    result.write('''$indent${type}:
-$indent  token: ${token}
-$indent  type: ${type}
-$indent  creationLocation: ${creationLocation}
-$indent  identityHashCode: ${theIdentityHashCode}
-''');
-    if (retainingPath != null) {
-      result.write('''$indent  retainingPath: ${retainingPath}
-''');
-    }
+    result.writeln('$indent${type}:');
+    result.writeln('$indent  token: ${token}');
+    result.writeln('$indent  type: ${type}');
+    result.writeln('$indent  creationLocation: ${creationLocation}');
+    result.writeln('$indent  identityHashCode: ${theIdentityHashCode}');
 
-    if (retainers?.isNotEmpty ?? false) {
+    if (detailedPath != null) {
+      result.writeln('$indent  retainingPath:');
+      result.writeln(detailedPath!.map((s) => '$indent    - $s').join('\n'));
+    } else if (retainingPath != null) {
+      result.writeln('$indent  retainingPath: ${retainingPath}');
+    } else if (retainers?.isNotEmpty ?? false) {
       String retainersYaml = _retainersToYaml(retainers, '$indent    ');
-      result.write('''$indent  retainers: $retainersYaml
-''');
+      result.writeln('$indent  retainers: $retainersYaml');
     }
     return result.toString();
   }
