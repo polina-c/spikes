@@ -50,8 +50,15 @@ void init({
   config.logger.info('Leak detector initialized.');
 }
 
+// Initiated by DevTools with 'eval'.
 void sendLeaks() {
   print('!!!!!!! reporting leaks...');
   reportLeaks(objectRegistry.collectLeaks());
-  print('!!!!!!! reported leaks...');
+  print('!!!!!!! reported leaks.');
+}
+
+// Initiated by DevTools with 'eval'.
+void triggerGC() {
+  print('!!!!!!! triggering GC...');
+  print('!!!!!!! triggered GC.');
 }
