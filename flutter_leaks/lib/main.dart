@@ -4,6 +4,8 @@ import 'package:memory_tools/app_leak_detector.dart' as leak_detector;
 
 import 'leaking_widget.dart';
 
+WeakReference? f;
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   leak_detector.init(
