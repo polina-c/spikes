@@ -1,6 +1,7 @@
 import 'package:vm_service/vm_service.dart';
 
 class MtHeap {
+  static const rootIndex = 1;
   final List<MtHeapObject> objects;
 
   MtHeap(this.objects);
@@ -44,7 +45,7 @@ class MtHeapObject {
 
   factory MtHeapObject.fromJson(Map<String, dynamic> json) => MtHeapObject(
         code: json['code'],
-        successors: json['successors'],
+        successors: (json['successors'] as List<dynamic>).cast<int>(),
         references: (json['references'] as List<dynamic>).cast<int>(),
         klass: json['klass'],
         library: json['url'],
