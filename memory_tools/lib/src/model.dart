@@ -1,6 +1,3 @@
-import 'package:memory_tools/model.dart';
-import 'package:memory_tools/src/_gc_time.dart';
-
 import 'package:collection/collection.dart';
 
 typedef GCDuration = int;

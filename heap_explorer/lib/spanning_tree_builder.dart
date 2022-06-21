@@ -1,6 +1,5 @@
 import 'package:heap_explorer/model.dart';
 
-/// Returns null if there is no path to root.
 void buildTreeFromRoot(MtHeap heap) {
   final root = heap.objects[MtHeap.rootIndex];
   root.parent = -1;
@@ -9,8 +8,8 @@ void buildTreeFromRoot(MtHeap heap) {
   // n starts with 0 and increases by 1 on each step of the algorithm.
   var cut = [MtHeap.rootIndex];
 
-  // On each step of algorithm we know that there is no roots closer
-  // than nodes in the current cut, to the destination.
+  // On each step of algorithm we know that all nodes at distance n or closer to
+  // root, has parent initialized.
   while (true) {
     final nextCut = <int>[];
     for (var p in cut) {
