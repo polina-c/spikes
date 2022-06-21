@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:heap_explorer/model.dart';
+import 'package:heap_explorer/spanning_tree_builder.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -25,6 +26,16 @@ void main() {
   test('There is exactly one object of type $appName.', () {
     final appObjects = heap.objects.where((o) => o.klass == appName);
     expect(appObjects, hasLength(1));
+  });
+
+  test('Write spanning tree to file.', () async {
+    buildTreeFromRoot(heap);
+    final appObject = heap.objects.where((o) => o.klass == appName).first;
+    expect(appObject.parent, isNotNull);
+
+    await File(
+      'test/goldens/demo_app.yaml',
+    ).writeAsString(heap.toYaml());
   });
 }
 
