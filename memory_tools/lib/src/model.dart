@@ -43,20 +43,20 @@ class LeakSummary {
 }
 
 class Leaks {
-  final Map<LeakType, List<ObjectReport>> byType;
+  final Map<LeakType, List<LeakReport>> byType;
 
   Leaks(this.byType);
 
-  List<ObjectReport> get notGCed => byType[LeakType.notGCed] ?? [];
-  List<ObjectReport> get notDisposed => byType[LeakType.notDisposed] ?? [];
-  List<ObjectReport> get gcedLate => byType[LeakType.gcedLate] ?? [];
+  List<LeakReport> get notGCed => byType[LeakType.notGCed] ?? [];
+  List<LeakReport> get notDisposed => byType[LeakType.notDisposed] ?? [];
+  List<LeakReport> get gcedLate => byType[LeakType.gcedLate] ?? [];
 
   factory Leaks.fromJson(Map<String, dynamic> json) =>
       Leaks(json.map((key, value) => MapEntry(
           _parseLeakType(key),
           (value as List)
               .cast<Map<String, dynamic>>()
-              .map((e) => ObjectReport.fromJson(e))
+              .map((e) => LeakReport.fromJson(e))
               .toList(growable: false))));
 
   Map<String, dynamic> toJson() => byType.map(
@@ -65,31 +65,28 @@ class Leaks {
       );
 }
 
-class ObjectReport {
+class LeakReport {
   final String token;
   final String type;
   final String creationLocation;
   final int theIdentityHashCode;
   String? retainingPath;
   List<String>? detailedPath;
-  Map<String, dynamic>? retainers;
 
-  ObjectReport({
+  LeakReport({
     required this.token,
     required this.type,
     required this.creationLocation,
     required this.theIdentityHashCode,
     this.retainingPath,
-    this.retainers,
   });
 
-  factory ObjectReport.fromJson(Map<String, dynamic> json) => ObjectReport(
+  factory LeakReport.fromJson(Map<String, dynamic> json) => LeakReport(
         token: json['token'],
         type: json['type'],
         creationLocation: json['creationLocation'],
         theIdentityHashCode: json['theIdentityHashCode'],
         retainingPath: json['retainingPath'],
-        retainers: json['retainers'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -98,12 +95,11 @@ class ObjectReport {
         'creationLocation': creationLocation,
         'theIdentityHashCode': theIdentityHashCode,
         'retainingPath': retainingPath,
-        'retainers': retainers,
       };
 
   static String iterableToYaml(
     String title,
-    Iterable<ObjectReport>? leaks, {
+    Iterable<LeakReport>? leaks, {
     String indent = '',
   }) {
     if (leaks == null || leaks.length == 0) return '';
@@ -128,20 +124,8 @@ ${leaks.map((e) => e.toYaml('$indent    ')).join()}
       result.writeln(detailedPath!.map((s) => '$indent    - $s').join('\n'));
     } else if (retainingPath != null) {
       result.writeln('$indent  retainingPath: ${retainingPath}');
-    } else if (retainers?.isNotEmpty ?? false) {
-      String retainersYaml = _retainersToYaml(retainers, '$indent    ');
-      result.writeln('$indent  retainers: $retainersYaml');
     }
     return result.toString();
-  }
-
-  static String _retainersToYaml(
-      Map<String, dynamic>? theRetainers, String indent) {
-    if (theRetainers == null || theRetainers.isEmpty) return ' null';
-    return theRetainers.keys
-        .map((e) =>
-            '\n$indent$e:${_retainersToYaml(theRetainers[e], '$indent  ')}')
-        .join();
   }
 }
 
@@ -207,7 +191,7 @@ class ObjectInfo {
   )   : this.type = object.runtimeType,
         this.theIdentityHashCode = identityHashCode(object);
 
-  ObjectReport toObjectReport() => ObjectReport(
+  LeakReport toObjectReport() => LeakReport(
       token: token.toString(),
       type: type.toString(),
       creationLocation: creationLocation,
