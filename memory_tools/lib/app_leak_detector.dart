@@ -30,7 +30,8 @@ void init({
 
   print('registering extension');
   // We need the extension to receive GC events from flutter_tools.
-  developer.registerExtension('ext.app-gc-event', (method, parameters) async {
+  developer.registerExtension('ext.memory-leak-tracking',
+      (method, parameters) async {
     objectRegistry.registerGCEvent(
       oldSpace: parameters.containsKey('old'),
       newSpace: parameters.containsKey('new'),
