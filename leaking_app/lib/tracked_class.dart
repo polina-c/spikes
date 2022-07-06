@@ -6,14 +6,14 @@ import 'package:flutter/memory.dart';
 
 class MyTrackedClass {
   MyTrackedClass({required this.token, this.child}) {
-    startObjectLeakTracking(this, token: token);
+    startObjectLeakTracking(this, details: token);
   }
 
-  final Object token;
+  final String token;
   final MyTrackedClass? child;
 
   void dispose() {
     child?.dispose();
-    registerDisposal(this, token: token);
+    registerDisposal(this, details: token);
   }
 }
