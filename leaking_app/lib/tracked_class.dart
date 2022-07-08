@@ -3,17 +3,19 @@
 // found in the LICENSE file.
 
 import 'package:flutter/memory.dart';
+import 'dart:core';
 
 class MyTrackedClass {
-  MyTrackedClass({required this.token, this.child}) {
+  MyTrackedClass({required this.token, required this.children}) {
     startObjectLeakTracking(this, details: token);
   }
 
   final String token;
-  final MyTrackedClass? child;
+  final List<MyTrackedClass> children;
 
   void dispose() {
-    child?.dispose();
-    registerDisposal(this, details: token);
+    children.forEach((element) => element.dispose());
+    registerDisposal(this,
+        details: 'disposal call stack:\n${StackTrace.current.toString()}');
   }
 }

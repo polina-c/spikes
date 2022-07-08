@@ -7,13 +7,16 @@ import 'package:flutter/material.dart';
 import 'tracked_class.dart';
 
 class MyClass {
-  MyTrackedClass? notGCed1 = MyTrackedClass(
-    token: 'not-GCed1',
-    child: MyTrackedClass(token: 'not-GCed2'),
+  MyTrackedClass? notGCedParent = MyTrackedClass(
+    token: 'not-GCed-parent',
+    children: [
+      MyTrackedClass(token: 'not-GCed-child1', children: []),
+      MyTrackedClass(token: 'not-GCed-child2', children: []),
+    ],
   );
 
   void dispose() {
-    notGCed1?.dispose();
+    notGCedParent?.dispose();
   }
 }
 
@@ -26,8 +29,10 @@ class LeakingWidget extends StatefulWidget {
 
 class _LeakingWidgetState extends State<LeakingWidget> {
   bool _isCleaned = false;
-  MyTrackedClass? _notDisposed = MyTrackedClass(token: 'not-disposed');
-  MyTrackedClass? _disposedAndGCed = MyTrackedClass(token: 'disposed-and-GCed');
+  MyTrackedClass? _notDisposed =
+      MyTrackedClass(token: 'not-disposed', children: []);
+  MyTrackedClass? _disposedAndGCed =
+      MyTrackedClass(token: 'disposed-and-GCed', children: []);
   // ignore: unnecessary_nullable_for_final_variable_declarations
   final MyClass? _notGCed = MyClass();
 
