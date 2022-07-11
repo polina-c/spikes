@@ -5,7 +5,9 @@ import 'leaking_widget.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  startAppLeakTracking();
+  startAppLeakTracking(
+      //enabledFamilies: {'internalFlutterObjects'},
+      );
   runApp(const MyApp());
 }
 
