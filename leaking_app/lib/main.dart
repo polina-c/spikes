@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/memory.dart';
+// import 'package:flutter/memory.dart';
 
 import 'leaking_widget.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  startAppLeakTracking(
-      //enabledFamilies: {'internalFlutterObjects'},
-      );
+  // startAppLeakTracking(
+  //     //enabledFamilies: {'internalFlutterObjects'},
+  //     );
   runApp(const MyApp());
 }
 
