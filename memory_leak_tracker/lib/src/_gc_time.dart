@@ -13,7 +13,7 @@ class GCTimeLine {
   // https://github.com/dart-lang/sdk/issues/49319.
 
   int _cyclesPassed = 0;
-  static const _cycleLength = 8;
+  static const _cycleLength = 2;
   int _eventsPassed = 0;
 
   void registerOldGCEvent() {
