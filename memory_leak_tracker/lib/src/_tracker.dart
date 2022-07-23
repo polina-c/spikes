@@ -85,6 +85,11 @@ class LeakTracker {
       ],
     );
 
+    if (typesToCollectStackTraceOnTrackingStart
+        .contains(object.runtimeType.toString())) {
+      info.details.add(StackTrace.current.toString());
+    }
+
     _notGCed[code] = info;
     _notGCedFresh.add(code);
     assert(_assertIntegrity(info));

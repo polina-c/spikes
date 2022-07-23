@@ -24,8 +24,11 @@ const String memoryLeakTrackingExtensionName = 'ext.dart.memoryLeakTracking';
 void startAppLeakTracking({
   Duration? checkPeriod = const Duration(seconds: 1),
   Set<Object> enabledFamilies = const <Object>{},
+  Set<String> typesToCollectStackTraceOnTrackingStart = const <String>{},
 }) {
   config.enabledFamilies = enabledFamilies;
+  config.typesToCollectStackTraceOnTrackingStart =
+      typesToCollectStackTraceOnTrackingStart;
 
   if (checkPeriod != null) {
     _timer?.cancel();

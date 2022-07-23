@@ -12,3 +12,6 @@ bool leakTrackingEnabled = false;
 /// If an object does not belong to any family, it is always tracked.
 /// Otherwise it is tracked if its family belongs to this set.
 Set<Object> enabledFamilies = <Object>{};
+
+/// We use String, because some types are private and thus not accessible.
+Set<String> typesToCollectStackTraceOnTrackingStart = <String>{};
