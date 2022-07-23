@@ -6,6 +6,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import '_app_config.dart' as config;
+import '_gc_detector.dart';
 import '_gc_initiator.dart';
 import '_reporter.dart';
 import '_tracker.dart';
@@ -26,6 +27,11 @@ void startAppLeakTracking({
   Set<Object> enabledFamilies = const <Object>{},
   Set<String> typesToCollectStackTraceOnTrackingStart = const <String>{},
 }) {
+  addOldGCEventListener(() {
+    print('!!!! gc happened!');
+  });
+  print('!!!! listening for gc');
+
   config.enabledFamilies = enabledFamilies;
   config.typesToCollectStackTraceOnTrackingStart =
       typesToCollectStackTraceOnTrackingStart;
