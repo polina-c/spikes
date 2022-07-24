@@ -27,14 +27,11 @@ void startAppLeakTracking({
   Set<Object> enabledFamilies = const <Object>{},
   Set<String> typesToCollectStackTraceOnTrackingStart = const <String>{},
 }) {
-  addOldGCEventListener(() {
-    print('!!!! gc happened!');
-  });
-  print('!!!! listening for gc');
-
   config.enabledFamilies = enabledFamilies;
   config.typesToCollectStackTraceOnTrackingStart =
       typesToCollectStackTraceOnTrackingStart;
+
+  addOldGCEventListener(() => leakTracker.registerOldGCEvent());
 
   if (checkPeriod != null) {
     _timer?.cancel();
@@ -49,8 +46,8 @@ void startAppLeakTracking({
   try {
     registerExtension(memoryLeakTrackingExtensionName,
         (String method, Map<String, String> parameters) async {
-      final bool isGCRegistration = parameters.containsKey('registerGC');
-      if (isGCRegistration) leakTracker.registerOldGCEvent();
+      // final bool isGCRegistration = parameters.containsKey('registerGC');
+      // if (isGCRegistration) leakTracker.registerOldGCEvent();
 
       final bool isRequestForDetails = parameters.containsKey('requestDetails');
       if (isRequestForDetails) reportLeaks(leakTracker.collectLeaks());
