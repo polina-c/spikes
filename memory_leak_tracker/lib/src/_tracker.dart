@@ -139,6 +139,8 @@ class LeakTracker {
   bool _assertIntegrity(TrackedObjectInfo info) {
     if (_notGCed.containsKey(info.code)) {
       assert(_notGCed[info.code]!.code == info.code);
+
+      // It was false one time.
       assert(!info.isGCed);
     }
 
