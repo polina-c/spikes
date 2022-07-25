@@ -3,8 +3,8 @@ import 'dart:async';
 final _listeners = <Function>[];
 Timer? _timer;
 
-Object? oldSpaceObject;
-late WeakReference<Object> detector;
+Object? _oldSpaceObject;
+late WeakReference<Object> _detector;
 
 void addOldGCEventListener(Function listener) {
   _listeners.add(listener);
@@ -15,7 +15,7 @@ void addOldGCEventListener(Function listener) {
 void _start() async {
   await _resetDetector();
   Timer.periodic(const Duration(seconds: 1), (timer) {
-    if (detector.target != null) return;
+    if (_detector.target != null) return;
     for (var l in _listeners) {
       l();
     }
@@ -24,8 +24,8 @@ void _start() async {
 }
 
 Future<void> _resetDetector() async {
-  oldSpaceObject = [DateTime.now()];
+  _oldSpaceObject = [DateTime.now()];
+  _detector = WeakReference(_oldSpaceObject!);
   await Future.delayed(Duration(milliseconds: 100));
-  detector = WeakReference(oldSpaceObject!);
-  oldSpaceObject = null;
+  _oldSpaceObject = null;
 }
