@@ -4,17 +4,26 @@
 
 import 'dart:developer';
 
+import 'package:memory_leak_tracker/src/_app_config.dart';
+
 import 'model.dart';
 
 LeakSummary? _previous;
 
 void reportLeaksSummary(LeakSummary leakSummary) {
-  postEvent('memory_leaks_summary', leakSummary.toJson());
   if (leakSummary.equals(_previous)) return;
   _previous = leakSummary;
+  final config = leakTrackingConfiguration!;
+  final listener = config.leakListener;
+
+  postEvent('memory_leaks_summary', leakSummary.toJson());
+
+  if (listener != null) listener(leakSummary);
 
   // TODO(polina-c): add deep link for DevTools here.
-  print(leakSummary.toMessage());
+  if (config.stdoutLeaks) {
+    print(leakSummary.toMessage());
+  }
 }
 
 void reportLeaks(Leaks leaks) {

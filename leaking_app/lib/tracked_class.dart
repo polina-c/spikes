@@ -8,7 +8,10 @@ import 'package:flutter/memory.dart';
 
 class MyTrackedClass {
   MyTrackedClass({required this.token, required this.children}) {
-    startObjectLeakTracking(this, details: token);
+    startObjectLeakTracking(
+      this,
+      details: 'creation call stack:\n${StackTrace.current.toString()}',
+    );
   }
 
   final String token;
@@ -16,7 +19,9 @@ class MyTrackedClass {
 
   void dispose() {
     children.forEach((element) => element.dispose());
-    registerDisposal(this,
-        details: 'disposal call stack:\n${StackTrace.current.toString()}');
+    registerDisposal(
+      this,
+      details: 'disposal call stack:\n${StackTrace.current.toString()}',
+    );
   }
 }

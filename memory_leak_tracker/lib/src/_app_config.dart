@@ -4,14 +4,4 @@
 
 import 'model.dart';
 
-/// If true, leak detection is enabled for the application.
-bool leakTrackingEnabled = false;
-
-/// Set of object families, enabled for tracking.
-///
-/// If an object does not belong to any family, it is always tracked.
-/// Otherwise it is tracked if its family belongs to this set.
-Set<Object> enabledFamilies = <Object>{};
-
-/// We use String, because some types are private and thus not accessible.
-Set<String> typesToCollectStackTraceOnTrackingStart = <String>{};
+LeakTrackingConfiguration? leakTrackingConfiguration;

@@ -5,11 +5,12 @@
 import 'dart:async';
 import 'dart:developer';
 
-import '_app_config.dart' as config;
+import '_app_config.dart';
 import '_gc_detector.dart';
 import '_gc_initiator.dart';
 import '_reporter.dart';
 import '_tracker.dart';
+import 'model.dart';
 
 Timer? _timer;
 
@@ -22,21 +23,14 @@ const String memoryLeakTrackingExtensionName = 'ext.dart.memoryLeakTracking';
 /// for the leaked objects.
 /// If [checkPeriod] is not null, the leaks summary will be regularly calculated
 /// and, in case of new leaks, output to the console.
-void startAppLeakTracking({
-  Duration? checkPeriod = const Duration(seconds: 1),
-  Set<Object> enabledFamilies = const <Object>{},
-  Set<String> typesToCollectStackTraceOnTrackingStart = const <String>{},
-}) {
-  config.enabledFamilies = enabledFamilies;
-  config.typesToCollectStackTraceOnTrackingStart =
-      typesToCollectStackTraceOnTrackingStart;
-
+void startAppLeakTracking(LeakTrackingConfiguration config) {
+  leakTrackingConfiguration = config;
   addOldGCEventListener(() => leakTracker.registerOldGCEvent());
 
-  if (checkPeriod != null) {
+  if (config.checkPeriod != null) {
     _timer?.cancel();
     _timer = Timer.periodic(
-      checkPeriod,
+      config.checkPeriod!,
       (_) {
         reportLeaksSummary(leakTracker.collectLeaksSummary());
       },
@@ -62,12 +56,10 @@ void startAppLeakTracking({
     final bool isAlreadyRegisteredError = ex.toString().contains('registered');
     if (!isAlreadyRegisteredError) rethrow;
   }
-
-  config.leakTrackingEnabled = true;
 }
 
 void stopAppLeakTracking() {
-  config.leakTrackingEnabled = false;
+  leakTrackingConfiguration = null;
   _timer?.cancel();
 }
 
@@ -88,7 +80,8 @@ void addLeakTrackingDetails(Object object, String details, {Object? family}) {
 
 bool _shouldTrack(Object? family) {
   // TODO: check if release mode.
-  if (!config.leakTrackingEnabled) return false;
+  final config = leakTrackingConfiguration;
+  if (config == null) return false;
   if (family == null) return true;
   return config.enabledFamilies.contains(family);
 }
