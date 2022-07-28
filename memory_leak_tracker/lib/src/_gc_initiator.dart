@@ -7,7 +7,7 @@
 /// It is temporary implementation while 'right' way is not possible:
 /// https://github.com/dart-lang/sdk/issues/49320
 Future<void> forceGC(int oldSpaceObjectPickUpTimes) async {
-  Iterable.generate(oldSpaceObjectPickUpTimes).forEach((_) async {
+  for (var _ in Iterable.generate(oldSpaceObjectPickUpTimes)) {
     _gcValidator = List.filled(100, DateTime.now());
     final ref = WeakReference<Object>(_gcValidator!);
     await _doSomeAllocationsInOldAndNewSpace();
@@ -20,7 +20,7 @@ Future<void> forceGC(int oldSpaceObjectPickUpTimes) async {
     }
     print('GC happened after $count iterations.');
     _oldSpaceObjects.clear();
-  });
+  }
 }
 
 Object? _gcValidator;
