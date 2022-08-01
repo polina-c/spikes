@@ -32,7 +32,9 @@ void startAppLeakTracking(LeakTrackingConfiguration config) {
     _timer = Timer.periodic(
       config.checkPeriod!,
       (_) {
+        final start = DateTime.now();
         reportLeaksSummary(leakTracker.collectLeaksSummary());
+        print('!!!! analysis took ${DateTime.now().difference(start)}');
       },
     );
   }
@@ -64,24 +66,20 @@ void stopAppLeakTracking() {
 }
 
 void startObjectLeakTracking(Object object, {String? details, Object? family}) {
-  if (!_shouldTrack(family)) return;
+  if (!_shouldTrack()) return;
   leakTracker.startTracking(object, details);
 }
 
 void registerDisposal(Object object, {String? details, Object? family}) {
-  if (!_shouldTrack(family)) return;
+  if (!_shouldTrack()) return;
   leakTracker.registerDisposal(object, details);
 }
 
 void addLeakTrackingDetails(Object object, String details, {Object? family}) {
-  if (!_shouldTrack(family)) return;
+  if (!_shouldTrack()) return;
   leakTracker.addDetails(object, details);
 }
 
-bool _shouldTrack(Object? family) {
-  // TODO: check if release mode.
-  final config = leakTrackingConfiguration;
-  if (config == null) return false;
-  if (family == null) return true;
-  return config.enabledFamilies.contains(family);
+bool _shouldTrack() {
+  return leakTrackingConfiguration != null;
 }

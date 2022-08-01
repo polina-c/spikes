@@ -228,27 +228,23 @@ class LeakTrackingConfiguration {
   /// If null, there is no periodic checking.
   final Duration? checkPeriod;
 
-  /// Set of object families, enabled for tracking.
-  ///
-  /// If an object does not belong to any family, it is always tracked.
-  /// Otherwise it is tracked if its family belongs to this set.
-  final Set<Object> enabledFamilies;
+  /// We use String, because some types are private and thus not accessible.
+  final Set<String> classesToCollectStackTraceOnTrackingStart;
 
   /// We use String, because some types are private and thus not accessible.
-  final Set<String> typesToCollectStackTraceOnTrackingStart;
+  final Set<String> classesToCollectStackTraceOnDisposal;
 
   /// If true, the tool will output the leaks to console.
-  ///
-  /// TODO: add option for logger and stderr.
   final bool stdoutLeaks;
 
+  /// Listener for [LeakSummary] updates.
   final LeakListener? leakListener;
 
   LeakTrackingConfiguration({
     this.leakListener,
     this.stdoutLeaks = true,
     this.checkPeriod = const Duration(seconds: 1),
-    this.enabledFamilies = const {},
-    this.typesToCollectStackTraceOnTrackingStart = const {},
+    this.classesToCollectStackTraceOnTrackingStart = const {},
+    this.classesToCollectStackTraceOnDisposal = const {},
   });
 }

@@ -86,7 +86,7 @@ class LeakTracker {
     );
 
     final config = leakTrackingConfiguration!;
-    if (config.typesToCollectStackTraceOnTrackingStart
+    if (config.classesToCollectStackTraceOnTrackingStart
         .contains(object.runtimeType.toString())) {
       info.details.add(StackTrace.current.toString());
     }
