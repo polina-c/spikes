@@ -32,9 +32,7 @@ void startAppLeakTracking(LeakTrackingConfiguration config) {
     _timer = Timer.periodic(
       config.checkPeriod!,
       (_) {
-        final start = DateTime.now();
         reportLeaksSummary(leakTracker.collectLeaksSummary());
-        print('!!!! analysis took ${DateTime.now().difference(start)}');
       },
     );
   }
