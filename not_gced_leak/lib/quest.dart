@@ -37,8 +37,11 @@ class _QuestState extends State<Quest> {
   _openAnswer(BuildContext context) {
     widget.controller.setAnswerBuilderIfNull((value) =>
         '$value is odd with probability 1/${identityHashCode(context)}.');
+
+    final val = widget.value;
+    final controller = widget.controller;
     setState(() {
-      widget.controller.buildAnswer(widget.value);
+      controller.buildAnswer(val);
     });
   }
 
