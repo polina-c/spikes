@@ -5,7 +5,7 @@ This application illustrates memory leak caused by context passed to a closure.
 Follow https://github.com/flutter/devtools/blob/master/packages/devtools_app/lib/src/screens/memory/panes/leaks/LEAK_TRACKING.md
 for tha application in profile mode for macos.
 
-After set of size changes, counter increases and answer openings you will get the leak:
+After a set of size changes, counter increases and answer openings you will get the leak:
 
 ```yaml
     StatefulElement:
