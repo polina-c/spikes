@@ -10,6 +10,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:stager_demo/main.dart';
 
+import 'scenes/hello.dart';
+
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
@@ -26,5 +28,12 @@ void main() {
     // Verify that our counter has incremented.
     expect(find.text('0'), findsNothing);
     expect(find.text('1'), findsOneWidget);
+  });
+
+  testWidgets('shows an empty state', (WidgetTester tester) async {
+    final scene = HelloScene();
+    await scene.setUp();
+
+    await tester.pumpWidget(scene.build());
   });
 }
