@@ -1,7 +1,11 @@
 import 'dart:ui' as ui;
 
+ui.Image? image;
+ui.Picture? picture;
+
 Future<void> exerciseGraphics() async {
-  final image = await _createImage();
+  image = await _createImage();
+  picture = _createPicture();
   print('${image.runtimeType}');
 }
 
