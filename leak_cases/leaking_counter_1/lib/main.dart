@@ -38,17 +38,20 @@ typedef ButtonClickHandler = Function(BuildContext);
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+
   late MyIncrementer _incrementer = MyIncrementer(() => setState(() {
         _counter++;
       }));
 
   void _updateAndInvokeClickHandler(BuildContext context) {
-    final oldIncrementer = _incrementer;
+    final incrementer = _incrementer;
+
     _incrementer = MyIncrementer(() {
       if (identityHashCode(context) > 0) {
-        oldIncrementer.increment();
+        incrementer.increment();
       }
     });
+
     _incrementer.increment();
   }
 
