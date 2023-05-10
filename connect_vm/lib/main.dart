@@ -32,10 +32,17 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  final _textCtrl = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    connect(); //unawaited
+  }
 
   Future<void> _incrementCounter() async {
-    await connectToVm(_textCtrl.value.text);
+    final path = await getRetainingPath(this);
+    print(path);
+
     setState(() {
       _counter++;
     });
