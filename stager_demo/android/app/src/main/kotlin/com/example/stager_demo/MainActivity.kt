@@ -1,6 +1,0 @@
-package com.example.stager_demo
-
-import io.flutter.embedding.android.FlutterActivity
-
-class MainActivity: FlutterActivity() {
-}
