@@ -11,20 +11,24 @@ bool connected = false;
 Future<void> connect() async {
   if (connected) return;
 
-  final info = await Service.getInfo();
+  try {
+    final info = await Service.getInfo();
 
-  service = await connectWithWebSocket(info.serverWebSocketUri!, (error) {
-    print('error recieved: $error');
-  });
+    service = await connectWithWebSocket(info.serverWebSocketUri!, (error) {
+      print('error recieved: $error');
+    });
 
-  await service.getVersion();
-  await service.forEachIsolate((IsolateRef r) async {
-    if (r.name == 'main') {
-      isolateId = r.id!;
-    }
-  });
+    await service.getVersion();
+    await service.forEachIsolate((IsolateRef r) async {
+      if (r.name == 'main') {
+        isolateId = r.id!;
+      }
+    });
 
-  connected = true;
+    connected = true;
+  } catch (e, stack) {
+    print('error connecting: $e\n$stack');
+  }
 }
 
 Future<RetainingPath> getRetainingPath(Object object) async {
