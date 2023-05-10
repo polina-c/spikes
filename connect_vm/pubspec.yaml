@@ -12,6 +12,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   vm_service: ^11.5.0
+  web_socket_channel: ^2.1.0
 
 dev_dependencies:
   flutter_test:
