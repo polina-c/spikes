@@ -12,7 +12,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:connect_vm/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('Retaining path is detectable.', (WidgetTester tester) async {
     await tester.pumpWidget(const MyApp());
 
     final state = tester.state(find.byType(MyHomePage));

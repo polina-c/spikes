@@ -12,7 +12,9 @@ Future<void> connect() async {
   if (connected) return;
 
   try {
+    print('Obtaining info...');
     final info = await Service.getInfo();
+    print('Obtained info.');
 
     service = await connectWithWebSocket(info.serverWebSocketUri!, (error) {
       print('error recieved: $error');
@@ -27,7 +29,7 @@ Future<void> connect() async {
 
     connected = true;
   } catch (e, stack) {
-    print('error connecting: $e\n$stack');
+    print('Error connecting: $e\n$stack');
   }
 }
 
