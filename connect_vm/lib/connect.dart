@@ -14,7 +14,7 @@ Future<void> connect() async {
   final info = await Service.getInfo();
   if (info.serverWebSocketUri == null) {
     throw Exception(
-        'Run tests in debug or profile mode to troubleshoot leaks.');
+        'Run your application or tests in debug or profile mode to troubleshoot leaks.');
   }
 
   service = await connectWithWebSocket(info.serverWebSocketUri!, (error) {
