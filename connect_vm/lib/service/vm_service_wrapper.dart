@@ -3,12 +3,11 @@
 // found in the LICENSE file.
 
 // Code needs to match API from VmService.
-// ignore_for_file: avoid-dynamic
+
 library vm_service_wrapper;
 
 import 'dart:async';
 
-import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/foundation.dart';
 import 'package:vm_service/vm_service.dart';
 
@@ -79,9 +78,6 @@ class VmServiceWrapper implements VmService {
   // A local cache of "fake" service objects. Used to convert JSON objects to
   // VM service response formats to be used with APIs that require them.
   final fakeServiceCache = JsonToServiceCache();
-
-  /// A counter for unique ids to add to each of a future's messages.
-  static int _logIdCounter = 0;
 
   /// Executes `callback` for each isolate, and waiting for all callbacks to
   /// finish before completing.
