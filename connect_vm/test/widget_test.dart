@@ -20,7 +20,7 @@ void main() {
     expect(find.text('0'), findsOneWidget);
     expect(find.text('1'), findsNothing);
 
-    final path = await getRetainingPath(state);
+    final path = await tester.runAsync(() => getRetainingPath(state));
     print(path);
   });
 }
