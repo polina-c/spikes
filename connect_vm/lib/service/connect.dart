@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:connect_vm/service/service.dart';
 import 'package:vm_service/vm_service.dart';
 import 'package:collection/collection.dart';
-import 'service/vm_service_wrapper.dart';
+import 'vm_service_wrapper.dart';
 
 late String isolateId;
 late VmServiceWrapper service;
@@ -31,11 +31,10 @@ Future<void> connect() async {
   connected = true;
 }
 
-Future<RetainingPath> getRetainingPath(Object object) async {
+Future<RetainingPath> getRetainingPath(ObjectFingerprint object) async {
   await connect();
 
-  final fp = _ObjectFingerprint(object);
-  final targetId = await _targetId(fp);
+  final targetId = await _targetId(object);
   if (targetId == null) {
     throw Exception('Could not find object in heap');
   }
@@ -43,17 +42,17 @@ Future<RetainingPath> getRetainingPath(Object object) async {
   return await service.getRetainingPath(isolateId, targetId, 100000);
 }
 
-class _ObjectFingerprint {
+class ObjectFingerprint {
   final String type;
   final int code;
 
-  _ObjectFingerprint._(this.type, this.code);
-  _ObjectFingerprint(Object object)
+  ObjectFingerprint.byCode(this.type, this.code);
+  ObjectFingerprint(Object object)
       : type = object.runtimeType.toString(),
         code = identityHashCode(object);
 }
 
-Future<String?> _targetId(_ObjectFingerprint object) async {
+Future<String?> _targetId(ObjectFingerprint object) async {
   final classes = await findClasses(object.type);
 
   for (final theClass in classes) {

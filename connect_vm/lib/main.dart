@@ -1,4 +1,4 @@
-import 'package:connect_vm/connect.dart';
+import 'package:connect_vm/service/connect.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -34,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   Future<void> _incrementCounter() async {
-    final path = await getRetainingPath(this);
+    final path = await getRetainingPath(ObjectFingerprint(this));
     print(path);
 
     setState(() {
