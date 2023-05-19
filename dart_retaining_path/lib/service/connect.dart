@@ -57,10 +57,6 @@ class ObjectFingerprint {
 Future<String> _targetId(ObjectFingerprint object) async {
   final classes = await findClasses(object.type);
 
-  if (classes.isEmpty) {
-    throw StateError('Class ${object.type} not found.');
-  }
-
   for (final theClass in classes) {
     final instances =
         (await _service.getInstances(_isolateId, theClass.id!, 10000000))
@@ -84,8 +80,14 @@ Future<List<ClassRef>> findClasses(String runtimeClassName) async {
     classes = await _service.getClassList(_isolateId);
   }
 
-  return classes.classes
-          ?.where((ref) => runtimeClassName == ref.name)
-          .toList() ??
-      [];
+  final result =
+      classes.classes?.where((ref) => runtimeClassName == ref.name).toList() ??
+          [];
+
+  print(classes.classes!.map((e) => e.name).join(', '));
+  if (result.isEmpty) {
+    throw StateError('Class $runtimeClassName not found.');
+  }
+
+  return result;
 }
