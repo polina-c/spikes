@@ -11,6 +11,12 @@
             "type": "dart",
         },
         {
+            "name": "counter",
+            "cwd": "counter",
+            "request": "launch",
+            "type": "dart",
+        },
+        {
             "name": "overflow",
             "cwd": "overflow",
             "request": "launch",

@@ -1,0 +1,32 @@
+{
+    "json.maxItemsComputed": 25000,
+    "security.workspace.trust.untrustedFiles": "open",
+    "workbench.colorTheme": "Visual Studio Light",
+    "git.openRepositoryInParentFolders": "never",
+    //
+    "editor.fontSize": 14,
+    "editor.largeFileOptimizations": false,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {},
+    "editor.inlineSuggest.enabled": true,
+    //
+    "files.trimTrailingWhitespace": true,
+    "files.autoSave": "onFocusChange",
+    "files.insertFinalNewline": true,
+    //
+    "dart.updateDevTools": false,
+    "dart.debugExternalPackageLibraries": true,
+    "dart.debugSdkLibraries": true,
+    "dart.showTodos": false,
+    "dart.cliConsole": "terminal",
+    "dart.runPubGetOnPubspecChanges": "never",
+    "dart.analyzerAdditionalArgs": [
+        "autosnapshotting-thresholdMb-300,increaseMb-100,dir-/Users/polinach/Downloads/analyzer_snapshots,dirLimitMb-4000,delaySec-20"
+    ],
+    "dart.flutterSdkPaths": [
+        "/Users/polinach/_/flutter",
+        "/Users/polinach/_/platform/flutter"
+    ],
+}

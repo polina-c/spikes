@@ -1,0 +1,4 @@
+    final file = File(fileName);
+    final bytes = await file.readAsBytes();
+    final data = bytes.buffer.asByteData();
+    final graph = HeapSnapshotGraph.fromChunks([data]);

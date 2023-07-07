@@ -1,0 +1,50 @@
+echo "original path:"
+echo $PATH
+
+export PATH="$PATH:/Users/polinach/_/platform/flutter/bin"
+export PATH="$PATH:/Users/polinach/_/platform/depot_tools"
+export PATH="$PATH:/Users/polinach/_/platform/chromedriver_mac_arm64"
+
+# path for global packages
+export PATH="$HOME/.pub-cache/bin:$PATH"
+
+export LOCAL_DART_SDK=/Users/polinach/_/dart-sdk/sdk
+
+alias work='gcert -s && ssh polinach.sea.corp.google.com'
+alias sshp='ssh polinach.sea.corp.google.com'
+alias rr='cd /Users/polinach/_/devtools && sh tool/refresh.sh && cd -'
+
+alias pr="code /Users/polinach/.bash_profile"
+
+alias as="code /Users/polinach/_/dart-sdk/sdk/pkg/analysis_server"
+alias dt="code /Users/polinach/_/devtools/packages"
+alias dtr="code /Users/polinach/_/devtools"
+alias dg="code /Users/polinach/_/date-game"
+alias fc="code /Users/polinach/_/flutter-chat"
+alias ff="code /Users/polinach/_/flutter/packages/flutter"
+alias fl="code /Users/polinach/_/platform/flutter"
+alias fld="code /Users/polinach/_/flutter"
+alias ga="code /Users/polinach/_/gallery"
+alias lc="code /Users/polinach/_/devtools/case_study/memory_leaks/leaking_counter_1"
+alias ll="code /Users/polinach/_/layerlens"
+alias lt="code /Users/polinach/_/leak_tracker"
+alias ma="code /Users/polinach/_/devtools/packages/devtools_app/test/test_infra/fixtures/memory_app"
+alias root="code /Users/polinach"
+alias sdk="code /Users/polinach/_/dart-sdk/sdk"
+alias sdkg="code /Users/polinach/_/dart-sdk-github"
+alias sp="code /Users/polinach/_/spikes"
+alias sv="code /Users/polinach/_/surveyor"
+alias st="code /Users/polinach/_/stager"
+alias to="code /Users/polinach/_/tools"
+alias tt="code /Users/polinach/_/tic_tac_toe"
+alias ws="code /Users/polinach/_/website"
+
+# Setting PATH for Python 3.10
+# The original version is saved in .bash_profile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/3.10/bin:${PATH}"
+export PATH
+
+# Path for brew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+echo ".bach_profile loaded :)"
