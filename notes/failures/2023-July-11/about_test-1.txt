@@ -1,14 +1,3 @@
-packages/flutter/test/material/about_test.dart
-LicensePage control test
-
-Resolving dependencies...
-  file 6.1.4 (7.0.0 available)
-* flutter_goldens_client 0.0.0 from path ../../../platform/flutter/packages/flutter_goldens_client (was 0.0.0 from path ../flutter_goldens_client)
-  material_color_utilities 0.5.0 (0.8.0 available)
-Changed 1 dependency!
-Connecting to VM Service at ws://127.0.0.1:58648/EoX2WAqyhrk=/ws
-
-══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
 The following TestFailure was thrown running a test:
 Expected: leak free
   Actual: <Instance of 'Leaks'>
