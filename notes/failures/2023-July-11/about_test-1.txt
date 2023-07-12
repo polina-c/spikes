@@ -1,4 +1,4 @@
-LicensePage control test with all properties
+LicensePage control test
 
 ══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
 The following TestFailure was thrown running a test:
