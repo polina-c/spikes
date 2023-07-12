@@ -1,6 +1,6 @@
-packages/flutter/test/material/about_test.dart
-LicensePage control test
+LicensePage control test with all properties
 
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
 The following TestFailure was thrown running a test:
 Expected: leak free
   Actual: <Instance of 'Leaks'>
@@ -12,162 +12,62 @@ Expected: leak free
             total: 3
             objects:
               ValueNotifier<_OverlayEntryWidgetState?>:
-                identityHashCode: 1066930571
+                identityHashCode: 31037098
                 context:
-                  start: >
-                    #4_______withFlutterLeakTracking.flutterEventToLeakTracker_(file:///Users/polinach/_/flutter/packages/flutter/test/foundation/leak_tracking.dart:125:12)
-                    #5______MemoryAllocations.dispatchObjectEvent_(package:flutter/src/foundation/memory_allocations.dart:238:23)
-                    #6______MemoryAllocations.dispatchObjectCreated_(package:flutter/src/foundation/memory_allocations.dart:272:5)
-                    #7______new_ValueNotifier_(package:flutter/src/foundation/change_notifier.dart:508:34)
-                    #8______new_OverlayEntry_(package:flutter/src/widgets/overlay.dart:141:79)
-                    #9______ModalRoute.createOverlayEntries_(package:flutter/src/widgets/routes.dart:1761:23)
-                    #10_____OverlayRoute.install_(package:flutter/src/widgets/routes.dart:59:28)
-                    #11_____TransitionRoute.install_(package:flutter/src/widgets/routes.dart:268:11)
-                    #12_____ModalRoute.install_(package:flutter/src/widgets/routes.dart:1240:11)
-                    #13______RouteEntry.handlePush_(package:flutter/src/widgets/navigator.dart:2916:11)
-                    #14_____NavigatorState._flushHistoryUpdates_(package:flutter/src/widgets/navigator.dart:4013:17)
-                    #15_____NavigatorState._pushEntry_(package:flutter/src/widgets/navigator.dart:4598:5)
-                    #16_____NavigatorState.push_(package:flutter/src/widgets/navigator.dart:4547:5)
-                    #17_____NavigatorState.pushNamed_(package:flutter/src/widgets/navigator.dart:4275:12)
-                    #18______MasterDetailFlowState.openDetailPage_(package:flutter/src/material/about.dart:1150:35)
-                    #19______MasterDetailFlowProxy.openDetailPage_(package:flutter/src/material/about.dart:1115:19)
-                    #20______PackagesViewState._packagesList.<anonymous_closure>.<anonymous_closure>_(package:flutter/src/material/about.dart:650:43)
-                    #21______InkResponseState.handleTap_(package:flutter/src/material/ink_well.dart:1154:21)
-                    #22_____GestureRecognizer.invokeCallback_(package:flutter/src/gestures/recognizer.dart:275:24)
-                    #23_____TapGestureRecognizer.handleTapUp_(package:flutter/src/gestures/tap.dart:654:11)
-                    #24_____BaseTapGestureRecognizer._checkUp_(package:flutter/src/gestures/tap.dart:311:5)
-                    #25_____BaseTapGestureRecognizer.acceptGesture_(package:flutter/src/gestures/tap.dart:281:7)
-                    #26_____GestureArenaManager.sweep_(package:flutter/src/gestures/arena.dart:167:27)
-                    #27_____GestureBinding.handleEvent_(package:flutter/src/gestures/binding.dart:492:20)
-                    #28_____GestureBinding.dispatchEvent_(package:flutter/src/gestures/binding.dart:468:22)
-                    #29_____RendererBinding.dispatchEvent_(package:flutter/src/rendering/binding.dart:333:11)
-                    #30_____GestureBinding._handlePointerEventImmediately_(package:flutter/src/gestures/binding.dart:413:7)
-                    #31_____GestureBinding.handlePointerEvent_(package:flutter/src/gestures/binding.dart:376:5)
-                    #32_____TestWidgetsFlutterBinding.handlePointerEventForSource.<anonymous_closure>_(package:flutter_test/src/binding.dart:626:42)
-                    #33_____TestWidgetsFlutterBinding.withPointerEventSource_(package:flutter_test/src/binding.dart:636:11)
-                    #34_____TestWidgetsFlutterBinding.handlePointerEventForSource_(package:flutter_test/src/binding.dart:626:5)
-                    #35_____WidgetTester.sendEventToBinding.<anonymous_closure>_(package:flutter_test/src/widget_tester.dart:848:15)
-                    #36______rootRun_(dart:async/zone.dart:1399:13)
-                    #37______CustomZone.run_(dart:async/zone.dart:1301:19)
-                    #38_____TestAsyncUtils.guard_(package:flutter_test/src/test_async_utils.dart:68:41)
-                    #39_____WidgetTester.sendEventToBinding_(package:flutter_test/src/widget_tester.dart:847:27)
-                    #40_____TestGesture.up.<anonymous_closure>_(package:flutter_test/src/test_pointer.dart:550:26)
-                    #41______rootRun_(dart:async/zone.dart:1399:13)
-                    #42______CustomZone.run_(dart:async/zone.dart:1301:19)
-                    #43_____TestAsyncUtils.guard_(package:flutter_test/src/test_async_utils.dart:68:41)
-                    #44_____TestGesture.up_(package:flutter_test/src/test_pointer.dart:543:27)
-                    #45_____WidgetController.tapAt.<anonymous_closure>_(package:flutter_test/src/controller.dart:561:21)
-                    <asynchronous_suspension>
-                    #46_____TestAsyncUtils.guard.<anonymous_closure>_(package:flutter_test/src/test_async_utils.dart:114:7)
-                    <asynchronous_suspension>
-                    #47_____main.<anonymous_closure>_(file:///Users/polinach/_/flutter/packages/flutter/test/material/about_test.dart:193:5)
-                    <asynchronous_suspension>
-                    #48_____withLeakTracking_(package:leak_tracker/src/leak_tracking/orchestration.dart:89:5)
-                    <asynchronous_suspension>
-                    #49______withFlutterLeakTracking.<anonymous_closure>_(file:///Users/polinach/_/flutter/packages/flutter/test/foundation/leak_tracking.dart:133:21)
-                    <asynchronous_suspension>
-                    #50_____TestAsyncUtils.guard.<anonymous_closure>_(package:flutter_test/src/test_async_utils.dart:114:7)
-                    <asynchronous_suspension>
-                    #51_____testWidgetsWithLeakTracking.wrappedCallback_(file:///Users/polinach/_/flutter/packages/flutter/test/foundation/leak_tracking.dart:73:5)
-                    <asynchronous_suspension>
-                    #52_____testWidgets.<anonymous_closure>.<anonymous_closure>_(package:flutter_test/src/widget_tester.dart:165:15)
-                    <asynchronous_suspension>
-                    #53_____TestWidgetsFlutterBinding._runTestBody_(package:flutter_test/src/binding.dart:982:5)
-                    <asynchronous_suspension>
-                    #54_____StackZoneSpecification._registerCallback.<anonymous_closure>_(package:stack_trace/src/stack_zone_specification.dart:114:42)
-                    <asynchronous_suspension>
-                  disposal: >
-                    #4_______withFlutterLeakTracking.flutterEventToLeakTracker_(file:///Users/polinach/_/flutter/packages/flutter/test/foundation/leak_tracking.dart:125:12)
-                    #5______MemoryAllocations.dispatchObjectEvent_(package:flutter/src/foundation/memory_allocations.dart:238:23)
-                    #6______MemoryAllocations.dispatchObjectDisposed_(package:flutter/src/foundation/memory_allocations.dart:286:5)
-                    #7______ChangeNotifier.dispose_(package:flutter/src/foundation/change_notifier.dart:357:34)
-                    #8______OverlayEntry.dispose_(package:flutter/src/widgets/overlay.dart:220:34)
-                    #9______OverlayRoute.dispose_(package:flutter/src/widgets/routes.dart:88:13)
-                    #10_____TransitionRoute.dispose_(package:flutter/src/widgets/routes.dart:489:11)
-                    #11______RouteEntry.forcedDispose_(package:flutter/src/widgets/navigator.dart:3061:11)
-                    #12______RouteEntry.dispose.<anonymous_closure>.<anonymous_closure>_(package:flutter/src/widgets/navigator.dart:3116:13)
-                    #13_____StackZoneSpecification._run_(package:stack_trace/src/stack_zone_specification.dart:207:15)
-                    #14_____StackZoneSpecification._registerCallback.<anonymous_closure>_(package:stack_trace/src/stack_zone_specification.dart:114:48)
-                    #15______rootRun_(dart:async/zone.dart:1391:47)
-                    #16______CustomZone.run_(dart:async/zone.dart:1301:19)
-                    #17______CustomZone.runGuarded_(dart:async/zone.dart:1209:7)
-                    #18______CustomZone.bindCallbackGuarded.<anonymous_closure>_(dart:async/zone.dart:1249:23)
-                    #19_____FakeAsync.flushMicrotasks_(package:fake_async/fake_async.dart:197:32)
-                    #20_____AutomatedTestWidgetsFlutterBinding.pump.<anonymous_closure>_(package:flutter_test/src/binding.dart:1235:26)
-                    #21______rootRun_(dart:async/zone.dart:1399:13)
-                    #22______CustomZone.run_(dart:async/zone.dart:1301:19)
-                    #23_____TestAsyncUtils.guard_(package:flutter_test/src/test_async_utils.dart:68:41)
-                    #24_____AutomatedTestWidgetsFlutterBinding.pump_(package:flutter_test/src/binding.dart:1220:27)
-                    #25_____WidgetTester.pumpAndSettle.<anonymous_closure>_(package:flutter_test/src/widget_tester.dart:704:23)
-                    <asynchronous_suspension>
-                    #26_____TestAsyncUtils.guard.<anonymous_closure>_(package:flutter_test/src/test_async_utils.dart:114:7)
-                    <asynchronous_suspension>
-                    #27_____main.<anonymous_closure>_(file:///Users/polinach/_/flutter/packages/flutter/test/material/about_test.dart:199:5)
-                    <asynchronous_suspension>
-                    #28_____withLeakTracking_(package:leak_tracker/src/leak_tracking/orchestration.dart:89:5)
-                    <asynchronous_suspension>
-                    #29______withFlutterLeakTracking.<anonymous_closure>_(file:///Users/polinach/_/flutter/packages/flutter/test/foundation/leak_tracking.dart:133:21)
-                    <asynchronous_suspension>
-                    #30_____TestAsyncUtils.guard.<anonymous_closure>_(package:flutter_test/src/test_async_utils.dart:114:7)
-                    <asynchronous_suspension>
-                    #31_____testWidgetsWithLeakTracking.wrappedCallback_(file:///Users/polinach/_/flutter/packages/flutter/test/foundation/leak_tracking.dart:73:5)
-                    <asynchronous_suspension>
-                    #32_____testWidgets.<anonymous_closure>.<anonymous_closure>_(package:flutter_test/src/widget_tester.dart:165:15)
-                    <asynchronous_suspension>
-                    #33_____TestWidgetsFlutterBinding._runTestBody_(package:flutter_test/src/binding.dart:982:5)
-                    <asynchronous_suspension>
-                    #34_____StackZoneSpecification._registerCallback.<anonymous_closure>_(package:stack_trace/src/stack_zone_specification.dart:114:42)
-                    <asynchronous_suspension>
                   path: >
                     References that retain the object from garbage collection.
-                    package:flutter/src/widgets/widget_inspector.dart/_instance
-                    package:flutter/src/widgets/widget_inspector.dart/_WidgetInspectorService:_registerServiceExtensionCallback@853171358
-                    dart.core/_Closure (in registerServiceExtension):_context@0150898
+                    package:flutter/src/widgets/app.dart/defaultActions
+                    dart.collection/_Map:[InstanceRef id: classes/4623/types/0, kind: Type,
+identityHashCode: 530049589, classRef: [ClassRef id: classes/48, name: _Type, library: [LibraryRef
+id: libraries/@0150898, name: dart.core, uri: dart:core]]]
+                    package:flutter/src/widgets/actions.dart/VoidCallbackAction:_listeners@816441002
+                    package:flutter/src/foundation/observer_list.dart/ObserverList:_list@441023516
+                    dart.core/_GrowableList:0
+                    dart.core/_Closure (in _handleActionChanged):_context@0150898
                     @Context:0
-                    package:flutter_test/src/binding.dart/AutomatedTestWidgetsFlutterBinding:_rootElement@357399801
-                    package:flutter/src/widgets/binding.dart/RenderObjectToWidgetElement:_child@357399801
-                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
+                    package:flutter/src/widgets/actions.dart/_ActionsState:listenedActions
+                    dart.collection/_Set:data_
+                    dart.core/_List:6
+                    package:flutter/src/widgets/actions.dart/_OverridableContextAction:lookupContext
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_model.dart/InheritedModelElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:28
-                    dart.collection/_HashMapEntry:next
-                    dart.collection/_HashMapEntry:next
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
-                    package:flutter/src/material/page_transitions_theme.dart/_ZoomExitTransitionState:delegate
-                    package:flutter/src/material/page_transitions_theme.dart/_ZoomExitTransitionPainter:_listeners@429329750
-                    dart.core/_List:0
-                    dart.core/_Closure (in markNeedsPaint):_context@0150898
-                    @Context:0
-                    package:flutter/src/widgets/snapshot_widget.dart/_RenderSnapshotWidget:_child@360266271
-                    package:flutter/src/rendering/proxy_box.dart/RenderIgnorePointer:_child@360266271
-                    package:flutter/src/rendering/proxy_box.dart/RenderRepaintBoundary:_child@360266271
-                    package:flutter/src/rendering/proxy_box.dart/RenderSemanticsAnnotations:_child@360266271
-                    package:flutter/src/rendering/proxy_box.dart/RenderBlockSemantics:_child@360266271
-                    package:flutter/src/rendering/proxy_box.dart/RenderPhysicalModel:_child@360266271
-                    package:flutter/src/material/material.dart/_RenderInkFeatures:vsync
-                    package:flutter/src/material/material.dart/_MaterialState:_element@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
-                    package:flutter/src/widgets/implicit_animations.dart/_AnimatedPhysicalModelState:_tickerModeNotifier@790311458
-                    package:flutter/src/foundation/change_notifier.dart/ValueNotifier:_listeners@429329750
-                    dart.core/_List:13
-                    dart.core/_Closure (in _updateTickers):_context@0150898
-                    @Context:0
-                    package:flutter/src/material/material.dart/_MaterialState:_element@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/notification_listener.dart/_NotificationElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/InheritedElement:_dependents@345042623
                     dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:7
+                    dart.core/_List:0
                     dart.collection/_HashMapEntry:key
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
+                    package:flutter/src/widgets/navigator.dart/NavigatorState:userGestureInProgressNotifier
+                    package:flutter/src/foundation/change_notifier.dart/ValueNotifier:_listeners@429329750
+                    dart.core/_List:0
+                    dart.core/_Closure (in _handleChange):_context@0150898
+                    @Context:0
+                    package:flutter/src/widgets/transitions.dart/_AnimatedState:_element@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
+                    package:flutter/src/material/about.dart/_LicensePageState:selectedId
+                    package:flutter/src/foundation/change_notifier.dart/ValueNotifier:_listeners@429329750
+                    dart.core/_List:0
+                    dart.core/_Closure (in _valueChanged):_context@0150898
+                    @Context:0
+                    package:flutter/src/widgets/value_listenable_builder.dart/_ValueListenableBuilderState:_element@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
+                    package:flutter/src/material/material.dart/_MaterialState:_tickerModeNotifier@790311458
+                    package:flutter/src/foundation/change_notifier.dart/ValueNotifier:_listeners@429329750
+                    dart.core/_List:12
+                    dart.core/_Closure (in _updateTicker):_context@0150898
+                    @Context:0
+                    package:flutter/src/widgets/implicit_animations.dart/_AnimatedDefaultTextStyleState:_element@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/MultiChildRenderObjectElement:_renderObject@345042623
                     package:flutter/src/rendering/paragraph.dart/RenderParagraph:_relayoutBoundary@360266271
@@ -184,133 +84,34 @@ Expected: leak free
                     package:flutter/src/rendering/custom_paint.dart/RenderCustomPaint:_child@360266271
                     package:flutter/src/rendering/proxy_box.dart/RenderRepaintBoundary:_child@360266271
                     package:flutter/src/widgets/scrollable.dart/_RenderScrollSemantics:_innerNode@895019050
-                    package:flutter/src/semantics/semantics.dart/SemanticsNode:_debugPreviousSnapshot@747082469
-                    dart.core/_GrowableList:2
-                    package:flutter/src/semantics/semantics.dart/SemanticsNode:_actions@747082469
-                    dart.collection/_Map:[InstanceRef id: objects/3388, kind: PlainInstance,
-identityHashCode: 593604394, classRef: [ClassRef id: classes/1196, name: SemanticsAction, library:
-[LibraryRef id: libraries/@15065589, name: dart.ui, uri: dart:ui]]]
-                    dart.core/_Closure (in _addArgumentlessAction):_context@0150898
+                    package:flutter/src/semantics/semantics.dart/SemanticsNode:_owner@747082469
+                    package:flutter/src/semantics/semantics.dart/SemanticsOwner:_nodes@747082469
+                    dart.collection/_Map:[InstanceRef id: objects/int-8, kind: Int,
+identityHashCode: 0, classRef: [ClassRef id: classes/59, name: _Smi, library: [LibraryRef id:
+libraries/@0150898, name: dart.core, uri: dart:core]]]
+                    package:flutter/src/semantics/semantics.dart/SemanticsNode:_showOnScreen@747082469
+                    dart.core/_Closure (in showOnScreen):_context@0150898
                     @Context:0
-                    dart.core/_Closure (in _performTap):_context@0150898
-                    @Context:0
-                    package:flutter/src/rendering/proxy_box.dart/RenderSemanticsAnnotations:_properties@347160605
-                    package:flutter/src/semantics/semantics.dart/SemanticsProperties:onTap
-                    dart.core/_Closure (in simulateTap):_context@0150898
-                    @Context:0
-                    package:flutter/src/material/ink_well.dart/_InkResponseState:_actionMap@560059085
-                    dart.collection/_Map:[InstanceRef id: classes/4629/types/0, kind: Type,
-identityHashCode: 373655292, classRef: [ClassRef id: classes/48, name: _Type, library: [LibraryRef
-id: libraries/@0150898, name: dart.core, uri: dart:core]]]
-                    package:flutter/src/widgets/actions.dart/CallbackAction:_listeners@816441002
-                    package:flutter/src/foundation/observer_list.dart/ObserverList:_list@441023516
-                    dart.core/_GrowableList:0
-                    dart.core/_Closure (in _handleActionChanged):_context@0150898
-                    @Context:0
-                    package:flutter/src/widgets/actions.dart/_ActionsState:_element@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
-                    package:flutter/src/widgets/focus_scope.dart/_FocusState:_internalNode@831492240
-                    package:flutter/src/widgets/focus_manager.dart/FocusNode:_parent@830042876
-                    package:flutter/src/widgets/focus_manager.dart/FocusScopeNode:_children@830042876
-                    dart.core/_GrowableList:0
-                    package:flutter/src/widgets/focus_manager.dart/FocusNode:_ancestors@830042876
-                    dart.core/_GrowableList:11
-                    package:flutter/src/widgets/focus_manager.dart/FocusNode:_context@830042876
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:4
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:6
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:5
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:7
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
+                    package:flutter/src/rendering/proxy_box.dart/RenderSemanticsAnnotations:_child@360266271
+                    package:flutter/src/material/app_bar.dart/_RenderAppBarTitleBox:_child@360266271
+                    package:flutter/src/rendering/paragraph.dart/RenderParagraph:debugCreator
+                    package:flutter/src/widgets/framework.dart/DebugCreator:element
+                    package:flutter/src/widgets/framework.dart/MultiChildRenderObjectElement:_ancestorRenderObjectElement@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_dependencies@345042623
+                    dart.collection/_HashSet:_buckets@3220832
                     dart.core/_List:3
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:0
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:6
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:1
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:6
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
-                    package:flutter/src/widgets/focus_scope.dart/_FocusScopeState:_focusAttachment@831492240
-                    package:flutter/src/widgets/focus_manager.dart/FocusAttachment:_node@830042876
-                    package:flutter/src/widgets/focus_manager.dart/FocusScopeNode:_children@830042876
-                    dart.core/_GrowableList:0
-                    package:flutter/src/widgets/focus_manager.dart/FocusNode:_context@830042876
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    dart.collection/_HashSetEntry:key
+                    package:flutter/src/widgets/basic.dart/_UbiquitousInheritedElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
-                    package:flutter/src/widgets/gesture_detector.dart/RawGestureDetectorState:_recognizers@881132872
-                    dart.collection/_Map:[InstanceRef id: classes/2726/types/0, kind: Type,
-identityHashCode: 752472855, classRef: [ClassRef id: classes/48, name: _Type, library: [LibraryRef
-id: libraries/@0150898, name: dart.core, uri: dart:core]]]
-                    package:flutter/src/gestures/tap.dart/TapGestureRecognizer:onTapCancel
-                    dart.core/_Closure (in handleTapCancel):_context@0150898
-                    @Context:0
-                    package:flutter/src/material/ink_well.dart/_InkResponseState:_actionMap@560059085
-                    dart.collection/_Map:[InstanceRef id: classes/4629/types/0, kind: Type,
-identityHashCode: 373655292, classRef: [ClassRef id: classes/48, name: _Type, library: [LibraryRef
-id: libraries/@0150898, name: dart.core, uri: dart:core]]]
-                    package:flutter/src/widgets/actions.dart/CallbackAction:_listeners@816441002
-                    package:flutter/src/foundation/observer_list.dart/ObserverList:_list@441023516
-                    dart.core/_GrowableList:0
-                    dart.core/_Closure (in _handleActionChanged):_context@0150898
-                    @Context:0
-                    package:flutter/src/widgets/actions.dart/_ActionsState:_element@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_inheritedElements@345042623
-                    package:flutter/src/foundation/persistent_hash_map.dart/PersistentHashMap:_root@442137193
-                    package:flutter/src/foundation/persistent_hash_map.dart/_CompressedNode:keyValuePairs
-                    dart.core/_List:29
-                    package:flutter/src/widgets/framework.dart/InheritedElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:7
-                    dart.collection/_HashMapEntry:next
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
+                    package:flutter/src/material/scaffold.dart/ScaffoldMessengerState:_scaffolds@601420462
+                    dart.collection/_Set:data_
+                    dart.core/_List:0
                     package:flutter/src/material/scaffold.dart/ScaffoldState:_floatingActionButtonVisibilityController@601420462
                     package:flutter/src/animation/animation_controller.dart/AnimationController:_statusListeners@373091803
                     package:flutter/src/foundation/observer_list.dart/ObserverList:_list@441023516
@@ -346,105 +147,161 @@ id: libraries/@0150898, name: dart.core, uri: dart:core]]]
                     package:flutter/src/widgets/framework.dart/ParentDataElement:_child@345042623
                     package:flutter/src/widgets/inherited_model.dart/InheritedModelElement:_dependents@345042623
                     dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:4
+                    dart.core/_List:0
                     dart.collection/_HashMapEntry:next
                     dart.collection/_HashMapEntry:key
                     package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
                     package:flutter/src/material/app_bar.dart/_AppBarState:_scrollNotificationObserver@480187611
                     package:flutter/src/widgets/scroll_notification_observer.dart/ScrollNotificationObserverState:_element@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_inheritedElements@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/notification_listener.dart/_NotificationElement:_child@345042623
+                    package:flutter/src/widgets/notification_listener.dart/_NotificationElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_ancestorRenderObjectElement@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_renderObject@345042623
+                    package:flutter/src/rendering/proxy_box.dart/RenderBlockSemantics:_parent@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderSemanticsAnnotations:_parent@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderRepaintBoundary:_layerHandle@360266271
+                    package:flutter/src/rendering/layer.dart/LayerHandle:_layer@713518307
+                    package:flutter/src/rendering/layer.dart/OffsetLayer:_lastChild@713518307
+                    package:flutter/src/rendering/layer.dart/AnnotatedRegionLayer:size
+                    package:flutter/src/rendering/box.dart/_DebugSize:_owner@702392247
+                    package:flutter/src/rendering/proxy_box.dart/RenderAnnotatedRegion:_child@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderPhysicalModel:_child@360266271
+                    package:flutter/src/material/material.dart/_RenderInkFeatures:vsync
+                    package:flutter/src/material/material.dart/_MaterialState:_element@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    package:flutter/src/widgets/notification_listener.dart/_NotificationElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_renderObject@345042623
+                    package:flutter/src/rendering/shifted_box.dart/RenderPositionedBox:_child@360266271
+                    package:flutter/src/rendering/shifted_box.dart/RenderPadding:_child@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderClipRect:_child@360266271
+                    package:flutter/src/rendering/shifted_box.dart/RenderCustomSingleChildLayoutBox:debugCreator
+                    package:flutter/src/widgets/framework.dart/DebugCreator:element
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/MultiChildRenderObjectElement:_children@345042623
+                    dart.core/_List:0
+                    package:flutter/src/widgets/framework.dart/ParentDataElement:_child@345042623
+                    package:flutter/src/widgets/inherited_model.dart/InheritedModelElement:_inheritedElements@345042623
                     package:flutter/src/foundation/persistent_hash_map.dart/PersistentHashMap:_root@442137193
                     package:flutter/src/foundation/persistent_hash_map.dart/_CompressedNode:keyValuePairs
                     dart.core/_List:25
                     package:flutter/src/foundation/persistent_hash_map.dart/_CompressedNode:keyValuePairs
-                    dart.core/_List:3
-                    package:flutter/src/widgets/framework.dart/InheritedElement:_inheritedElements@345042623
-                    package:flutter/src/foundation/persistent_hash_map.dart/PersistentHashMap:_root@442137193
-                    package:flutter/src/foundation/persistent_hash_map.dart/_CompressedNode:keyValuePairs
-                    dart.core/_List:9
-                    package:flutter/src/foundation/persistent_hash_map.dart/_CompressedNode:keyValuePairs
-                    dart.core/_List:3
-                    package:flutter/src/widgets/basic.dart/_UbiquitousInheritedElement:_parent@345042623
+                    dart.core/_List:1
                     package:flutter/src/widgets/framework.dart/InheritedElement:_dependents@345042623
                     dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:63
+                    dart.core/_List:61
+                    dart.collection/_HashMapEntry:key
+                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
+                    package:flutter/src/material/ink_decoration.dart/_InkState:_ink@555412529
+                    package:flutter/src/material/ink_decoration.dart/InkDecoration:referenceBox
+                    package:flutter/src/rendering/shifted_box.dart/RenderPadding:_child@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderSemanticsAnnotations:_child@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderMouseRegion:onExit
+                    dart.core/_Closure (in handleMouseExit):_context@0150898
+                    @Context:0
+                    package:flutter/src/material/ink_well.dart/_InkResponseState:_actionMap@560059085
+                    dart.collection/_Map:[InstanceRef id: classes/4629/types/0, kind: Type,
+identityHashCode: 3483911676, classRef: [ClassRef id: classes/48, name: _Type, library: [LibraryRef
+id: libraries/@0150898, name: dart.core, uri: dart:core]]]
+                    package:flutter/src/widgets/actions.dart/CallbackAction:_listeners@816441002
+                    package:flutter/src/foundation/observer_list.dart/ObserverList:_list@441023516
+                    dart.core/_GrowableList:0
+                    dart.core/_Closure (in _handleActionChanged):_context@0150898
+                    @Context:0
+                    package:flutter/src/widgets/actions.dart/_ActionsState:_element@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
+                    package:flutter/src/widgets/focus_scope.dart/_FocusState:_internalNode@831492240
+                    package:flutter/src/widgets/focus_manager.dart/FocusNode:_parent@830042876
+                    package:flutter/src/widgets/focus_manager.dart/FocusScopeNode:_children@830042876
+                    dart.core/_GrowableList:0
+                    package:flutter/src/widgets/focus_manager.dart/FocusNode:_ancestors@830042876
+                    dart.core/_GrowableList:11
+                    package:flutter/src/widgets/focus_manager.dart/FocusNode:_context@830042876
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
+                    dart.collection/_HashMap:_buckets@3220832
+                    dart.core/_List:3
                     dart.collection/_HashMapEntry:key
                     package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/overlay.dart/_OverlayPortalElement:_child@859319124
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatelessElement:_dependencies@345042623
-                    dart.collection/_HashSet:_buckets@3220832
-                    dart.core/_List:3
-                    dart.collection/_HashSetEntry:key
-                    package:flutter/src/widgets/framework.dart/InheritedElement:_dependents@345042623
+                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
                     dart.collection/_HashMap:_buckets@3220832
                     dart.core/_List:6
                     dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatelessElement:_parent@345042623
-                    package:flutter/src/widgets/framework.dart/StatelessElement:_parent@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_ancestorRenderObjectElement@345042623
-                    package:flutter/src/widgets/framework.dart/MultiChildRenderObjectElement:_children@345042623
-                    dart.core/_List:1
-                    package:flutter/src/widgets/framework.dart/ParentDataElement:_child@345042623
-                    package:flutter/src/widgets/inherited_model.dart/InheritedModelElement:_dependents@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
                     dart.collection/_HashMap:_buckets@3220832
                     dart.core/_List:7
                     dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/MultiChildRenderObjectElement:_renderObject@345042623
-                    package:flutter/src/rendering/paragraph.dart/RenderParagraph:_relayoutBoundary@360266271
-                    package:flutter/src/rendering/custom_layout.dart/RenderCustomMultiChildLayoutBox:_lastChild@360266271
-                    package:flutter/src/rendering/stack.dart/RenderStack:_firstChild@360266271
-                    package:flutter/src/rendering/proxy_box.dart/RenderTransform:_child@360266271
-                    package:flutter/src/rendering/proxy_box.dart/RenderTransform:debugCreator
-                    package:flutter/src/widgets/framework.dart/DebugCreator:element
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_ancestorRenderObjectElement@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_ancestorRenderObjectElement@345042623
-                    package:flutter/src/widgets/framework.dart/MultiChildRenderObjectElement:_ancestorRenderObjectElement@345042623
-                    package:flutter/src/widgets/framework.dart/MultiChildRenderObjectElement:_children@345042623
-                    dart.core/_List:2
-                    package:flutter/src/widgets/framework.dart/ParentDataElement:_child@345042623
-                    package:flutter/src/widgets/inherited_model.dart/InheritedModelElement:_widget@345042623
-                    package:flutter/src/widgets/media_query.dart/MediaQuery:child
-                    package:flutter/src/material/scaffold.dart/_FloatingActionButtonTransition:currentController
-                    package:flutter/src/animation/animation_controller.dart/AnimationController:_ticker@370066280
-                    package:flutter/src/widgets/ticker_provider.dart/_WidgetTicker:_creator@790311458
-                    package:flutter/src/material/scaffold.dart/ScaffoldState:_tickerModeNotifier@790311458
-                    package:flutter/src/foundation/change_notifier.dart/ValueNotifier:_listeners@429329750
-                    dart.core/_List:8
-                    dart.core/_Closure (in _updateTicker):_context@0150898
-                    @Context:0
-                    package:flutter/src/widgets/implicit_animations.dart/_AnimatedDefaultTextStyleState:_element@345042623
                     package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/inherited_model.dart/InheritedModelElement:_inheritedElements@345042623
-                    package:flutter/src/foundation/persistent_hash_map.dart/PersistentHashMap:_root@442137193
-                    package:flutter/src/foundation/persistent_hash_map.dart/_CompressedNode:keyValuePairs
-                    dart.core/_List:13
-                    package:flutter/src/foundation/persistent_hash_map.dart/_CompressedNode:keyValuePairs
+                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
+                    dart.collection/_HashMap:_buckets@3220832
                     dart.core/_List:5
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    dart.collection/_HashMapEntry:key
                     package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
+                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
+                    dart.collection/_HashMap:_buckets@3220832
+                    dart.core/_List:3
+                    dart.collection/_HashMapEntry:key
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_renderObject@345042623
+                    package:flutter/src/rendering/proxy_box.dart/RenderSemanticsAnnotations:_child@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderPointerListener:_child@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderAbsorbPointer:_child@360266271
+                    package:flutter/src/widgets/overlay.dart/_RenderTheater:_lastChild@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderSemanticsAnnotations:_child@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderOffstage:_child@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderSemanticsAnnotations:_child@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderRepaintBoundary:_child@360266271
+                    package:flutter/src/widgets/snapshot_widget.dart/_RenderSnapshotWidget:_painter@820188970
+                    package:flutter/src/material/page_transitions_theme.dart/_ZoomEnterTransitionPainter:animation
+                    package:flutter/src/animation/animations.dart/ProxyAnimation:_statusListeners@373091803
+                    package:flutter/src/foundation/observer_list.dart/ObserverList:_list@441023516
+                    dart.core/_GrowableList:0
+                    dart.core/_Closure (in onAnimationStatusChange):_context@0150898
+                    @Context:0
+                    package:flutter/src/material/page_transitions_theme.dart/_ZoomEnterTransitionState:_element@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
-                    package:flutter/src/widgets/dual_transition_builder.dart/_DualTransitionBuilderState:_reverseAnimation@893338117
+                    package:flutter/src/material/page_transitions_theme.dart/_ZoomExitTransitionState:delegate
+                    package:flutter/src/material/page_transitions_theme.dart/_ZoomExitTransitionPainter:animation
                     package:flutter/src/animation/animations.dart/ProxyAnimation:_parent@371411118
                     package:flutter/src/animation/animations.dart/ReverseAnimation:parent
                     package:flutter/src/animation/animations.dart/ProxyAnimation:_parent@371411118
-                    package:flutter/src/animation/animation_controller.dart/AnimationController:_ticker@370066280
-                    package:flutter/src/widgets/ticker_provider.dart/_WidgetTicker:_creator@790311458
+                    package:flutter/src/animation/animation_controller.dart/AnimationController:_statusListeners@373091803
+                    package:flutter/src/foundation/observer_list.dart/ObserverList:_list@441023516
+                    dart.core/_GrowableList:0
+                    dart.core/_Closure (in _handleStatusChanged):_context@0150898
+                    @Context:0
+                    package:flutter/src/material/page.dart/MaterialPageRoute:_modalScope@796188637
+                    package:flutter/src/widgets/overlay.dart/OverlayEntry:_overlay@859319124
+                    package:flutter/src/widgets/overlay.dart/OverlayState:_element@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/overlay.dart/_TheaterElement:_children@345042623
+                    dart.core/_List:1
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
+                    package:flutter/src/widgets/ticker_provider.dart/_TickerModeState:_effectiveMode@790311458
+                    package:flutter/src/foundation/change_notifier.dart/ValueNotifier:_listeners@429329750
+                    dart.core/_List:0
+                    dart.core/_Closure (in _updateTickers):_context@0150898
+                    @Context:0
                     package:flutter/src/widgets/navigator.dart/NavigatorState:_history@31124995
                     dart.core/_GrowableList:0
                     package:flutter/src/widgets/navigator.dart/_RouteEntry:lastAnnouncedPoppedNextRoute
@@ -452,162 +309,62 @@ id: libraries/@0150898, name: dart.core, uri: dart:core]]]
                     package:flutter/src/widgets/overlay.dart/OverlayEntry:_overlayEntryStateNotifier@859319124
                     package:flutter/src/foundation/change_notifier.dart/ValueNotifier
               ValueNotifier<_OverlayEntryWidgetState?>:
-                identityHashCode: 890289203
+                identityHashCode: 465290959
                 context:
-                  start: >
-                    #4_______withFlutterLeakTracking.flutterEventToLeakTracker_(file:///Users/polinach/_/flutter/packages/flutter/test/foundation/leak_tracking.dart:125:12)
-                    #5______MemoryAllocations.dispatchObjectEvent_(package:flutter/src/foundation/memory_allocations.dart:238:23)
-                    #6______MemoryAllocations.dispatchObjectCreated_(package:flutter/src/foundation/memory_allocations.dart:272:5)
-                    #7______new_ValueNotifier_(package:flutter/src/foundation/change_notifier.dart:508:34)
-                    #8______new_OverlayEntry_(package:flutter/src/widgets/overlay.dart:141:79)
-                    #9______ModalRoute.createOverlayEntries_(package:flutter/src/widgets/routes.dart:1762:21)
-                    #10_____OverlayRoute.install_(package:flutter/src/widgets/routes.dart:59:28)
-                    #11_____TransitionRoute.install_(package:flutter/src/widgets/routes.dart:268:11)
-                    #12_____ModalRoute.install_(package:flutter/src/widgets/routes.dart:1240:11)
-                    #13______RouteEntry.handlePush_(package:flutter/src/widgets/navigator.dart:2916:11)
-                    #14_____NavigatorState._flushHistoryUpdates_(package:flutter/src/widgets/navigator.dart:4013:17)
-                    #15_____NavigatorState._pushEntry_(package:flutter/src/widgets/navigator.dart:4598:5)
-                    #16_____NavigatorState.push_(package:flutter/src/widgets/navigator.dart:4547:5)
-                    #17_____NavigatorState.pushNamed_(package:flutter/src/widgets/navigator.dart:4275:12)
-                    #18______MasterDetailFlowState.openDetailPage_(package:flutter/src/material/about.dart:1150:35)
-                    #19______MasterDetailFlowProxy.openDetailPage_(package:flutter/src/material/about.dart:1115:19)
-                    #20______PackagesViewState._packagesList.<anonymous_closure>.<anonymous_closure>_(package:flutter/src/material/about.dart:650:43)
-                    #21______InkResponseState.handleTap_(package:flutter/src/material/ink_well.dart:1154:21)
-                    #22_____GestureRecognizer.invokeCallback_(package:flutter/src/gestures/recognizer.dart:275:24)
-                    #23_____TapGestureRecognizer.handleTapUp_(package:flutter/src/gestures/tap.dart:654:11)
-                    #24_____BaseTapGestureRecognizer._checkUp_(package:flutter/src/gestures/tap.dart:311:5)
-                    #25_____BaseTapGestureRecognizer.acceptGesture_(package:flutter/src/gestures/tap.dart:281:7)
-                    #26_____GestureArenaManager.sweep_(package:flutter/src/gestures/arena.dart:167:27)
-                    #27_____GestureBinding.handleEvent_(package:flutter/src/gestures/binding.dart:492:20)
-                    #28_____GestureBinding.dispatchEvent_(package:flutter/src/gestures/binding.dart:468:22)
-                    #29_____RendererBinding.dispatchEvent_(package:flutter/src/rendering/binding.dart:333:11)
-                    #30_____GestureBinding._handlePointerEventImmediately_(package:flutter/src/gestures/binding.dart:413:7)
-                    #31_____GestureBinding.handlePointerEvent_(package:flutter/src/gestures/binding.dart:376:5)
-                    #32_____TestWidgetsFlutterBinding.handlePointerEventForSource.<anonymous_closure>_(package:flutter_test/src/binding.dart:626:42)
-                    #33_____TestWidgetsFlutterBinding.withPointerEventSource_(package:flutter_test/src/binding.dart:636:11)
-                    #34_____TestWidgetsFlutterBinding.handlePointerEventForSource_(package:flutter_test/src/binding.dart:626:5)
-                    #35_____WidgetTester.sendEventToBinding.<anonymous_closure>_(package:flutter_test/src/widget_tester.dart:848:15)
-                    #36______rootRun_(dart:async/zone.dart:1399:13)
-                    #37______CustomZone.run_(dart:async/zone.dart:1301:19)
-                    #38_____TestAsyncUtils.guard_(package:flutter_test/src/test_async_utils.dart:68:41)
-                    #39_____WidgetTester.sendEventToBinding_(package:flutter_test/src/widget_tester.dart:847:27)
-                    #40_____TestGesture.up.<anonymous_closure>_(package:flutter_test/src/test_pointer.dart:550:26)
-                    #41______rootRun_(dart:async/zone.dart:1399:13)
-                    #42______CustomZone.run_(dart:async/zone.dart:1301:19)
-                    #43_____TestAsyncUtils.guard_(package:flutter_test/src/test_async_utils.dart:68:41)
-                    #44_____TestGesture.up_(package:flutter_test/src/test_pointer.dart:543:27)
-                    #45_____WidgetController.tapAt.<anonymous_closure>_(package:flutter_test/src/controller.dart:561:21)
-                    <asynchronous_suspension>
-                    #46_____TestAsyncUtils.guard.<anonymous_closure>_(package:flutter_test/src/test_async_utils.dart:114:7)
-                    <asynchronous_suspension>
-                    #47_____main.<anonymous_closure>_(file:///Users/polinach/_/flutter/packages/flutter/test/material/about_test.dart:193:5)
-                    <asynchronous_suspension>
-                    #48_____withLeakTracking_(package:leak_tracker/src/leak_tracking/orchestration.dart:89:5)
-                    <asynchronous_suspension>
-                    #49______withFlutterLeakTracking.<anonymous_closure>_(file:///Users/polinach/_/flutter/packages/flutter/test/foundation/leak_tracking.dart:133:21)
-                    <asynchronous_suspension>
-                    #50_____TestAsyncUtils.guard.<anonymous_closure>_(package:flutter_test/src/test_async_utils.dart:114:7)
-                    <asynchronous_suspension>
-                    #51_____testWidgetsWithLeakTracking.wrappedCallback_(file:///Users/polinach/_/flutter/packages/flutter/test/foundation/leak_tracking.dart:73:5)
-                    <asynchronous_suspension>
-                    #52_____testWidgets.<anonymous_closure>.<anonymous_closure>_(package:flutter_test/src/widget_tester.dart:165:15)
-                    <asynchronous_suspension>
-                    #53_____TestWidgetsFlutterBinding._runTestBody_(package:flutter_test/src/binding.dart:982:5)
-                    <asynchronous_suspension>
-                    #54_____StackZoneSpecification._registerCallback.<anonymous_closure>_(package:stack_trace/src/stack_zone_specification.dart:114:42)
-                    <asynchronous_suspension>
-                  disposal: >
-                    #4_______withFlutterLeakTracking.flutterEventToLeakTracker_(file:///Users/polinach/_/flutter/packages/flutter/test/foundation/leak_tracking.dart:125:12)
-                    #5______MemoryAllocations.dispatchObjectEvent_(package:flutter/src/foundation/memory_allocations.dart:238:23)
-                    #6______MemoryAllocations.dispatchObjectDisposed_(package:flutter/src/foundation/memory_allocations.dart:286:5)
-                    #7______ChangeNotifier.dispose_(package:flutter/src/foundation/change_notifier.dart:357:34)
-                    #8______OverlayEntry.dispose_(package:flutter/src/widgets/overlay.dart:220:34)
-                    #9______OverlayRoute.dispose_(package:flutter/src/widgets/routes.dart:88:13)
-                    #10_____TransitionRoute.dispose_(package:flutter/src/widgets/routes.dart:489:11)
-                    #11______RouteEntry.forcedDispose_(package:flutter/src/widgets/navigator.dart:3061:11)
-                    #12______RouteEntry.dispose.<anonymous_closure>.<anonymous_closure>_(package:flutter/src/widgets/navigator.dart:3116:13)
-                    #13_____StackZoneSpecification._run_(package:stack_trace/src/stack_zone_specification.dart:207:15)
-                    #14_____StackZoneSpecification._registerCallback.<anonymous_closure>_(package:stack_trace/src/stack_zone_specification.dart:114:48)
-                    #15______rootRun_(dart:async/zone.dart:1391:47)
-                    #16______CustomZone.run_(dart:async/zone.dart:1301:19)
-                    #17______CustomZone.runGuarded_(dart:async/zone.dart:1209:7)
-                    #18______CustomZone.bindCallbackGuarded.<anonymous_closure>_(dart:async/zone.dart:1249:23)
-                    #19_____FakeAsync.flushMicrotasks_(package:fake_async/fake_async.dart:197:32)
-                    #20_____AutomatedTestWidgetsFlutterBinding.pump.<anonymous_closure>_(package:flutter_test/src/binding.dart:1235:26)
-                    #21______rootRun_(dart:async/zone.dart:1399:13)
-                    #22______CustomZone.run_(dart:async/zone.dart:1301:19)
-                    #23_____TestAsyncUtils.guard_(package:flutter_test/src/test_async_utils.dart:68:41)
-                    #24_____AutomatedTestWidgetsFlutterBinding.pump_(package:flutter_test/src/binding.dart:1220:27)
-                    #25_____WidgetTester.pumpAndSettle.<anonymous_closure>_(package:flutter_test/src/widget_tester.dart:704:23)
-                    <asynchronous_suspension>
-                    #26_____TestAsyncUtils.guard.<anonymous_closure>_(package:flutter_test/src/test_async_utils.dart:114:7)
-                    <asynchronous_suspension>
-                    #27_____main.<anonymous_closure>_(file:///Users/polinach/_/flutter/packages/flutter/test/material/about_test.dart:199:5)
-                    <asynchronous_suspension>
-                    #28_____withLeakTracking_(package:leak_tracker/src/leak_tracking/orchestration.dart:89:5)
-                    <asynchronous_suspension>
-                    #29______withFlutterLeakTracking.<anonymous_closure>_(file:///Users/polinach/_/flutter/packages/flutter/test/foundation/leak_tracking.dart:133:21)
-                    <asynchronous_suspension>
-                    #30_____TestAsyncUtils.guard.<anonymous_closure>_(package:flutter_test/src/test_async_utils.dart:114:7)
-                    <asynchronous_suspension>
-                    #31_____testWidgetsWithLeakTracking.wrappedCallback_(file:///Users/polinach/_/flutter/packages/flutter/test/foundation/leak_tracking.dart:73:5)
-                    <asynchronous_suspension>
-                    #32_____testWidgets.<anonymous_closure>.<anonymous_closure>_(package:flutter_test/src/widget_tester.dart:165:15)
-                    <asynchronous_suspension>
-                    #33_____TestWidgetsFlutterBinding._runTestBody_(package:flutter_test/src/binding.dart:982:5)
-                    <asynchronous_suspension>
-                    #34_____StackZoneSpecification._registerCallback.<anonymous_closure>_(package:stack_trace/src/stack_zone_specification.dart:114:42)
-                    <asynchronous_suspension>
                   path: >
                     References that retain the object from garbage collection.
-                    package:flutter/src/widgets/widget_inspector.dart/_instance
-                    package:flutter/src/widgets/widget_inspector.dart/_WidgetInspectorService:_registerServiceExtensionCallback@853171358
-                    dart.core/_Closure (in registerServiceExtension):_context@0150898
+                    package:flutter/src/widgets/app.dart/defaultActions
+                    dart.collection/_Map:[InstanceRef id: classes/4623/types/0, kind: Type,
+identityHashCode: 530049589, classRef: [ClassRef id: classes/48, name: _Type, library: [LibraryRef
+id: libraries/@0150898, name: dart.core, uri: dart:core]]]
+                    package:flutter/src/widgets/actions.dart/VoidCallbackAction:_listeners@816441002
+                    package:flutter/src/foundation/observer_list.dart/ObserverList:_list@441023516
+                    dart.core/_GrowableList:0
+                    dart.core/_Closure (in _handleActionChanged):_context@0150898
                     @Context:0
-                    package:flutter_test/src/binding.dart/AutomatedTestWidgetsFlutterBinding:_rootElement@357399801
-                    package:flutter/src/widgets/binding.dart/RenderObjectToWidgetElement:_child@357399801
-                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
+                    package:flutter/src/widgets/actions.dart/_ActionsState:listenedActions
+                    dart.collection/_Set:data_
+                    dart.core/_List:6
+                    package:flutter/src/widgets/actions.dart/_OverridableContextAction:lookupContext
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_model.dart/InheritedModelElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:28
-                    dart.collection/_HashMapEntry:next
-                    dart.collection/_HashMapEntry:next
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
-                    package:flutter/src/material/page_transitions_theme.dart/_ZoomExitTransitionState:delegate
-                    package:flutter/src/material/page_transitions_theme.dart/_ZoomExitTransitionPainter:_listeners@429329750
-                    dart.core/_List:0
-                    dart.core/_Closure (in markNeedsPaint):_context@0150898
-                    @Context:0
-                    package:flutter/src/widgets/snapshot_widget.dart/_RenderSnapshotWidget:_child@360266271
-                    package:flutter/src/rendering/proxy_box.dart/RenderIgnorePointer:_child@360266271
-                    package:flutter/src/rendering/proxy_box.dart/RenderRepaintBoundary:_child@360266271
-                    package:flutter/src/rendering/proxy_box.dart/RenderSemanticsAnnotations:_child@360266271
-                    package:flutter/src/rendering/proxy_box.dart/RenderBlockSemantics:_child@360266271
-                    package:flutter/src/rendering/proxy_box.dart/RenderPhysicalModel:_child@360266271
-                    package:flutter/src/material/material.dart/_RenderInkFeatures:vsync
-                    package:flutter/src/material/material.dart/_MaterialState:_element@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
-                    package:flutter/src/widgets/implicit_animations.dart/_AnimatedPhysicalModelState:_tickerModeNotifier@790311458
-                    package:flutter/src/foundation/change_notifier.dart/ValueNotifier:_listeners@429329750
-                    dart.core/_List:13
-                    dart.core/_Closure (in _updateTickers):_context@0150898
-                    @Context:0
-                    package:flutter/src/material/material.dart/_MaterialState:_element@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/notification_listener.dart/_NotificationElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/InheritedElement:_dependents@345042623
                     dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:7
+                    dart.core/_List:0
                     dart.collection/_HashMapEntry:key
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
+                    package:flutter/src/widgets/navigator.dart/NavigatorState:userGestureInProgressNotifier
+                    package:flutter/src/foundation/change_notifier.dart/ValueNotifier:_listeners@429329750
+                    dart.core/_List:0
+                    dart.core/_Closure (in _handleChange):_context@0150898
+                    @Context:0
+                    package:flutter/src/widgets/transitions.dart/_AnimatedState:_element@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
+                    package:flutter/src/material/about.dart/_LicensePageState:selectedId
+                    package:flutter/src/foundation/change_notifier.dart/ValueNotifier:_listeners@429329750
+                    dart.core/_List:0
+                    dart.core/_Closure (in _valueChanged):_context@0150898
+                    @Context:0
+                    package:flutter/src/widgets/value_listenable_builder.dart/_ValueListenableBuilderState:_element@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
+                    package:flutter/src/material/material.dart/_MaterialState:_tickerModeNotifier@790311458
+                    package:flutter/src/foundation/change_notifier.dart/ValueNotifier:_listeners@429329750
+                    dart.core/_List:12
+                    dart.core/_Closure (in _updateTicker):_context@0150898
+                    @Context:0
+                    package:flutter/src/widgets/implicit_animations.dart/_AnimatedDefaultTextStyleState:_element@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/MultiChildRenderObjectElement:_renderObject@345042623
                     package:flutter/src/rendering/paragraph.dart/RenderParagraph:_relayoutBoundary@360266271
@@ -624,133 +381,34 @@ id: libraries/@0150898, name: dart.core, uri: dart:core]]]
                     package:flutter/src/rendering/custom_paint.dart/RenderCustomPaint:_child@360266271
                     package:flutter/src/rendering/proxy_box.dart/RenderRepaintBoundary:_child@360266271
                     package:flutter/src/widgets/scrollable.dart/_RenderScrollSemantics:_innerNode@895019050
-                    package:flutter/src/semantics/semantics.dart/SemanticsNode:_debugPreviousSnapshot@747082469
-                    dart.core/_GrowableList:2
-                    package:flutter/src/semantics/semantics.dart/SemanticsNode:_actions@747082469
-                    dart.collection/_Map:[InstanceRef id: objects/3896, kind: PlainInstance,
-identityHashCode: 593604394, classRef: [ClassRef id: classes/1196, name: SemanticsAction, library:
-[LibraryRef id: libraries/@15065589, name: dart.ui, uri: dart:ui]]]
-                    dart.core/_Closure (in _addArgumentlessAction):_context@0150898
+                    package:flutter/src/semantics/semantics.dart/SemanticsNode:_owner@747082469
+                    package:flutter/src/semantics/semantics.dart/SemanticsOwner:_nodes@747082469
+                    dart.collection/_Map:[InstanceRef id: objects/int-8, kind: Int,
+identityHashCode: 0, classRef: [ClassRef id: classes/59, name: _Smi, library: [LibraryRef id:
+libraries/@0150898, name: dart.core, uri: dart:core]]]
+                    package:flutter/src/semantics/semantics.dart/SemanticsNode:_showOnScreen@747082469
+                    dart.core/_Closure (in showOnScreen):_context@0150898
                     @Context:0
-                    dart.core/_Closure (in _performTap):_context@0150898
-                    @Context:0
-                    package:flutter/src/rendering/proxy_box.dart/RenderSemanticsAnnotations:_properties@347160605
-                    package:flutter/src/semantics/semantics.dart/SemanticsProperties:onTap
-                    dart.core/_Closure (in simulateTap):_context@0150898
-                    @Context:0
-                    package:flutter/src/material/ink_well.dart/_InkResponseState:_actionMap@560059085
-                    dart.collection/_Map:[InstanceRef id: classes/4629/types/0, kind: Type,
-identityHashCode: 373655292, classRef: [ClassRef id: classes/48, name: _Type, library: [LibraryRef
-id: libraries/@0150898, name: dart.core, uri: dart:core]]]
-                    package:flutter/src/widgets/actions.dart/CallbackAction:_listeners@816441002
-                    package:flutter/src/foundation/observer_list.dart/ObserverList:_list@441023516
-                    dart.core/_GrowableList:0
-                    dart.core/_Closure (in _handleActionChanged):_context@0150898
-                    @Context:0
-                    package:flutter/src/widgets/actions.dart/_ActionsState:_element@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
-                    package:flutter/src/widgets/focus_scope.dart/_FocusState:_internalNode@831492240
-                    package:flutter/src/widgets/focus_manager.dart/FocusNode:_parent@830042876
-                    package:flutter/src/widgets/focus_manager.dart/FocusScopeNode:_children@830042876
-                    dart.core/_GrowableList:0
-                    package:flutter/src/widgets/focus_manager.dart/FocusNode:_ancestors@830042876
-                    dart.core/_GrowableList:11
-                    package:flutter/src/widgets/focus_manager.dart/FocusNode:_context@830042876
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:4
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:6
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:5
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:7
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
+                    package:flutter/src/rendering/proxy_box.dart/RenderSemanticsAnnotations:_child@360266271
+                    package:flutter/src/material/app_bar.dart/_RenderAppBarTitleBox:_child@360266271
+                    package:flutter/src/rendering/paragraph.dart/RenderParagraph:debugCreator
+                    package:flutter/src/widgets/framework.dart/DebugCreator:element
+                    package:flutter/src/widgets/framework.dart/MultiChildRenderObjectElement:_ancestorRenderObjectElement@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_dependencies@345042623
+                    dart.collection/_HashSet:_buckets@3220832
                     dart.core/_List:3
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:0
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:6
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:1
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:6
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
-                    package:flutter/src/widgets/focus_scope.dart/_FocusScopeState:_focusAttachment@831492240
-                    package:flutter/src/widgets/focus_manager.dart/FocusAttachment:_node@830042876
-                    package:flutter/src/widgets/focus_manager.dart/FocusScopeNode:_children@830042876
-                    dart.core/_GrowableList:0
-                    package:flutter/src/widgets/focus_manager.dart/FocusNode:_context@830042876
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    dart.collection/_HashSetEntry:key
+                    package:flutter/src/widgets/basic.dart/_UbiquitousInheritedElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
-                    package:flutter/src/widgets/gesture_detector.dart/RawGestureDetectorState:_recognizers@881132872
-                    dart.collection/_Map:[InstanceRef id: classes/2726/types/0, kind: Type,
-identityHashCode: 752472855, classRef: [ClassRef id: classes/48, name: _Type, library: [LibraryRef
-id: libraries/@0150898, name: dart.core, uri: dart:core]]]
-                    package:flutter/src/gestures/tap.dart/TapGestureRecognizer:onTapCancel
-                    dart.core/_Closure (in handleTapCancel):_context@0150898
-                    @Context:0
-                    package:flutter/src/material/ink_well.dart/_InkResponseState:_actionMap@560059085
-                    dart.collection/_Map:[InstanceRef id: classes/4629/types/0, kind: Type,
-identityHashCode: 373655292, classRef: [ClassRef id: classes/48, name: _Type, library: [LibraryRef
-id: libraries/@0150898, name: dart.core, uri: dart:core]]]
-                    package:flutter/src/widgets/actions.dart/CallbackAction:_listeners@816441002
-                    package:flutter/src/foundation/observer_list.dart/ObserverList:_list@441023516
-                    dart.core/_GrowableList:0
-                    dart.core/_Closure (in _handleActionChanged):_context@0150898
-                    @Context:0
-                    package:flutter/src/widgets/actions.dart/_ActionsState:_element@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_inheritedElements@345042623
-                    package:flutter/src/foundation/persistent_hash_map.dart/PersistentHashMap:_root@442137193
-                    package:flutter/src/foundation/persistent_hash_map.dart/_CompressedNode:keyValuePairs
-                    dart.core/_List:29
-                    package:flutter/src/widgets/framework.dart/InheritedElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:7
-                    dart.collection/_HashMapEntry:next
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
+                    package:flutter/src/material/scaffold.dart/ScaffoldMessengerState:_scaffolds@601420462
+                    dart.collection/_Set:data_
+                    dart.core/_List:0
                     package:flutter/src/material/scaffold.dart/ScaffoldState:_floatingActionButtonVisibilityController@601420462
                     package:flutter/src/animation/animation_controller.dart/AnimationController:_statusListeners@373091803
                     package:flutter/src/foundation/observer_list.dart/ObserverList:_list@441023516
@@ -786,105 +444,161 @@ id: libraries/@0150898, name: dart.core, uri: dart:core]]]
                     package:flutter/src/widgets/framework.dart/ParentDataElement:_child@345042623
                     package:flutter/src/widgets/inherited_model.dart/InheritedModelElement:_dependents@345042623
                     dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:4
+                    dart.core/_List:0
                     dart.collection/_HashMapEntry:next
                     dart.collection/_HashMapEntry:key
                     package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
                     package:flutter/src/material/app_bar.dart/_AppBarState:_scrollNotificationObserver@480187611
                     package:flutter/src/widgets/scroll_notification_observer.dart/ScrollNotificationObserverState:_element@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_inheritedElements@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/notification_listener.dart/_NotificationElement:_child@345042623
+                    package:flutter/src/widgets/notification_listener.dart/_NotificationElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_ancestorRenderObjectElement@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_renderObject@345042623
+                    package:flutter/src/rendering/proxy_box.dart/RenderBlockSemantics:_parent@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderSemanticsAnnotations:_parent@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderRepaintBoundary:_layerHandle@360266271
+                    package:flutter/src/rendering/layer.dart/LayerHandle:_layer@713518307
+                    package:flutter/src/rendering/layer.dart/OffsetLayer:_lastChild@713518307
+                    package:flutter/src/rendering/layer.dart/AnnotatedRegionLayer:size
+                    package:flutter/src/rendering/box.dart/_DebugSize:_owner@702392247
+                    package:flutter/src/rendering/proxy_box.dart/RenderAnnotatedRegion:_child@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderPhysicalModel:_child@360266271
+                    package:flutter/src/material/material.dart/_RenderInkFeatures:vsync
+                    package:flutter/src/material/material.dart/_MaterialState:_element@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    package:flutter/src/widgets/notification_listener.dart/_NotificationElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_renderObject@345042623
+                    package:flutter/src/rendering/shifted_box.dart/RenderPositionedBox:_child@360266271
+                    package:flutter/src/rendering/shifted_box.dart/RenderPadding:_child@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderClipRect:_child@360266271
+                    package:flutter/src/rendering/shifted_box.dart/RenderCustomSingleChildLayoutBox:debugCreator
+                    package:flutter/src/widgets/framework.dart/DebugCreator:element
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/MultiChildRenderObjectElement:_children@345042623
+                    dart.core/_List:0
+                    package:flutter/src/widgets/framework.dart/ParentDataElement:_child@345042623
+                    package:flutter/src/widgets/inherited_model.dart/InheritedModelElement:_inheritedElements@345042623
                     package:flutter/src/foundation/persistent_hash_map.dart/PersistentHashMap:_root@442137193
                     package:flutter/src/foundation/persistent_hash_map.dart/_CompressedNode:keyValuePairs
                     dart.core/_List:25
                     package:flutter/src/foundation/persistent_hash_map.dart/_CompressedNode:keyValuePairs
-                    dart.core/_List:3
-                    package:flutter/src/widgets/framework.dart/InheritedElement:_inheritedElements@345042623
-                    package:flutter/src/foundation/persistent_hash_map.dart/PersistentHashMap:_root@442137193
-                    package:flutter/src/foundation/persistent_hash_map.dart/_CompressedNode:keyValuePairs
-                    dart.core/_List:9
-                    package:flutter/src/foundation/persistent_hash_map.dart/_CompressedNode:keyValuePairs
-                    dart.core/_List:3
-                    package:flutter/src/widgets/basic.dart/_UbiquitousInheritedElement:_parent@345042623
+                    dart.core/_List:1
                     package:flutter/src/widgets/framework.dart/InheritedElement:_dependents@345042623
                     dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:63
+                    dart.core/_List:61
+                    dart.collection/_HashMapEntry:key
+                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
+                    package:flutter/src/material/ink_decoration.dart/_InkState:_ink@555412529
+                    package:flutter/src/material/ink_decoration.dart/InkDecoration:referenceBox
+                    package:flutter/src/rendering/shifted_box.dart/RenderPadding:_child@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderSemanticsAnnotations:_child@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderMouseRegion:onExit
+                    dart.core/_Closure (in handleMouseExit):_context@0150898
+                    @Context:0
+                    package:flutter/src/material/ink_well.dart/_InkResponseState:_actionMap@560059085
+                    dart.collection/_Map:[InstanceRef id: classes/4629/types/0, kind: Type,
+identityHashCode: 3483911676, classRef: [ClassRef id: classes/48, name: _Type, library: [LibraryRef
+id: libraries/@0150898, name: dart.core, uri: dart:core]]]
+                    package:flutter/src/widgets/actions.dart/CallbackAction:_listeners@816441002
+                    package:flutter/src/foundation/observer_list.dart/ObserverList:_list@441023516
+                    dart.core/_GrowableList:0
+                    dart.core/_Closure (in _handleActionChanged):_context@0150898
+                    @Context:0
+                    package:flutter/src/widgets/actions.dart/_ActionsState:_element@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
+                    package:flutter/src/widgets/focus_scope.dart/_FocusState:_internalNode@831492240
+                    package:flutter/src/widgets/focus_manager.dart/FocusNode:_parent@830042876
+                    package:flutter/src/widgets/focus_manager.dart/FocusScopeNode:_children@830042876
+                    dart.core/_GrowableList:0
+                    package:flutter/src/widgets/focus_manager.dart/FocusNode:_ancestors@830042876
+                    dart.core/_GrowableList:11
+                    package:flutter/src/widgets/focus_manager.dart/FocusNode:_context@830042876
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
+                    dart.collection/_HashMap:_buckets@3220832
+                    dart.core/_List:3
                     dart.collection/_HashMapEntry:key
                     package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/overlay.dart/_OverlayPortalElement:_child@859319124
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatelessElement:_dependencies@345042623
-                    dart.collection/_HashSet:_buckets@3220832
-                    dart.core/_List:3
-                    dart.collection/_HashSetEntry:key
-                    package:flutter/src/widgets/framework.dart/InheritedElement:_dependents@345042623
+                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
                     dart.collection/_HashMap:_buckets@3220832
                     dart.core/_List:6
                     dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatelessElement:_parent@345042623
-                    package:flutter/src/widgets/framework.dart/StatelessElement:_parent@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_ancestorRenderObjectElement@345042623
-                    package:flutter/src/widgets/framework.dart/MultiChildRenderObjectElement:_children@345042623
-                    dart.core/_List:1
-                    package:flutter/src/widgets/framework.dart/ParentDataElement:_child@345042623
-                    package:flutter/src/widgets/inherited_model.dart/InheritedModelElement:_dependents@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
                     dart.collection/_HashMap:_buckets@3220832
                     dart.core/_List:7
                     dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/MultiChildRenderObjectElement:_renderObject@345042623
-                    package:flutter/src/rendering/paragraph.dart/RenderParagraph:_relayoutBoundary@360266271
-                    package:flutter/src/rendering/custom_layout.dart/RenderCustomMultiChildLayoutBox:_lastChild@360266271
-                    package:flutter/src/rendering/stack.dart/RenderStack:_firstChild@360266271
-                    package:flutter/src/rendering/proxy_box.dart/RenderTransform:_child@360266271
-                    package:flutter/src/rendering/proxy_box.dart/RenderTransform:debugCreator
-                    package:flutter/src/widgets/framework.dart/DebugCreator:element
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_ancestorRenderObjectElement@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_ancestorRenderObjectElement@345042623
-                    package:flutter/src/widgets/framework.dart/MultiChildRenderObjectElement:_ancestorRenderObjectElement@345042623
-                    package:flutter/src/widgets/framework.dart/MultiChildRenderObjectElement:_children@345042623
-                    dart.core/_List:2
-                    package:flutter/src/widgets/framework.dart/ParentDataElement:_child@345042623
-                    package:flutter/src/widgets/inherited_model.dart/InheritedModelElement:_widget@345042623
-                    package:flutter/src/widgets/media_query.dart/MediaQuery:child
-                    package:flutter/src/material/scaffold.dart/_FloatingActionButtonTransition:currentController
-                    package:flutter/src/animation/animation_controller.dart/AnimationController:_ticker@370066280
-                    package:flutter/src/widgets/ticker_provider.dart/_WidgetTicker:_creator@790311458
-                    package:flutter/src/material/scaffold.dart/ScaffoldState:_tickerModeNotifier@790311458
-                    package:flutter/src/foundation/change_notifier.dart/ValueNotifier:_listeners@429329750
-                    dart.core/_List:8
-                    dart.core/_Closure (in _updateTicker):_context@0150898
-                    @Context:0
-                    package:flutter/src/widgets/implicit_animations.dart/_AnimatedDefaultTextStyleState:_element@345042623
                     package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/inherited_model.dart/InheritedModelElement:_inheritedElements@345042623
-                    package:flutter/src/foundation/persistent_hash_map.dart/PersistentHashMap:_root@442137193
-                    package:flutter/src/foundation/persistent_hash_map.dart/_CompressedNode:keyValuePairs
-                    dart.core/_List:13
-                    package:flutter/src/foundation/persistent_hash_map.dart/_CompressedNode:keyValuePairs
+                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
+                    dart.collection/_HashMap:_buckets@3220832
                     dart.core/_List:5
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    dart.collection/_HashMapEntry:key
                     package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
+                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
+                    dart.collection/_HashMap:_buckets@3220832
+                    dart.core/_List:3
+                    dart.collection/_HashMapEntry:key
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_renderObject@345042623
+                    package:flutter/src/rendering/proxy_box.dart/RenderSemanticsAnnotations:_child@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderPointerListener:_child@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderAbsorbPointer:_child@360266271
+                    package:flutter/src/widgets/overlay.dart/_RenderTheater:_lastChild@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderSemanticsAnnotations:_child@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderOffstage:_child@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderSemanticsAnnotations:_child@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderRepaintBoundary:_child@360266271
+                    package:flutter/src/widgets/snapshot_widget.dart/_RenderSnapshotWidget:_painter@820188970
+                    package:flutter/src/material/page_transitions_theme.dart/_ZoomEnterTransitionPainter:animation
+                    package:flutter/src/animation/animations.dart/ProxyAnimation:_statusListeners@373091803
+                    package:flutter/src/foundation/observer_list.dart/ObserverList:_list@441023516
+                    dart.core/_GrowableList:0
+                    dart.core/_Closure (in onAnimationStatusChange):_context@0150898
+                    @Context:0
+                    package:flutter/src/material/page_transitions_theme.dart/_ZoomEnterTransitionState:_element@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
-                    package:flutter/src/widgets/dual_transition_builder.dart/_DualTransitionBuilderState:_reverseAnimation@893338117
+                    package:flutter/src/material/page_transitions_theme.dart/_ZoomExitTransitionState:delegate
+                    package:flutter/src/material/page_transitions_theme.dart/_ZoomExitTransitionPainter:animation
                     package:flutter/src/animation/animations.dart/ProxyAnimation:_parent@371411118
                     package:flutter/src/animation/animations.dart/ReverseAnimation:parent
                     package:flutter/src/animation/animations.dart/ProxyAnimation:_parent@371411118
-                    package:flutter/src/animation/animation_controller.dart/AnimationController:_ticker@370066280
-                    package:flutter/src/widgets/ticker_provider.dart/_WidgetTicker:_creator@790311458
+                    package:flutter/src/animation/animation_controller.dart/AnimationController:_statusListeners@373091803
+                    package:flutter/src/foundation/observer_list.dart/ObserverList:_list@441023516
+                    dart.core/_GrowableList:0
+                    dart.core/_Closure (in _handleStatusChanged):_context@0150898
+                    @Context:0
+                    package:flutter/src/material/page.dart/MaterialPageRoute:_modalScope@796188637
+                    package:flutter/src/widgets/overlay.dart/OverlayEntry:_overlay@859319124
+                    package:flutter/src/widgets/overlay.dart/OverlayState:_element@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/overlay.dart/_TheaterElement:_children@345042623
+                    dart.core/_List:1
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
+                    package:flutter/src/widgets/ticker_provider.dart/_TickerModeState:_effectiveMode@790311458
+                    package:flutter/src/foundation/change_notifier.dart/ValueNotifier:_listeners@429329750
+                    dart.core/_List:0
+                    dart.core/_Closure (in _updateTickers):_context@0150898
+                    @Context:0
                     package:flutter/src/widgets/navigator.dart/NavigatorState:_history@31124995
                     dart.core/_GrowableList:0
                     package:flutter/src/widgets/navigator.dart/_RouteEntry:lastAnnouncedPoppedNextRoute
@@ -892,164 +606,62 @@ id: libraries/@0150898, name: dart.core, uri: dart:core]]]
                     package:flutter/src/widgets/overlay.dart/OverlayEntry:_overlayEntryStateNotifier@859319124
                     package:flutter/src/foundation/change_notifier.dart/ValueNotifier
               ValueNotifier<String?>:
-                identityHashCode: 247246253
+                identityHashCode: 32107642
                 context:
-                  start: >
-                    #4_______withFlutterLeakTracking.flutterEventToLeakTracker_(file:///Users/polinach/_/flutter/packages/flutter/test/foundation/leak_tracking.dart:125:12)
-                    #5______MemoryAllocations.dispatchObjectEvent_(package:flutter/src/foundation/memory_allocations.dart:238:23)
-                    #6______MemoryAllocations.dispatchObjectCreated_(package:flutter/src/foundation/memory_allocations.dart:272:5)
-                    #7______new_ValueNotifier_(package:flutter/src/foundation/change_notifier.dart:508:34)
-                    #8______new_Route_(package:flutter/src/widgets/navigator.dart:171:54)
-                    #9______new_OverlayRoute_(package:flutter/src/widgets/routes.dart)
-                    #10_____new_TransitionRoute_(package:flutter/src/widgets/routes.dart)
-                    #11_____new__ModalRoute&TransitionRoute&LocalHistoryRoute_(package:flutter/src/widgets/routes.dart)
-                    #12_____new_ModalRoute_(package:flutter/src/widgets/routes.dart)
-                    #13_____new_PageRoute_(package:flutter/src/widgets/pages.dart)
-                    #14_____new__MaterialPageRoute&PageRoute&MaterialRouteTransitionMixin_(package:flutter/src/material/page.dart)
-                    #15_____new_MaterialPageRoute_(package:flutter/src/material/page.dart)
-                    #16______MasterDetailFlowState._detailPageRoute_(package:flutter/src/material/about.dart:1230:12)
-                    #17______MasterDetailFlowState._nestedUI.<anonymous_closure>_(package:flutter/src/material/about.dart:1204:22)
-                    #18_____NavigatorState._routeNamed_(package:flutter/src/widgets/navigator.dart:4216:47)
-                    #19_____NavigatorState.pushNamed_(package:flutter/src/widgets/navigator.dart:4275:21)
-                    #20______MasterDetailFlowState.openDetailPage_(package:flutter/src/material/about.dart:1150:35)
-                    #21______MasterDetailFlowProxy.openDetailPage_(package:flutter/src/material/about.dart:1115:19)
-                    #22______PackagesViewState._packagesList.<anonymous_closure>.<anonymous_closure>_(package:flutter/src/material/about.dart:650:43)
-                    #23______InkResponseState.handleTap_(package:flutter/src/material/ink_well.dart:1154:21)
-                    #24_____GestureRecognizer.invokeCallback_(package:flutter/src/gestures/recognizer.dart:275:24)
-                    #25_____TapGestureRecognizer.handleTapUp_(package:flutter/src/gestures/tap.dart:654:11)
-                    #26_____BaseTapGestureRecognizer._checkUp_(package:flutter/src/gestures/tap.dart:311:5)
-                    #27_____BaseTapGestureRecognizer.acceptGesture_(package:flutter/src/gestures/tap.dart:281:7)
-                    #28_____GestureArenaManager.sweep_(package:flutter/src/gestures/arena.dart:167:27)
-                    #29_____GestureBinding.handleEvent_(package:flutter/src/gestures/binding.dart:492:20)
-                    #30_____GestureBinding.dispatchEvent_(package:flutter/src/gestures/binding.dart:468:22)
-                    #31_____RendererBinding.dispatchEvent_(package:flutter/src/rendering/binding.dart:333:11)
-                    #32_____GestureBinding._handlePointerEventImmediately_(package:flutter/src/gestures/binding.dart:413:7)
-                    #33_____GestureBinding.handlePointerEvent_(package:flutter/src/gestures/binding.dart:376:5)
-                    #34_____TestWidgetsFlutterBinding.handlePointerEventForSource.<anonymous_closure>_(package:flutter_test/src/binding.dart:626:42)
-                    #35_____TestWidgetsFlutterBinding.withPointerEventSource_(package:flutter_test/src/binding.dart:636:11)
-                    #36_____TestWidgetsFlutterBinding.handlePointerEventForSource_(package:flutter_test/src/binding.dart:626:5)
-                    #37_____WidgetTester.sendEventToBinding.<anonymous_closure>_(package:flutter_test/src/widget_tester.dart:848:15)
-                    #38______rootRun_(dart:async/zone.dart:1399:13)
-                    #39______CustomZone.run_(dart:async/zone.dart:1301:19)
-                    #40_____TestAsyncUtils.guard_(package:flutter_test/src/test_async_utils.dart:68:41)
-                    #41_____WidgetTester.sendEventToBinding_(package:flutter_test/src/widget_tester.dart:847:27)
-                    #42_____TestGesture.up.<anonymous_closure>_(package:flutter_test/src/test_pointer.dart:550:26)
-                    #43______rootRun_(dart:async/zone.dart:1399:13)
-                    #44______CustomZone.run_(dart:async/zone.dart:1301:19)
-                    #45_____TestAsyncUtils.guard_(package:flutter_test/src/test_async_utils.dart:68:41)
-                    #46_____TestGesture.up_(package:flutter_test/src/test_pointer.dart:543:27)
-                    #47_____WidgetController.tapAt.<anonymous_closure>_(package:flutter_test/src/controller.dart:561:21)
-                    <asynchronous_suspension>
-                    #48_____TestAsyncUtils.guard.<anonymous_closure>_(package:flutter_test/src/test_async_utils.dart:114:7)
-                    <asynchronous_suspension>
-                    #49_____main.<anonymous_closure>_(file:///Users/polinach/_/flutter/packages/flutter/test/material/about_test.dart:193:5)
-                    <asynchronous_suspension>
-                    #50_____withLeakTracking_(package:leak_tracker/src/leak_tracking/orchestration.dart:89:5)
-                    <asynchronous_suspension>
-                    #51______withFlutterLeakTracking.<anonymous_closure>_(file:///Users/polinach/_/flutter/packages/flutter/test/foundation/leak_tracking.dart:133:21)
-                    <asynchronous_suspension>
-                    #52_____TestAsyncUtils.guard.<anonymous_closure>_(package:flutter_test/src/test_async_utils.dart:114:7)
-                    <asynchronous_suspension>
-                    #53_____testWidgetsWithLeakTracking.wrappedCallback_(file:///Users/polinach/_/flutter/packages/flutter/test/foundation/leak_tracking.dart:73:5)
-                    <asynchronous_suspension>
-                    #54_____testWidgets.<anonymous_closure>.<anonymous_closure>_(package:flutter_test/src/widget_tester.dart:165:15)
-                    <asynchronous_suspension>
-                    #55_____TestWidgetsFlutterBinding._runTestBody_(package:flutter_test/src/binding.dart:982:5)
-                    <asynchronous_suspension>
-                    #56_____StackZoneSpecification._registerCallback.<anonymous_closure>_(package:stack_trace/src/stack_zone_specification.dart:114:42)
-                    <asynchronous_suspension>
-                  disposal: >
-                    #4_______withFlutterLeakTracking.flutterEventToLeakTracker_(file:///Users/polinach/_/flutter/packages/flutter/test/foundation/leak_tracking.dart:125:12)
-                    #5______MemoryAllocations.dispatchObjectEvent_(package:flutter/src/foundation/memory_allocations.dart:238:23)
-                    #6______MemoryAllocations.dispatchObjectDisposed_(package:flutter/src/foundation/memory_allocations.dart:286:5)
-                    #7______ChangeNotifier.dispose_(package:flutter/src/foundation/change_notifier.dart:357:34)
-                    #8______Route.dispose_(package:flutter/src/widgets/navigator.dart:457:25)
-                    #9______OverlayRoute.dispose_(package:flutter/src/widgets/routes.dart:91:11)
-                    #10_____TransitionRoute.dispose_(package:flutter/src/widgets/routes.dart:489:11)
-                    #11______RouteEntry.forcedDispose_(package:flutter/src/widgets/navigator.dart:3061:11)
-                    #12______RouteEntry.dispose.<anonymous_closure>.<anonymous_closure>_(package:flutter/src/widgets/navigator.dart:3116:13)
-                    #13_____StackZoneSpecification._run_(package:stack_trace/src/stack_zone_specification.dart:207:15)
-                    #14_____StackZoneSpecification._registerCallback.<anonymous_closure>_(package:stack_trace/src/stack_zone_specification.dart:114:48)
-                    #15______rootRun_(dart:async/zone.dart:1391:47)
-                    #16______CustomZone.run_(dart:async/zone.dart:1301:19)
-                    #17______CustomZone.runGuarded_(dart:async/zone.dart:1209:7)
-                    #18______CustomZone.bindCallbackGuarded.<anonymous_closure>_(dart:async/zone.dart:1249:23)
-                    #19_____FakeAsync.flushMicrotasks_(package:fake_async/fake_async.dart:197:32)
-                    #20_____AutomatedTestWidgetsFlutterBinding.pump.<anonymous_closure>_(package:flutter_test/src/binding.dart:1235:26)
-                    #21______rootRun_(dart:async/zone.dart:1399:13)
-                    #22______CustomZone.run_(dart:async/zone.dart:1301:19)
-                    #23_____TestAsyncUtils.guard_(package:flutter_test/src/test_async_utils.dart:68:41)
-                    #24_____AutomatedTestWidgetsFlutterBinding.pump_(package:flutter_test/src/binding.dart:1220:27)
-                    #25_____WidgetTester.pumpAndSettle.<anonymous_closure>_(package:flutter_test/src/widget_tester.dart:704:23)
-                    <asynchronous_suspension>
-                    #26_____TestAsyncUtils.guard.<anonymous_closure>_(package:flutter_test/src/test_async_utils.dart:114:7)
-                    <asynchronous_suspension>
-                    #27_____main.<anonymous_closure>_(file:///Users/polinach/_/flutter/packages/flutter/test/material/about_test.dart:199:5)
-                    <asynchronous_suspension>
-                    #28_____withLeakTracking_(package:leak_tracker/src/leak_tracking/orchestration.dart:89:5)
-                    <asynchronous_suspension>
-                    #29______withFlutterLeakTracking.<anonymous_closure>_(file:///Users/polinach/_/flutter/packages/flutter/test/foundation/leak_tracking.dart:133:21)
-                    <asynchronous_suspension>
-                    #30_____TestAsyncUtils.guard.<anonymous_closure>_(package:flutter_test/src/test_async_utils.dart:114:7)
-                    <asynchronous_suspension>
-                    #31_____testWidgetsWithLeakTracking.wrappedCallback_(file:///Users/polinach/_/flutter/packages/flutter/test/foundation/leak_tracking.dart:73:5)
-                    <asynchronous_suspension>
-                    #32_____testWidgets.<anonymous_closure>.<anonymous_closure>_(package:flutter_test/src/widget_tester.dart:165:15)
-                    <asynchronous_suspension>
-                    #33_____TestWidgetsFlutterBinding._runTestBody_(package:flutter_test/src/binding.dart:982:5)
-                    <asynchronous_suspension>
-                    #34_____StackZoneSpecification._registerCallback.<anonymous_closure>_(package:stack_trace/src/stack_zone_specification.dart:114:42)
-                    <asynchronous_suspension>
                   path: >
                     References that retain the object from garbage collection.
-                    package:flutter/src/widgets/widget_inspector.dart/_instance
-                    package:flutter/src/widgets/widget_inspector.dart/_WidgetInspectorService:_registerServiceExtensionCallback@853171358
-                    dart.core/_Closure (in registerServiceExtension):_context@0150898
+                    package:flutter/src/widgets/app.dart/defaultActions
+                    dart.collection/_Map:[InstanceRef id: classes/4623/types/0, kind: Type,
+identityHashCode: 530049589, classRef: [ClassRef id: classes/48, name: _Type, library: [LibraryRef
+id: libraries/@0150898, name: dart.core, uri: dart:core]]]
+                    package:flutter/src/widgets/actions.dart/VoidCallbackAction:_listeners@816441002
+                    package:flutter/src/foundation/observer_list.dart/ObserverList:_list@441023516
+                    dart.core/_GrowableList:0
+                    dart.core/_Closure (in _handleActionChanged):_context@0150898
                     @Context:0
-                    package:flutter_test/src/binding.dart/AutomatedTestWidgetsFlutterBinding:_rootElement@357399801
-                    package:flutter/src/widgets/binding.dart/RenderObjectToWidgetElement:_child@357399801
-                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
+                    package:flutter/src/widgets/actions.dart/_ActionsState:listenedActions
+                    dart.collection/_Set:data_
+                    dart.core/_List:6
+                    package:flutter/src/widgets/actions.dart/_OverridableContextAction:lookupContext
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_model.dart/InheritedModelElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:28
-                    dart.collection/_HashMapEntry:next
-                    dart.collection/_HashMapEntry:next
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
-                    package:flutter/src/material/page_transitions_theme.dart/_ZoomExitTransitionState:delegate
-                    package:flutter/src/material/page_transitions_theme.dart/_ZoomExitTransitionPainter:_listeners@429329750
-                    dart.core/_List:0
-                    dart.core/_Closure (in markNeedsPaint):_context@0150898
-                    @Context:0
-                    package:flutter/src/widgets/snapshot_widget.dart/_RenderSnapshotWidget:_child@360266271
-                    package:flutter/src/rendering/proxy_box.dart/RenderIgnorePointer:_child@360266271
-                    package:flutter/src/rendering/proxy_box.dart/RenderRepaintBoundary:_child@360266271
-                    package:flutter/src/rendering/proxy_box.dart/RenderSemanticsAnnotations:_child@360266271
-                    package:flutter/src/rendering/proxy_box.dart/RenderBlockSemantics:_child@360266271
-                    package:flutter/src/rendering/proxy_box.dart/RenderPhysicalModel:_child@360266271
-                    package:flutter/src/material/material.dart/_RenderInkFeatures:vsync
-                    package:flutter/src/material/material.dart/_MaterialState:_element@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
-                    package:flutter/src/widgets/implicit_animations.dart/_AnimatedPhysicalModelState:_tickerModeNotifier@790311458
-                    package:flutter/src/foundation/change_notifier.dart/ValueNotifier:_listeners@429329750
-                    dart.core/_List:13
-                    dart.core/_Closure (in _updateTickers):_context@0150898
-                    @Context:0
-                    package:flutter/src/material/material.dart/_MaterialState:_element@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/notification_listener.dart/_NotificationElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/InheritedElement:_dependents@345042623
                     dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:7
+                    dart.core/_List:0
                     dart.collection/_HashMapEntry:key
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
+                    package:flutter/src/widgets/navigator.dart/NavigatorState:userGestureInProgressNotifier
+                    package:flutter/src/foundation/change_notifier.dart/ValueNotifier:_listeners@429329750
+                    dart.core/_List:0
+                    dart.core/_Closure (in _handleChange):_context@0150898
+                    @Context:0
+                    package:flutter/src/widgets/transitions.dart/_AnimatedState:_element@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
+                    package:flutter/src/material/about.dart/_LicensePageState:selectedId
+                    package:flutter/src/foundation/change_notifier.dart/ValueNotifier:_listeners@429329750
+                    dart.core/_List:0
+                    dart.core/_Closure (in _valueChanged):_context@0150898
+                    @Context:0
+                    package:flutter/src/widgets/value_listenable_builder.dart/_ValueListenableBuilderState:_element@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
+                    package:flutter/src/material/material.dart/_MaterialState:_tickerModeNotifier@790311458
+                    package:flutter/src/foundation/change_notifier.dart/ValueNotifier:_listeners@429329750
+                    dart.core/_List:12
+                    dart.core/_Closure (in _updateTicker):_context@0150898
+                    @Context:0
+                    package:flutter/src/widgets/implicit_animations.dart/_AnimatedDefaultTextStyleState:_element@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/MultiChildRenderObjectElement:_renderObject@345042623
                     package:flutter/src/rendering/paragraph.dart/RenderParagraph:_relayoutBoundary@360266271
@@ -1066,133 +678,34 @@ id: libraries/@0150898, name: dart.core, uri: dart:core]]]
                     package:flutter/src/rendering/custom_paint.dart/RenderCustomPaint:_child@360266271
                     package:flutter/src/rendering/proxy_box.dart/RenderRepaintBoundary:_child@360266271
                     package:flutter/src/widgets/scrollable.dart/_RenderScrollSemantics:_innerNode@895019050
-                    package:flutter/src/semantics/semantics.dart/SemanticsNode:_debugPreviousSnapshot@747082469
-                    dart.core/_GrowableList:2
-                    package:flutter/src/semantics/semantics.dart/SemanticsNode:_actions@747082469
-                    dart.collection/_Map:[InstanceRef id: objects/4403, kind: PlainInstance,
-identityHashCode: 593604394, classRef: [ClassRef id: classes/1196, name: SemanticsAction, library:
-[LibraryRef id: libraries/@15065589, name: dart.ui, uri: dart:ui]]]
-                    dart.core/_Closure (in _addArgumentlessAction):_context@0150898
+                    package:flutter/src/semantics/semantics.dart/SemanticsNode:_owner@747082469
+                    package:flutter/src/semantics/semantics.dart/SemanticsOwner:_nodes@747082469
+                    dart.collection/_Map:[InstanceRef id: objects/int-8, kind: Int,
+identityHashCode: 0, classRef: [ClassRef id: classes/59, name: _Smi, library: [LibraryRef id:
+libraries/@0150898, name: dart.core, uri: dart:core]]]
+                    package:flutter/src/semantics/semantics.dart/SemanticsNode:_showOnScreen@747082469
+                    dart.core/_Closure (in showOnScreen):_context@0150898
                     @Context:0
-                    dart.core/_Closure (in _performTap):_context@0150898
-                    @Context:0
-                    package:flutter/src/rendering/proxy_box.dart/RenderSemanticsAnnotations:_properties@347160605
-                    package:flutter/src/semantics/semantics.dart/SemanticsProperties:onTap
-                    dart.core/_Closure (in simulateTap):_context@0150898
-                    @Context:0
-                    package:flutter/src/material/ink_well.dart/_InkResponseState:_actionMap@560059085
-                    dart.collection/_Map:[InstanceRef id: classes/4629/types/0, kind: Type,
-identityHashCode: 373655292, classRef: [ClassRef id: classes/48, name: _Type, library: [LibraryRef
-id: libraries/@0150898, name: dart.core, uri: dart:core]]]
-                    package:flutter/src/widgets/actions.dart/CallbackAction:_listeners@816441002
-                    package:flutter/src/foundation/observer_list.dart/ObserverList:_list@441023516
-                    dart.core/_GrowableList:0
-                    dart.core/_Closure (in _handleActionChanged):_context@0150898
-                    @Context:0
-                    package:flutter/src/widgets/actions.dart/_ActionsState:_element@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
-                    package:flutter/src/widgets/focus_scope.dart/_FocusState:_internalNode@831492240
-                    package:flutter/src/widgets/focus_manager.dart/FocusNode:_parent@830042876
-                    package:flutter/src/widgets/focus_manager.dart/FocusScopeNode:_children@830042876
-                    dart.core/_GrowableList:0
-                    package:flutter/src/widgets/focus_manager.dart/FocusNode:_ancestors@830042876
-                    dart.core/_GrowableList:11
-                    package:flutter/src/widgets/focus_manager.dart/FocusNode:_context@830042876
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:4
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:6
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:5
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:7
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
+                    package:flutter/src/rendering/proxy_box.dart/RenderSemanticsAnnotations:_child@360266271
+                    package:flutter/src/material/app_bar.dart/_RenderAppBarTitleBox:_child@360266271
+                    package:flutter/src/rendering/paragraph.dart/RenderParagraph:debugCreator
+                    package:flutter/src/widgets/framework.dart/DebugCreator:element
+                    package:flutter/src/widgets/framework.dart/MultiChildRenderObjectElement:_ancestorRenderObjectElement@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_dependencies@345042623
+                    dart.collection/_HashSet:_buckets@3220832
                     dart.core/_List:3
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:0
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:6
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:1
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:6
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
-                    package:flutter/src/widgets/focus_scope.dart/_FocusScopeState:_focusAttachment@831492240
-                    package:flutter/src/widgets/focus_manager.dart/FocusAttachment:_node@830042876
-                    package:flutter/src/widgets/focus_manager.dart/FocusScopeNode:_children@830042876
-                    dart.core/_GrowableList:0
-                    package:flutter/src/widgets/focus_manager.dart/FocusNode:_context@830042876
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    dart.collection/_HashSetEntry:key
+                    package:flutter/src/widgets/basic.dart/_UbiquitousInheritedElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
-                    package:flutter/src/widgets/gesture_detector.dart/RawGestureDetectorState:_recognizers@881132872
-                    dart.collection/_Map:[InstanceRef id: classes/2726/types/0, kind: Type,
-identityHashCode: 752472855, classRef: [ClassRef id: classes/48, name: _Type, library: [LibraryRef
-id: libraries/@0150898, name: dart.core, uri: dart:core]]]
-                    package:flutter/src/gestures/tap.dart/TapGestureRecognizer:onTapCancel
-                    dart.core/_Closure (in handleTapCancel):_context@0150898
-                    @Context:0
-                    package:flutter/src/material/ink_well.dart/_InkResponseState:_actionMap@560059085
-                    dart.collection/_Map:[InstanceRef id: classes/4629/types/0, kind: Type,
-identityHashCode: 373655292, classRef: [ClassRef id: classes/48, name: _Type, library: [LibraryRef
-id: libraries/@0150898, name: dart.core, uri: dart:core]]]
-                    package:flutter/src/widgets/actions.dart/CallbackAction:_listeners@816441002
-                    package:flutter/src/foundation/observer_list.dart/ObserverList:_list@441023516
-                    dart.core/_GrowableList:0
-                    dart.core/_Closure (in _handleActionChanged):_context@0150898
-                    @Context:0
-                    package:flutter/src/widgets/actions.dart/_ActionsState:_element@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_inheritedElements@345042623
-                    package:flutter/src/foundation/persistent_hash_map.dart/PersistentHashMap:_root@442137193
-                    package:flutter/src/foundation/persistent_hash_map.dart/_CompressedNode:keyValuePairs
-                    dart.core/_List:29
-                    package:flutter/src/widgets/framework.dart/InheritedElement:_dependents@345042623
-                    dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:7
-                    dart.collection/_HashMapEntry:next
-                    dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
+                    package:flutter/src/material/scaffold.dart/ScaffoldMessengerState:_scaffolds@601420462
+                    dart.collection/_Set:data_
+                    dart.core/_List:0
                     package:flutter/src/material/scaffold.dart/ScaffoldState:_floatingActionButtonVisibilityController@601420462
                     package:flutter/src/animation/animation_controller.dart/AnimationController:_statusListeners@373091803
                     package:flutter/src/foundation/observer_list.dart/ObserverList:_list@441023516
@@ -1228,105 +741,161 @@ id: libraries/@0150898, name: dart.core, uri: dart:core]]]
                     package:flutter/src/widgets/framework.dart/ParentDataElement:_child@345042623
                     package:flutter/src/widgets/inherited_model.dart/InheritedModelElement:_dependents@345042623
                     dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:4
+                    dart.core/_List:0
                     dart.collection/_HashMapEntry:next
                     dart.collection/_HashMapEntry:key
                     package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
                     package:flutter/src/material/app_bar.dart/_AppBarState:_scrollNotificationObserver@480187611
                     package:flutter/src/widgets/scroll_notification_observer.dart/ScrollNotificationObserverState:_element@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_inheritedElements@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/notification_listener.dart/_NotificationElement:_child@345042623
+                    package:flutter/src/widgets/notification_listener.dart/_NotificationElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_ancestorRenderObjectElement@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_renderObject@345042623
+                    package:flutter/src/rendering/proxy_box.dart/RenderBlockSemantics:_parent@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderSemanticsAnnotations:_parent@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderRepaintBoundary:_layerHandle@360266271
+                    package:flutter/src/rendering/layer.dart/LayerHandle:_layer@713518307
+                    package:flutter/src/rendering/layer.dart/OffsetLayer:_lastChild@713518307
+                    package:flutter/src/rendering/layer.dart/AnnotatedRegionLayer:size
+                    package:flutter/src/rendering/box.dart/_DebugSize:_owner@702392247
+                    package:flutter/src/rendering/proxy_box.dart/RenderAnnotatedRegion:_child@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderPhysicalModel:_child@360266271
+                    package:flutter/src/material/material.dart/_RenderInkFeatures:vsync
+                    package:flutter/src/material/material.dart/_MaterialState:_element@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    package:flutter/src/widgets/notification_listener.dart/_NotificationElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_renderObject@345042623
+                    package:flutter/src/rendering/shifted_box.dart/RenderPositionedBox:_child@360266271
+                    package:flutter/src/rendering/shifted_box.dart/RenderPadding:_child@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderClipRect:_child@360266271
+                    package:flutter/src/rendering/shifted_box.dart/RenderCustomSingleChildLayoutBox:debugCreator
+                    package:flutter/src/widgets/framework.dart/DebugCreator:element
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/MultiChildRenderObjectElement:_children@345042623
+                    dart.core/_List:0
+                    package:flutter/src/widgets/framework.dart/ParentDataElement:_child@345042623
+                    package:flutter/src/widgets/inherited_model.dart/InheritedModelElement:_inheritedElements@345042623
                     package:flutter/src/foundation/persistent_hash_map.dart/PersistentHashMap:_root@442137193
                     package:flutter/src/foundation/persistent_hash_map.dart/_CompressedNode:keyValuePairs
                     dart.core/_List:25
                     package:flutter/src/foundation/persistent_hash_map.dart/_CompressedNode:keyValuePairs
-                    dart.core/_List:3
-                    package:flutter/src/widgets/framework.dart/InheritedElement:_inheritedElements@345042623
-                    package:flutter/src/foundation/persistent_hash_map.dart/PersistentHashMap:_root@442137193
-                    package:flutter/src/foundation/persistent_hash_map.dart/_CompressedNode:keyValuePairs
-                    dart.core/_List:9
-                    package:flutter/src/foundation/persistent_hash_map.dart/_CompressedNode:keyValuePairs
-                    dart.core/_List:3
-                    package:flutter/src/widgets/basic.dart/_UbiquitousInheritedElement:_parent@345042623
+                    dart.core/_List:1
                     package:flutter/src/widgets/framework.dart/InheritedElement:_dependents@345042623
                     dart.collection/_HashMap:_buckets@3220832
-                    dart.core/_List:63
+                    dart.core/_List:61
+                    dart.collection/_HashMapEntry:key
+                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
+                    package:flutter/src/material/ink_decoration.dart/_InkState:_ink@555412529
+                    package:flutter/src/material/ink_decoration.dart/InkDecoration:referenceBox
+                    package:flutter/src/rendering/shifted_box.dart/RenderPadding:_child@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderSemanticsAnnotations:_child@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderMouseRegion:onExit
+                    dart.core/_Closure (in handleMouseExit):_context@0150898
+                    @Context:0
+                    package:flutter/src/material/ink_well.dart/_InkResponseState:_actionMap@560059085
+                    dart.collection/_Map:[InstanceRef id: classes/4629/types/0, kind: Type,
+identityHashCode: 3483911676, classRef: [ClassRef id: classes/48, name: _Type, library: [LibraryRef
+id: libraries/@0150898, name: dart.core, uri: dart:core]]]
+                    package:flutter/src/widgets/actions.dart/CallbackAction:_listeners@816441002
+                    package:flutter/src/foundation/observer_list.dart/ObserverList:_list@441023516
+                    dart.core/_GrowableList:0
+                    dart.core/_Closure (in _handleActionChanged):_context@0150898
+                    @Context:0
+                    package:flutter/src/widgets/actions.dart/_ActionsState:_element@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
+                    package:flutter/src/widgets/focus_scope.dart/_FocusState:_internalNode@831492240
+                    package:flutter/src/widgets/focus_manager.dart/FocusNode:_parent@830042876
+                    package:flutter/src/widgets/focus_manager.dart/FocusScopeNode:_children@830042876
+                    dart.core/_GrowableList:0
+                    package:flutter/src/widgets/focus_manager.dart/FocusNode:_ancestors@830042876
+                    dart.core/_GrowableList:11
+                    package:flutter/src/widgets/focus_manager.dart/FocusNode:_context@830042876
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
+                    dart.collection/_HashMap:_buckets@3220832
+                    dart.core/_List:3
                     dart.collection/_HashMapEntry:key
                     package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/overlay.dart/_OverlayPortalElement:_child@859319124
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatelessElement:_dependencies@345042623
-                    dart.collection/_HashSet:_buckets@3220832
-                    dart.core/_List:3
-                    dart.collection/_HashSetEntry:key
-                    package:flutter/src/widgets/framework.dart/InheritedElement:_dependents@345042623
+                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
                     dart.collection/_HashMap:_buckets@3220832
                     dart.core/_List:6
                     dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatelessElement:_parent@345042623
-                    package:flutter/src/widgets/framework.dart/StatelessElement:_parent@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_ancestorRenderObjectElement@345042623
-                    package:flutter/src/widgets/framework.dart/MultiChildRenderObjectElement:_children@345042623
-                    dart.core/_List:1
-                    package:flutter/src/widgets/framework.dart/ParentDataElement:_child@345042623
-                    package:flutter/src/widgets/inherited_model.dart/InheritedModelElement:_dependents@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
                     dart.collection/_HashMap:_buckets@3220832
                     dart.core/_List:7
                     dart.collection/_HashMapEntry:key
-                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/MultiChildRenderObjectElement:_renderObject@345042623
-                    package:flutter/src/rendering/paragraph.dart/RenderParagraph:_relayoutBoundary@360266271
-                    package:flutter/src/rendering/custom_layout.dart/RenderCustomMultiChildLayoutBox:_lastChild@360266271
-                    package:flutter/src/rendering/stack.dart/RenderStack:_firstChild@360266271
-                    package:flutter/src/rendering/proxy_box.dart/RenderTransform:_child@360266271
-                    package:flutter/src/rendering/proxy_box.dart/RenderTransform:debugCreator
-                    package:flutter/src/widgets/framework.dart/DebugCreator:element
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_ancestorRenderObjectElement@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_ancestorRenderObjectElement@345042623
-                    package:flutter/src/widgets/framework.dart/MultiChildRenderObjectElement:_ancestorRenderObjectElement@345042623
-                    package:flutter/src/widgets/framework.dart/MultiChildRenderObjectElement:_children@345042623
-                    dart.core/_List:2
-                    package:flutter/src/widgets/framework.dart/ParentDataElement:_child@345042623
-                    package:flutter/src/widgets/inherited_model.dart/InheritedModelElement:_widget@345042623
-                    package:flutter/src/widgets/media_query.dart/MediaQuery:child
-                    package:flutter/src/material/scaffold.dart/_FloatingActionButtonTransition:currentController
-                    package:flutter/src/animation/animation_controller.dart/AnimationController:_ticker@370066280
-                    package:flutter/src/widgets/ticker_provider.dart/_WidgetTicker:_creator@790311458
-                    package:flutter/src/material/scaffold.dart/ScaffoldState:_tickerModeNotifier@790311458
-                    package:flutter/src/foundation/change_notifier.dart/ValueNotifier:_listeners@429329750
-                    dart.core/_List:8
-                    dart.core/_Closure (in _updateTicker):_context@0150898
-                    @Context:0
-                    package:flutter/src/widgets/implicit_animations.dart/_AnimatedDefaultTextStyleState:_element@345042623
                     package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/InheritedElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
-                    package:flutter/src/widgets/inherited_model.dart/InheritedModelElement:_inheritedElements@345042623
-                    package:flutter/src/foundation/persistent_hash_map.dart/PersistentHashMap:_root@442137193
-                    package:flutter/src/foundation/persistent_hash_map.dart/_CompressedNode:keyValuePairs
-                    dart.core/_List:13
-                    package:flutter/src/foundation/persistent_hash_map.dart/_CompressedNode:keyValuePairs
+                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
+                    dart.collection/_HashMap:_buckets@3220832
                     dart.core/_List:5
-                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
+                    dart.collection/_HashMapEntry:key
                     package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
-                    package:flutter/src/widgets/framework.dart/StatelessElement:_child@345042623
+                    package:flutter/src/widgets/inherited_notifier.dart/_InheritedNotifierElement:_dependents@345042623
+                    dart.collection/_HashMap:_buckets@3220832
+                    dart.core/_List:3
+                    dart.collection/_HashMapEntry:key
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_renderObject@345042623
+                    package:flutter/src/rendering/proxy_box.dart/RenderSemanticsAnnotations:_child@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderPointerListener:_child@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderAbsorbPointer:_child@360266271
+                    package:flutter/src/widgets/overlay.dart/_RenderTheater:_lastChild@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderSemanticsAnnotations:_child@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderOffstage:_child@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderSemanticsAnnotations:_child@360266271
+                    package:flutter/src/rendering/proxy_box.dart/RenderRepaintBoundary:_child@360266271
+                    package:flutter/src/widgets/snapshot_widget.dart/_RenderSnapshotWidget:_painter@820188970
+                    package:flutter/src/material/page_transitions_theme.dart/_ZoomEnterTransitionPainter:animation
+                    package:flutter/src/animation/animations.dart/ProxyAnimation:_statusListeners@373091803
+                    package:flutter/src/foundation/observer_list.dart/ObserverList:_list@441023516
+                    dart.core/_GrowableList:0
+                    dart.core/_Closure (in onAnimationStatusChange):_context@0150898
+                    @Context:0
+                    package:flutter/src/material/page_transitions_theme.dart/_ZoomEnterTransitionState:_element@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/SingleChildRenderObjectElement:_child@345042623
                     package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
-                    package:flutter/src/widgets/dual_transition_builder.dart/_DualTransitionBuilderState:_reverseAnimation@893338117
+                    package:flutter/src/material/page_transitions_theme.dart/_ZoomExitTransitionState:delegate
+                    package:flutter/src/material/page_transitions_theme.dart/_ZoomExitTransitionPainter:animation
                     package:flutter/src/animation/animations.dart/ProxyAnimation:_parent@371411118
                     package:flutter/src/animation/animations.dart/ReverseAnimation:parent
                     package:flutter/src/animation/animations.dart/ProxyAnimation:_parent@371411118
-                    package:flutter/src/animation/animation_controller.dart/AnimationController:_ticker@370066280
-                    package:flutter/src/widgets/ticker_provider.dart/_WidgetTicker:_creator@790311458
+                    package:flutter/src/animation/animation_controller.dart/AnimationController:_statusListeners@373091803
+                    package:flutter/src/foundation/observer_list.dart/ObserverList:_list@441023516
+                    dart.core/_GrowableList:0
+                    dart.core/_Closure (in _handleStatusChanged):_context@0150898
+                    @Context:0
+                    package:flutter/src/material/page.dart/MaterialPageRoute:_modalScope@796188637
+                    package:flutter/src/widgets/overlay.dart/OverlayEntry:_overlay@859319124
+                    package:flutter/src/widgets/overlay.dart/OverlayState:_element@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/overlay.dart/_TheaterElement:_children@345042623
+                    dart.core/_List:1
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_child@345042623
+                    package:flutter/src/widgets/framework.dart/StatefulElement:_state@345042623
+                    package:flutter/src/widgets/ticker_provider.dart/_TickerModeState:_effectiveMode@790311458
+                    package:flutter/src/foundation/change_notifier.dart/ValueNotifier:_listeners@429329750
+                    dart.core/_List:0
+                    dart.core/_Closure (in _updateTickers):_context@0150898
+                    @Context:0
                     package:flutter/src/widgets/navigator.dart/NavigatorState:_history@31124995
                     dart.core/_GrowableList:0
                     package:flutter/src/widgets/navigator.dart/_RouteEntry:lastAnnouncedPoppedNextRoute
@@ -1334,11 +903,11 @@ id: libraries/@0150898, name: dart.core, uri: dart:core]]]
                     package:flutter/src/foundation/change_notifier.dart/ValueNotifier
 
 When the exception was thrown, this was the stack:
-#4      _withFlutterLeakTracking.<anonymous closure> (file:///Users/polinach/_/flutter/packages/flutter/test/foundation/leak_tracking.dart:145:11)
+#4      _withFlutterLeakTracking.<anonymous closure> (file:///Users/polinach/_/flutter/packages/flutter/test/foundation/leak_tracking.dart:132:11)
 <asynchronous suspension>
 #5      TestAsyncUtils.guard.<anonymous closure> (package:flutter_test/src/test_async_utils.dart:114:7)
 <asynchronous suspension>
-#6      testWidgetsWithLeakTracking.wrappedCallback (file:///Users/polinach/_/flutter/packages/flutter/test/foundation/leak_tracking.dart:73:5)
+#6      testWidgetsWithLeakTracking.wrappedCallback (file:///Users/polinach/_/flutter/packages/flutter/test/foundation/leak_tracking.dart:60:5)
 <asynchronous suspension>
 #7      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:165:15)
 <asynchronous suspension>
@@ -1348,7 +917,7 @@ When the exception was thrown, this was the stack:
 (elided one frame from package:stack_trace)
 
 This was caught by the test expectation on the following line:
-  file:///Users/polinach/_/flutter/packages/flutter/test/foundation/leak_tracking.dart line 145
+  file:///Users/polinach/_/flutter/packages/flutter/test/foundation/leak_tracking.dart line 132
 The test description was:
   LicensePage control test
 ════════════════════════════════════════════════════════════════════════════════════════════════════
@@ -1359,4 +928,3 @@ The test description was: LicensePage control test
 ✖ LicensePage control test
 
 Exited (1).
-
