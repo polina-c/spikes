@@ -65,10 +65,6 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _counter++;
     });
-    var fileName = 'counter_snapshot$_counter';
-    fileName = p.absolute(fileName);
-    print('saving snapshot to $fileName');
-    NativeRuntime.writeHeapSnapshotToFile(fileName);
   }
 
   @override

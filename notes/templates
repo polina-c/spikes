@@ -1,0 +1,11 @@
+
+dependency_overrides:
+  leak_tracker:
+    path: ../../../leak_tracker/pkgs/leak_tracker
+  leak_tracker_flutter_testing:
+    path: ../../../leak_tracker/pkgs/leak_tracker_flutter_testing
+
+<details>
+ <summary>Summary Goes Here</summary>
+ ...this is hidden, collapsable content...
+</details>
