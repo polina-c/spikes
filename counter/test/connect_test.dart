@@ -26,7 +26,15 @@ Future<Uri> _serviceUri() async {
 }
 
 void main() {
-  testWidgets('Service can be started for flutter test.',
+  test('Service can be started for flutter test.', () async {
+    Uri? uri;
+
+    uri = await _serviceUri();
+
+    print(uri);
+  });
+
+  testWidgets('Service can be started for flutter widgets test.',
       (WidgetTester tester) async {
     Uri? uri;
 
