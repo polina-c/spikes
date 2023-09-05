@@ -9,3 +9,16 @@ dependency_overrides:
  <summary>Summary Goes Here</summary>
  ...this is hidden, collapsable content...
 </details>
+
+addTearDown(() { focusNode.dispose(); controller.dispose(); });
+addTearDown(() => semantics.dispose());
+addTearDown(() => controller.dispose());
+
+late final OverlayEntry entry;
+        addTearDown(() => entry.dispose());
+
+flutter/test/material
+
+if (kFlutterMemoryAllocationsEnabled) {
+      maybeDispatchObjectCreation();
+    }

@@ -1,27 +1,4 @@
+last libs:
+/Users/polinach/_/flutter_dev/packages/flutter/test/material/floating_action_button_location_test.dart
 
-
-next tests for non GCed:
-
-Constructor parameters override theme parameters
-flutter test --update-goldens test/material/menu_bar_theme_test.dart
-flutter test --update-goldens test/material/menu_theme_test.dart
-
-should not paint when there isn't enough space
-
-
-Slider value indicator large text scale
-
-
-Slider value indicator large text scale and wide text
-
-
-This code fails for `flutter test` and succeeds for `dart test`:
-
-
-
-I copy-pasted a test from dart package to flutter package and it started failing ().
-Any clue what can be the reason?
-
-
-
-
+MemoryAllocations.instance.dispatchObjectDisposed(object: this);

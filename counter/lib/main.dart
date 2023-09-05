@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
 
 import 'package:flutter/material.dart';
@@ -58,12 +59,50 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyNotifier with ChangeNotifier {
+  _MyNotifier() {
+    if (kFlutterMemoryAllocationsEnabled) {
+      maybeDispatchObjectCreation();
+    }
+  }
+
   int _counter = 0;
+
+  int get counter => _counter;
+
+  void increment() {
+    _counter++;
+    notifyListeners();
+  }
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final _notifier = _MyNotifier();
+  int _counter = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (kFlutterMemoryAllocationsEnabled) {
+      MemoryAllocations.instance
+          .addListener(_handleMemoryAllocationsNotification);
+    }
+    _notifier.addListener(_handleNotifierNotification);
+  }
+
+  void _handleNotifierNotification() {
+    print('_handleNotifierNotification');
+  }
+
+  void _handleMemoryAllocationsNotification(_) {
+    print('_handleMemoryAllocationsNotification');
+  }
 
   void _incrementCounter() {
     setState(() {
       _counter++;
+      _notifier.increment();
     });
   }
 
