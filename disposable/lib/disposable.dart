@@ -1,5 +1,7 @@
 import 'package:meta/meta.dart';
 
+/// A class that can be extended or mixed in that provides a way
+/// to dispose the resources.
 mixin Disposable {
   bool _debugDisposed = false;
 
