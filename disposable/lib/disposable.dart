@@ -37,6 +37,10 @@ mixin Disposable {
     return true;
   }
 
+  /// Discards any resources used by the object. After this is called, the
+  /// object is not in a usable state and should be discarded.
+  ///
+  /// This method should only be called by the object's owner.
   @mustCallSuper
   void dispose() {
     assert(() {
