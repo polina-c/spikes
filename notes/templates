@@ -15,9 +15,12 @@ addTearDown(() => semantics.dispose());
 addTearDown(() => controller.dispose());
 
 late final OverlayEntry entry;
-        addTearDown(() => entry.dispose());
+addTearDown(() => entry.dispose());
 
-flutter/test/material
+Steps to repro:
+1. Remove notDisposedAllowList added by the PR
+2. Run the updated test library with 'flutter run <path to the library>'
+3. Observe the test failure
 
 if (kFlutterMemoryAllocationsEnabled) {
       maybeDispatchObjectCreation();

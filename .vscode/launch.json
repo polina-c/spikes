@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "ai",
+            "cwd": "ai",
+            "request": "launch",
+            "type": "dart",
+            "program": "bin/ai.dart",
+        },
+        {
             "name": "connect_vm",
             "cwd": "connect_vm",
             "request": "launch",
