@@ -1,5 +1,11 @@
 import 'package:meta/meta.dart';
 
+/// This file is linked in doc:
+/// https://docs.google.com/document/d/1ec5djPP14b1u93O9fHrJJf3gbONay1nV4sBV2-XXOIw/edit?resourcekey=0-CFEu4HWAW8yP0knhoVfKxQ
+
+// ---------------------------------------
+// Code for 'package:collection/disposable.dart'
+
 /// A class that can be extended or mixed in that provides a way
 /// to dispose the resources.
 mixin Disposable {
