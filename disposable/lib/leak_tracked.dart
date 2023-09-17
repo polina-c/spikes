@@ -12,8 +12,8 @@ import 'dart:async';
 
 /// List of disposables, ready for leak tracking.
 ///
-/// The disposable is ready for leak tracking if it is instrumented and
-/// the package code that declared it verified there is no leak in the package.
+/// A disposable class is ready for leak tracking if it is instrumented and
+/// the package code that declared the class verified there is no leak in the package.
 ///
 /// Used to define set of memory leaks that should be included or excluded.
 class TrackableDisposables {
