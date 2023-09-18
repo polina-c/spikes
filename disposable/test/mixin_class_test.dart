@@ -24,7 +24,16 @@ mixin Mixin1 on Disposable {
   }
 }
 
-class SuperPosition1 extends Class1 with Mixin1 {
+mixin class MixinClass1 implements Disposable {
+  @override
+  @mustCallSuper
+  void dispose() {
+    print(
+        'i am MixinClass1, i will have to implement Disposable, because I cannot extend or be on non object');
+  }
+}
+
+class SuperPosition1 extends Class1 with Mixin1, MixinClass1 {
   @override
   void dispose() {
     print('i am SuperPosition');
@@ -37,8 +46,6 @@ void main() {
     SuperPosition1().dispose();
     // Output shows nothing is missing:
     // i am SuperPosition
-    // i am Mixin1
-    // i am Class1
-    // i am Disposable
+    // i am MixinClass1, i will have to implement Disposable, because I cannot extend or be on non object
   });
 }
