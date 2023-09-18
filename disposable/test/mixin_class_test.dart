@@ -44,8 +44,8 @@ class SuperPosition1 extends Class1 with Mixin1, MixinClass1 {
 void main() {
   test('dispose SuperPosition1', () {
     SuperPosition1().dispose();
-    // Output shows nothing is missing:
+    // Output shows dispose of Class1 and Mixin1 are missing:
     // i am SuperPosition
-    // i am MixinClass1, i will have to implement Disposable, because I cannot extend or be on non object
+    // i am MixinClass1, i will have to implement Disposable, because I cannot extend or be on non Object
   });
 }
