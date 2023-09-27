@@ -178,9 +178,7 @@ void didChangeAppLifecycleState(AppLifecycleState state) {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     final newVisibility = switch (state) {
       AppLifecycleState.resumed || AppLifecycleState.inactive => true,
-      AppLifecycleState.paused ||
-      AppLifecycleState.detached =>
-        false,
+      AppLifecycleState.paused || AppLifecycleState.detached => false,
     };
     if (!previousVisibility && newVisibility) {
       cache._notifyListenersIfDataIsStale();
@@ -191,9 +189,7 @@ void didChangeAppLifecycleState(AppLifecycleState state) {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state != AppLifecycleState.resumed) return;
-    // When the app resumes from background, check if push notification
-    // settings has changed and refresh the feed.
-    unawaited(_refreshIfPushNotificationStateChanged());
+    _refreshIfPushNotificationStateChanged();
   }
 
 
@@ -266,14 +262,14 @@ void didChangeAppLifecycleState(AppLifecycleState state) {
     }
   }
 
-  void _notifyChanged(AppLifecycleState newState) {
-    if (_currentState == newState) {
-      return;
-    }
-    final previousState = _currentState;
-    _currentState = newState;
-    widget.onChange(previousState, newState);
+void _notifyChanged(AppLifecycleState newState) {
+  if (_currentState == newState) {
+    return;
   }
+  final previousState = _currentState;
+  _currentState = newState;
+  widget.onChange(previousState, newState);
+}
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {

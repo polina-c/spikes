@@ -1,33 +1,33 @@
 Update the code to process the new item 'hidden' in the enum AppLifecycleState.
 If there is no AppLifecycleState.paused in the code, output should be equal to input, otherwise update input to process AppLifecycleState.hidden the same way as AppLifecycleState.paused.
-If there is  AppLifecycleState.paused, and it is not equality and it is not in switch, output should be 'I do not know'.
 Make the code changes minimal.
 
- input:
-  switch (state) {
-    case AppLifecycleState.paused:
-      dosomething();
-      break;
-    case AppLifecycleState.resumed:
-      if (_wasPlayingBeforePause) {
-        dosomethingelse();
-      }
-      break;
-    default:
-  }
- output:
-  switch (state) {
-    case AppLifecycleState.paused:
-    case AppLifecycleState.hidden:
-      dosomething();
-      break;
-    case AppLifecycleState.resumed:
-      if (_wasPlayingBeforePause) {
-        _ dosomethingelse();
-      }
-      break;
-    default:
-  }
+input:
+switch (state) {
+  case AppLifecycleState.paused:
+    dosomething();
+    break;
+  case AppLifecycleState.resumed:
+    if (_wasPlayingBeforePause) {
+      dosomethingelse();
+    }
+    break;
+  default:
+}
+output:
+switch (state) {
+  case AppLifecycleState.paused:
+  case AppLifecycleState.hidden:
+    dosomething();
+    break;
+  case AppLifecycleState.resumed:
+    if (_wasPlayingBeforePause) {
+      _ dosomethingelse();
+    }
+    break;
+  default:
+}
+
 input:
 @override
 void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -40,6 +40,7 @@ void didChangeAppLifecycleState(AppLifecycleState state) {
   _appLifecycleState = state;
   super.didChangeAppLifecycleState(state);
 }
+
 input:
 if (state == AppLifecycleState.resumed) {
     submitCommand(const DoSomethingCommand());
@@ -48,6 +49,7 @@ output:
 if (state == AppLifecycleState.resumed) {
     submitCommand(const DoSomethingCommand());
   }
+
 input:
 if (state == AppLifecycleState.paused) {
     submitCommand(const DoSomethingCommand());
@@ -56,102 +58,148 @@ output:
 if (state == AppLifecycleState.paused || state == AppLifecycleState.hidden) {
     submitCommand(const DoSomethingCommand());
   }
+
 input:
-  switch (state) {
-    case AppLifecycleState.resumed:
-      dosomething();
-      break;
-    case AppLifecycleState.paused:
-      if (_wasPlayingBeforePause) {
-        dosomethingelse();
-      }
-      break;
-    default:
+switch (state) {
+  case AppLifecycleState.resumed:
+    dosomething();
+    break;
+  case AppLifecycleState.paused:
+    if (_wasPlayingBeforePause) {
+      dosomethingelse();
+    }
+    break;
+  default:
+}
+output:
+switch (state) {
+  case AppLifecycleState.resumed:
+    dosomething();
+    break;
+  case AppLifecycleState.paused:
+  case AppLifecycleState.hidden:
+    if (_wasPlayingBeforePause) {
+      dosomethingelse();
+    }
+    break;
+  default:
+}
+
+input:
+_appLifecycleState = state;
+super.didChangeAppLifecycleState(state);
+output:
+_appLifecycleState = state;
+super.didChangeAppLifecycleState(state);
+
+input:
+if (state == AppLifecycleState.resumed) {
+  // Refresh when the app comes back from the background in case the list of
+  // identities has changed or the app is stale.
+  _identitiesAdsAccessModel.refresh();
+}
+output:
+if (state == AppLifecycleState.resumed) {
+  // Refresh when the app comes back from the background in case the list of
+  // identities has changed or the app is stale.
+  _identitiesAdsAccessModel.refresh();
+}
+
+input:
+if (state == AppLifecycleState.paused) {
+  // Refresh when the app comes back from the background in case the list of
+  // identities has changed or the app is stale.
+  _identitiesAdsAccessModel.refresh();
+}
+output:
+if (state == AppLifecycleState.paused || state == AppLifecycleState.hidden) {
+  // Refresh when the app comes back from the background in case the list of
+  // identities has changed or the app is stale.
+  _identitiesAdsAccessModel.refresh();
+}
+
+input:
+if (state == AppLifecycleState.paused &&
+    _hasSuccessfullyLoaded &&
+    mounted &&
+    !_showAppBar) {
+  final route = ModalRoute.of(context);
+  if (route != null && route.isCurrent) {
+    _activityTracker.startPlaceChangeActivity('$_activityPrefix.Closed');
+    Navigator.removeRoute(context, route);
   }
+}
 output:
-  switch (state) {
-    case AppLifecycleState.resumed:
-      dosomething();
-      break;
-    case AppLifecycleState.paused:
-    case AppLifecycleState.hidden:
-      if (_wasPlayingBeforePause) {
-        dosomethingelse();
-      }
-      break;
-    default:
+if ((state == AppLifecycleState.paused  || state == AppLifecycleState.hidden) &&
+    _hasSuccessfullyLoaded &&
+    mounted &&
+    !_showAppBar) {
+  final route = ModalRoute.of(context);
+  if (route != null && route.isCurrent) {
+    _activityTracker.startPlaceChangeActivity('$_activityPrefix.Closed');
+    Navigator.removeRoute(context, route);
   }
+}
+
 input:
-  _appLifecycleState = state;
-  super.didChangeAppLifecycleState(state);
+if (_hasSuccessfullyLoaded &&
+    state == AppLifecycleState.paused &&
+    mounted &&
+    !_showAppBar) {
+    print('strange state')
+}
 output:
-  _appLifecycleState = state;
-  super.didChangeAppLifecycleState(state);
+if (_hasSuccessfullyLoaded &&
+    (state == AppLifecycleState.paused || state == AppLifecycleState.hidden)&&
+    mounted &&
+    !_showAppBar) {
+    print('strange state')
+}
+
 input:
-    if (state == AppLifecycleState.resumed) {
-      // Refresh when the app comes back from the background in case the list of
-      // identities has changed or the app is stale.
-      _identitiesAdsAccessModel.refresh();
-    }
+@override
+void didChangeAppLifecycleState(AppLifecycleState state) {
+  if (state != AppLifecycleState.resumed) return;
+  // When the app resumes from background, check if push notification
+  // settings has changed and refresh the feed.
+  unawaited(_refreshIfPushNotificationStateChanged());
+}
 output:
-    if (state == AppLifecycleState.resumed) {
-      // Refresh when the app comes back from the background in case the list of
-      // identities has changed or the app is stale.
-      _identitiesAdsAccessModel.refresh();
-    }
+@override
+void didChangeAppLifecycleState(AppLifecycleState state) {
+  if (state != AppLifecycleState.resumed) return;
+  // When the app resumes from background, check if push notification
+  // settings has changed and refresh the feed.
+  unawaited(_stateChanged());
+}
+
 input:
-    if (state == AppLifecycleState.paused) {
-      // Refresh when the app comes back from the background in case the list of
-      // identities has changed or the app is stale.
-      _identitiesAdsAccessModel.refresh();
-    }
+void _notifyChanged(AppLifecycleState newState) {
+  if (_currentState == newState) {
+    return;
+  }
+  final previousState = _currentState;
+  _currentState = newState;
+  widget.onChange(previousState, newState);
+}
 output:
-    if (state == AppLifecycleState.paused || state == AppLifecycleState.hidden) {
-      // Refresh when the app comes back from the background in case the list of
-      // identities has changed or the app is stale.
-      _identitiesAdsAccessModel.refresh();
-    }
+void _notifyChanged(AppLifecycleState newState) {
+  if (_currentState == newState) {
+    return;
+  }
+  final previousState = _currentState;
+  _currentState = newState;
+  widget.onChange(previousState, newState);
+}
+
 input:
-    if (state == AppLifecycleState.paused &&
-        _hasSuccessfullyLoaded &&
-        mounted &&
-        !_showAppBar) {
-      final route = ModalRoute.of(context);
-      if (route != null && route.isCurrent) {
-        _activityTracker.startPlaceChangeActivity('$_activityPrefix.Closed');
-        Navigator.removeRoute(context, route);
-      }
-    }
-output:
-    if ((state == AppLifecycleState.paused  || state == AppLifecycleState.hidden) &&
-        _hasSuccessfullyLoaded &&
-        mounted &&
-        !_showAppBar) {
-      final route = ModalRoute.of(context);
-      if (route != null && route.isCurrent) {
-        _activityTracker.startPlaceChangeActivity('$_activityPrefix.Closed');
-        Navigator.removeRoute(context, route);
-      }
-    }
-input:
-    if (_hasSuccessfullyLoaded &&
-        state == AppLifecycleState.paused &&
-        mounted &&
-        !_showAppBar) {
-        print('strange state')
-    }
-output:
-    if (_hasSuccessfullyLoaded &&
-        (state == AppLifecycleState.paused || state == AppLifecycleState.hidden)&&
-        mounted &&
-        !_showAppBar) {
-        print('strange state')
-    }
-input:
-    if (myFlag1 &&
-        state != AppLifecycleState.paused &&
-        mounted) {
-        generateOutput();
-    }
+if (state == AppLifecycleState.inactive ||
+    state == AppLifecycleState.paused) {
+  _lastStoppedPositionSeconds =
+      _transportState.playbackPosition.toDoubleSeconds;
+  _sendClientEvent(pb.ClientEvent()
+    ..transportEvent = (pb.TransportEvent()..stop = pb.Stop()));
+}
+
 
  `<ctrl23>`

@@ -12,7 +12,56 @@
     super.didChangeAppLifecycleState(state);
   }
 
+  final newVisibility = switch (state) {
+    AppLifecycleState.resumed || AppLifecycleState.inactive => true,
+    AppLifecycleState.paused || AppLifecycleState.detached => false,
+  };
 ------------
+
+if (state == AppLifecycleState.inactive ||
+    state == AppLifecycleState.paused) {
+  _lastStoppedPositionSeconds =
+      _transportState.playbackPosition.toDoubleSeconds;
+  _sendClientEvent(pb.ClientEvent()
+    ..transportEvent = (pb.TransportEvent()..stop = pb.Stop()));
+}
+
+switch (state) {
+  case AppLifecycleState.inactive:
+    appLifecycleAwareMixin.onApplicationInactive();
+    break;
+  case AppLifecycleState.resumed:
+    appLifecycleAwareMixin.onApplicationResumed();
+    break;
+  case AppLifecycleState.detached:
+    break;
+}
+
+
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state != AppLifecycleState.resumed) return;
+    // When the app resumes from background, check if push notification
+    // settings has changed and refresh the feed.
+    unawaited(_refreshIfPushNotificationStateChanged());
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    //TODO(yuehengl): move the logic to a higher level.
+    if (state == AppLifecycleState.resumed) {
+      Services.of(context).dateRangeProvider.updateIfStale();
+      setState(() {});
+    } else if (state == AppLifecycleState.paused) {
+      Services.of(context).dateRangeProvider.startTimerWhenInactive();
+    }
+  }
+
+  @provide
+  AppLifecycleState provideLifecycleState() =>
+      WidgetsBinding.instance.lifecycleState ?? AppLifecycleState.inactive;
+
   if (myFlag1 &&
       state == AppLifecycleState.paused &&
       mounted) {
