@@ -1,5 +1,6 @@
 Update the code to process the new item 'hidden' in the enum AppLifecycleState.
 If there is no AppLifecycleState.paused in the code, output should be equal to input, otherwise update input to process AppLifecycleState.hidden the same way as AppLifecycleState.paused.
+If there is  AppLifecycleState.paused, and it is not equality and it is not in switch, output should be 'I do not know'.
 Make the code changes minimal.
 
  input:
@@ -111,10 +112,6 @@ output:
       _identitiesAdsAccessModel.refresh();
     }
 input:
-@override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    super.didChangeAppLifecycleState(state);
-    _logger.info('didChangeAppLifecycleState: $state');
     if (state == AppLifecycleState.paused &&
         _hasSuccessfullyLoaded &&
         mounted &&
@@ -125,7 +122,36 @@ input:
         Navigator.removeRoute(context, route);
       }
     }
-  }
-
+output:
+    if ((state == AppLifecycleState.paused  || state == AppLifecycleState.hidden) &&
+        _hasSuccessfullyLoaded &&
+        mounted &&
+        !_showAppBar) {
+      final route = ModalRoute.of(context);
+      if (route != null && route.isCurrent) {
+        _activityTracker.startPlaceChangeActivity('$_activityPrefix.Closed');
+        Navigator.removeRoute(context, route);
+      }
+    }
+input:
+    if (_hasSuccessfullyLoaded &&
+        state == AppLifecycleState.paused &&
+        mounted &&
+        !_showAppBar) {
+        print('strange state')
+    }
+output:
+    if (_hasSuccessfullyLoaded &&
+        (state == AppLifecycleState.paused || state == AppLifecycleState.hidden)&&
+        mounted &&
+        !_showAppBar) {
+        print('strange state')
+    }
+input:
+    if (myFlag1 &&
+        state != AppLifecycleState.paused &&
+        mounted) {
+        generateOutput();
+    }
 
  `<ctrl23>`

@@ -1,3 +1,23 @@
+  if (myFlag1 &&
+      state != AppLifecycleState.paused &&
+      mounted) {
+      generateOutput();
+  }
+
+  if (AppLifecycleState.paused.toString() == y) {
+    doSomething();
+  }
+
+  if ({AppLifecycleState.paused, AppLifecycleState.inactive}.contains(state)) {
+    super.didChangeAppLifecycleState(state);
+  }
+
+------------
+  if (myFlag1 &&
+      state == AppLifecycleState.paused &&
+      mounted) {
+    generateOutput();
+  }
 
   switch (state) {
     case AppLifecycleState.resumed:
