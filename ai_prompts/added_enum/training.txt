@@ -29,28 +29,6 @@ switch (state) {
 }
 
 input:
-@override
-void didChangeAppLifecycleState(AppLifecycleState state) {
-  _appLifecycleState = state;
-  super.didChangeAppLifecycleState(state);
-}
-output:
-@override
-void didChangeAppLifecycleState(AppLifecycleState state) {
-  _appLifecycleState = state;
-  super.didChangeAppLifecycleState(state);
-}
-
-input:
-if (state == AppLifecycleState.resumed) {
-    submitCommand(const DoSomethingCommand());
-  }
-output:
-if (state == AppLifecycleState.resumed) {
-    submitCommand(const DoSomethingCommand());
-  }
-
-input:
 if (state == AppLifecycleState.paused) {
     submitCommand(const DoSomethingCommand());
   }
@@ -83,26 +61,6 @@ switch (state) {
     }
     break;
   default:
-}
-
-input:
-_appLifecycleState = state;
-super.didChangeAppLifecycleState(state);
-output:
-_appLifecycleState = state;
-super.didChangeAppLifecycleState(state);
-
-input:
-if (state == AppLifecycleState.resumed) {
-  // Refresh when the app comes back from the background in case the list of
-  // identities has changed or the app is stale.
-  _identitiesAdsAccessModel.refresh();
-}
-output:
-if (state == AppLifecycleState.resumed) {
-  // Refresh when the app comes back from the background in case the list of
-  // identities has changed or the app is stale.
-  _identitiesAdsAccessModel.refresh();
 }
 
 input:
@@ -154,42 +112,6 @@ if (_hasSuccessfullyLoaded &&
     mounted &&
     !_showAppBar) {
     print('strange state')
-}
-
-input:
-@override
-void didChangeAppLifecycleState(AppLifecycleState state) {
-  if (state != AppLifecycleState.resumed) return;
-  // When the app resumes from background, check if push notification
-  // settings has changed and refresh the feed.
-  unawaited(_refreshIfPushNotificationStateChanged());
-}
-output:
-@override
-void didChangeAppLifecycleState(AppLifecycleState state) {
-  if (state != AppLifecycleState.resumed) return;
-  // When the app resumes from background, check if push notification
-  // settings has changed and refresh the feed.
-  unawaited(_stateChanged());
-}
-
-input:
-void _notifyChanged(AppLifecycleState newState) {
-  if (_currentState == newState) {
-    return;
-  }
-  final previousState = _currentState;
-  _currentState = newState;
-  widget.onChange(previousState, newState);
-}
-output:
-void _notifyChanged(AppLifecycleState newState) {
-  if (_currentState == newState) {
-    return;
-  }
-  final previousState = _currentState;
-  _currentState = newState;
-  widget.onChange(previousState, newState);
 }
 
 input:
