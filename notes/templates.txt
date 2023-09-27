@@ -14,12 +14,6 @@ dependency_overrides:
  ...this is hidden, collapsable content...
 </details>
 
-addTearDown(() { focusNode.dispose(); controller.dispose(); });
-addTearDown(() => semantics.dispose());
-addTearDown(() => controller.dispose());
-
-late final OverlayEntry entry;
-addTearDown(() => entry.dispose());
 
 Steps to repro:
 1. Remove notDisposedAllowList added by the PR

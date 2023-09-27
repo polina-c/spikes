@@ -1,0 +1,63 @@
+
+  switch (state) {
+    case AppLifecycleState.resumed:
+      cancelCommands();
+      break;
+    case AppLifecycleState.paused:
+      exitApp();
+      break;
+    default:
+  }
+
+
+
+  switch (state) {
+    case AppLifecycleState.activated:
+      cancelCommands();
+      break;
+    case AppLifecycleState.paused:
+      exitApp();
+      break;
+    default:
+  }
+
+@override
+void didChangeAppLifecycleState(AppLifecycleState state) {
+  // We use 'paused' instead of 'inactive' since we want to know when the app
+  // is not visible to the user. 'inactive' is nuanced and also triggers for
+  // situations such as using TouchID, causing a lot of false positives.
+  if (state == AppLifecycleState.paused) {
+    if (_currentPlaceModel.place != null) {
+      _logPlaceView(viewedPlace: _currentPlaceModel.place!);
+    }
+    _hasBeenPaused = true;
+  } else if (state == AppLifecycleState.resumed && _hasBeenPaused) {
+    // If we have been in a paused state (application not visible to the user)
+    // we consider it being fully backgrounded and log that we have been
+    // resumed in foreground again.
+
+    _stopwatch.reset();
+
+    _activityTracker.startActivity(Activity(
+        ActivityType.INTERACTIVE, 'App.ResumedForeground',
+        isFoldable: true));
+
+    _hasBeenPaused = false;
+  }
+}
+
+@override
+void didChangeAppLifecycleState(AppLifecycleState state) {
+  // When the 'Settings' page is closed, check permissions again.
+  if (state == AppLifecycleState.resumed) {
+    submitCommand(const CheckPermissionsCommand());
+  }
+}
+
+@override
+void didChangeAppLifecycleState(AppLifecycleState state) {
+  // When the 'Settings' page is closed, check permissions again.
+  if (state == AppLifecycleState.paused) {
+    submitCommand(const CheckPermissionsCommand());
+  }
+}

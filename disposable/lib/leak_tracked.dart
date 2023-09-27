@@ -16,30 +16,30 @@ import 'dart:async';
 /// the package code that declared the class verified there is no leak in the package.
 ///
 /// Used to define set of memory leaks that should be included or excluded.
-class TrackableDisposables {
-  const TrackableDisposables({
+class MemoryLeakTypes {
+  const MemoryLeakTypes({
     required this.package,
     required this.notDisposed,
     required this.notGCed,
     this.outdatedWarning,
   });
 
-  TrackableDisposables outdated() {
-    return TrackableDisposables(
+  MemoryLeakTypes outdated() {
+    return MemoryLeakTypes(
         package: package,
         notDisposed: notDisposed,
         notGCed: notGCed,
         outdatedWarning: null);
   }
 
-  TrackableDisposables emptied() {
-    return TrackableDisposables(
+  MemoryLeakTypes emptied() {
+    return MemoryLeakTypes(
         package: package, notDisposed: [], notGCed: [], outdatedWarning: null);
   }
 
-  TrackableDisposables except(
+  MemoryLeakTypes except(
       {List<String> notDisposed = const [], List<String> notGCed = const []}) {
-    return TrackableDisposables(
+    return MemoryLeakTypes(
         package: package,
         notDisposed: Set<String>.from(this.notDisposed)
             .difference(Set<String>.from(notDisposed))
@@ -75,14 +75,14 @@ class TrackableDisposables {
 // If disposables are not ready for leak tracking yet, the list shpuld be empty.
 // ---------------------------------------
 
-const TrackableDisposables flutterDisposables1 = TrackableDisposables(
+const MemoryLeakTypes flutterDisposables1 = MemoryLeakTypes(
     package: 'flutter',
     notDisposed: ['RenderObject', 'Layer', 'ChangeNotifier'],
     notGCed: [],
     outdatedWarning:
         'flutterDisposables1 is outdated. Use flutterDisposables2.');
 
-const TrackableDisposables flutterDisposables2 = TrackableDisposables(
+const MemoryLeakTypes flutterDisposables2 = MemoryLeakTypes(
   package: 'flutter',
   notDisposed: ['RenderObject', 'Layer', 'ChangeNotifier'],
   notGCed: ['RenderObject', 'Layer', 'ChangeNotifier'],
@@ -99,12 +99,13 @@ class LeakTrackingSettings {
     this.printWarningsForMissedPackages = true,
   });
 
-  final List<TrackableDisposables> toTrack;
+  /// If null, all instrumented disposables will be tracked.
+  final List<MemoryLeakTypes>? toTrack;
   final bool printWarningsForOutdatedPackages;
   final bool printWarningsForMissedPackages;
 }
 
-void configureLeakTracking(LeakTrackingSettings settings) {}
+void setLeakTrackingSettings(LeakTrackingSettings settings) {}
 
 // ---------------------------------------
 // Code for user's package test/flutter_test_config.dart
@@ -112,31 +113,31 @@ void configureLeakTracking(LeakTrackingSettings settings) {}
 
 Future<void> testExecutable(FutureOr<void> Function() testMain) async {
   // No warnings:
-  configureLeakTracking(LeakTrackingSettings([
+  setLeakTrackingSettings(LeakTrackingSettings([
     flutterDisposables2,
   ]));
 
   // Warning will be printed:
-  configureLeakTracking(LeakTrackingSettings([
+  setLeakTrackingSettings(LeakTrackingSettings([
     flutterDisposables1,
   ]));
 
   // Warning will be printed, because of detected disposables from flutter:
-  configureLeakTracking(LeakTrackingSettings([]));
+  setLeakTrackingSettings(LeakTrackingSettings([]));
 
   // No warnings:
-  configureLeakTracking(LeakTrackingSettings(
+  setLeakTrackingSettings(LeakTrackingSettings(
     [],
     printWarningsForMissedPackages: false,
   ));
 
   // No warnings:
-  configureLeakTracking(LeakTrackingSettings([
+  setLeakTrackingSettings(LeakTrackingSettings([
     flutterDisposables1.emptied(),
   ]));
 
   // No warnings:
-  configureLeakTracking(
+  setLeakTrackingSettings(
     LeakTrackingSettings(
       [
         flutterDisposables1,
@@ -146,12 +147,12 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
   );
 
   // No warnings:
-  configureLeakTracking(LeakTrackingSettings([
+  setLeakTrackingSettings(LeakTrackingSettings([
     flutterDisposables1.outdated(),
   ]));
 
   // No warnings:
-  configureLeakTracking(LeakTrackingSettings([
+  setLeakTrackingSettings(LeakTrackingSettings([
     flutterDisposables1.except(notDisposed: ['RenderObject']),
   ]));
 }

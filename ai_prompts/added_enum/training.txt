@@ -1,0 +1,131 @@
+Update the code to process the new item 'hidden' in the enum AppLifecycleState.
+If there is no AppLifecycleState.paused in the code, output should be equal to input, otherwise update input to process AppLifecycleState.hidden the same way as AppLifecycleState.paused.
+Make the code changes minimal.
+
+ input:
+  switch (state) {
+    case AppLifecycleState.paused:
+      dosomething();
+      break;
+    case AppLifecycleState.resumed:
+      if (_wasPlayingBeforePause) {
+        dosomethingelse();
+      }
+      break;
+    default:
+  }
+ output:
+  switch (state) {
+    case AppLifecycleState.paused:
+    case AppLifecycleState.hidden:
+      dosomething();
+      break;
+    case AppLifecycleState.resumed:
+      if (_wasPlayingBeforePause) {
+        _ dosomethingelse();
+      }
+      break;
+    default:
+  }
+input:
+@override
+void didChangeAppLifecycleState(AppLifecycleState state) {
+  _appLifecycleState = state;
+  super.didChangeAppLifecycleState(state);
+}
+output:
+@override
+void didChangeAppLifecycleState(AppLifecycleState state) {
+  _appLifecycleState = state;
+  super.didChangeAppLifecycleState(state);
+}
+input:
+if (state == AppLifecycleState.resumed) {
+    submitCommand(const DoSomethingCommand());
+  }
+output:
+if (state == AppLifecycleState.resumed) {
+    submitCommand(const DoSomethingCommand());
+  }
+input:
+if (state == AppLifecycleState.paused) {
+    submitCommand(const DoSomethingCommand());
+  }
+output:
+if (state == AppLifecycleState.paused || state == AppLifecycleState.hidden) {
+    submitCommand(const DoSomethingCommand());
+  }
+input:
+  switch (state) {
+    case AppLifecycleState.resumed:
+      dosomething();
+      break;
+    case AppLifecycleState.paused:
+      if (_wasPlayingBeforePause) {
+        dosomethingelse();
+      }
+      break;
+    default:
+  }
+output:
+  switch (state) {
+    case AppLifecycleState.resumed:
+      dosomething();
+      break;
+    case AppLifecycleState.paused:
+    case AppLifecycleState.hidden:
+      if (_wasPlayingBeforePause) {
+        dosomethingelse();
+      }
+      break;
+    default:
+  }
+input:
+  _appLifecycleState = state;
+  super.didChangeAppLifecycleState(state);
+output:
+  _appLifecycleState = state;
+  super.didChangeAppLifecycleState(state);
+input:
+    if (state == AppLifecycleState.resumed) {
+      // Refresh when the app comes back from the background in case the list of
+      // identities has changed or the app is stale.
+      _identitiesAdsAccessModel.refresh();
+    }
+output:
+    if (state == AppLifecycleState.resumed) {
+      // Refresh when the app comes back from the background in case the list of
+      // identities has changed or the app is stale.
+      _identitiesAdsAccessModel.refresh();
+    }
+input:
+    if (state == AppLifecycleState.paused) {
+      // Refresh when the app comes back from the background in case the list of
+      // identities has changed or the app is stale.
+      _identitiesAdsAccessModel.refresh();
+    }
+output:
+    if (state == AppLifecycleState.paused || state == AppLifecycleState.hidden) {
+      // Refresh when the app comes back from the background in case the list of
+      // identities has changed or the app is stale.
+      _identitiesAdsAccessModel.refresh();
+    }
+input:
+@override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    _logger.info('didChangeAppLifecycleState: $state');
+    if (state == AppLifecycleState.paused &&
+        _hasSuccessfullyLoaded &&
+        mounted &&
+        !_showAppBar) {
+      final route = ModalRoute.of(context);
+      if (route != null && route.isCurrent) {
+        _activityTracker.startPlaceChangeActivity('$_activityPrefix.Closed');
+        Navigator.removeRoute(context, route);
+      }
+    }
+  }
+
+
+ `<ctrl23>`
