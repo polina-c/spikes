@@ -111,6 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        // ignore: deprecated_member_use_from_same_package
         onPressed: _incrementCounter,
         tooltip: 'Increment!',
         child: const Icon(Icons.add),

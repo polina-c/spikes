@@ -1,0 +1,313 @@
+
+
+
+@override
+void didChangeAppLifecycleState(AppLifecycleState state) {
+  switch (state) {
+    case AppLifecycleState.paused:
+      _wasPlayingBeforePause = _controller.value.isPlaying; // ignore in value
+      _controller.pause();
+      break;
+    case AppLifecycleState.resumed:
+      if (_wasPlayingBeforePause) {
+        _controller.play();
+      }
+      break;
+    default:
+  }
+}
+
+@override
+void didChangeAppLifecycleState(AppLifecycleState state) {
+  _appLifecycleState = state;
+  super.didChangeAppLifecycleState(state);  // ignore in didChangeAppLifecycleState
+}
+
+final x = doFoo();
+
+
+@override
+void didChangeAppLifecycleState(AppLifecycleState state) {
+  if (!exportInProgress) return;
+  switch (state) {
+    case AppLifecycleState.paused:
+      _logExportFlowEvent(  // ignore in _logExportFlowEvent
+        FlowLogging().logFlowEvent,
+        pb.ProducerExportEventType.PRODUCER_EXPORT_EVENT_TYPE_APP_TO_BACKGROUND,
+        widget.exportRequest,
+      );
+    case AppLifecycleState.resumed:
+      _logExportFlowEvent(
+        FlowLogging().logFlowEvent,
+        pb.ProducerExportEventType.PRODUCER_EXPORT_EVENT_TYPE_APP_TO_FOREGROUND,
+        widget.exportRequest,
+      );
+    default:
+    // Do nothing. Other states not handled.
+  }
+}
+
+@override
+void didChangeAppLifecycleState(AppLifecycleState state) {
+  // When the 'Settings' page is closed, check permissions again.
+  if (state == AppLifecycleState.resumed) {
+    submitCommand(const CheckPermissionsCommand());   // ignore in CheckPermissionsCommand
+  }
+}
+
+@override
+void didChangeAppLifecycleState(AppLifecycleState state) {
+  // When the 'Settings' page is closed, check permissions again.
+  if (state == AppLifecycleState.resumed) {
+    submitCommand(const CheckPermissionsCommand());   // ignore in submitCommand
+  }
+}
+
+
+@override
+void didChangeAppLifecycleState(AppLifecycleState state) {
+  // We use 'paused' instead of 'inactive' since we want to know when the app
+  // is not visible to the user. 'inactive' is nuanced and also triggers for
+  // situations such as using TouchID, causing a lot of false positives.
+  if (state == AppLifecycleState.paused) {  // ignore in paused
+    if (_currentPlaceModel.place != null) {
+      _logPlaceView(viewedPlace: _currentPlaceModel.place!);
+    }
+    _hasBeenPaused = true;
+  } else if (state == AppLifecycleState.resumed && _hasBeenPaused) {
+    // If we have been in a paused state (application not visible to the user)
+    // we consider it being fully backgrounded and log that we have been
+    // resumed in foreground again.
+
+    _stopwatch.reset();
+
+    _activityTracker.startActivity(Activity(
+        ActivityType.INTERACTIVE, 'App.ResumedForeground',
+        isFoldable: true));
+
+    _hasBeenPaused = false;
+  }
+}
+
+
+
+@override
+void didChangeAppLifecycleState(AppLifecycleState state) {
+  // When AxL WebView is resumed or paused, send associated events to the axl
+  // bridge.
+  if (state == AppLifecycleState.resumed) {
+    axlBridge.sendMessageToWebView(AxLHostToChild.resume);   // ignore in sendMessageToWebView
+  } else if (state == AppLifecycleState.paused ||
+      state == AppLifecycleState.inactive) {
+    axlBridge.sendMessageToWebView(AxLHostToChild.freeze);
+  }
+}
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      // Refresh when the app comes back from the background in case the list of
+      // identities has changed or the app is stale.
+      _identitiesAdsAccessModel.refresh();  // ignore in refresh
+    }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    _logger.info('didChangeAppLifecycleState: $state');
+    if (state == AppLifecycleState.resumed &&
+        _hasSuccessfullyLoaded &&
+        mounted &&
+        !_showAppBar) {
+      final route = ModalRoute.of(context);
+      if (route != null && route.isCurrent) {
+        _activityTracker.startPlaceChangeActivity('$_activityPrefix.Closed');
+        Navigator.removeRoute(context, route);
+      }
+    }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    _logger.info('didChangeAppLifecycleState: $state');
+    if (state == AppLifecycleState.paused &&
+        _hasSuccessfullyLoaded &&
+        mounted &&
+        !_showAppBar) {
+      final route = ModalRoute.of(context);
+      if (route != null && route.isCurrent) {
+        _activityTracker.startPlaceChangeActivity('$_activityPrefix.Closed');
+        Navigator.removeRoute(context, route);
+      }
+    }
+  }
+
+  Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
+    if (state != AppLifecycleState.resumed ||
+        !flags.isLocationServiceAutoRefreshEnabled) {
+      return;
+    }
+
+    final cachedLocation = _fetchCachedLocation(
+      stalenessDuration: Timing.locationCacheUpdateFrequencyDuration,
+    );
+    if (cachedLocation != null) return;
+
+    unawaited(_refreshCache());
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    final newVisibility = switch (state) {
+      AppLifecycleState.resumed || AppLifecycleState.inactive => true,
+      AppLifecycleState.paused || AppLifecycleState.detached => false,
+    };
+    if (!previousVisibility && newVisibility) {
+      cache._notifyListenersIfDataIsStale();
+    }
+    previousVisibility = newVisibility;
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state != AppLifecycleState.resumed) return;
+    _refreshIfPushNotificationStateChanged();
+  }
+
+
+    assert((){
+      AppLifecycleState? starting = previousState;
+      for (final AppLifecycleState ending in stateChanges) {
+        if (!_debugVerifyLifecycleChange(starting, ending)) {
+          return false;
+        }
+        starting = ending;
+      }
+      return true;
+    }(), 'Invalid lifecycle state transition generated from $previousState to $state (generated $stateChanges)');
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state != AppLifecycleState.resumed) return;
+    // When the app resumes from background, check if push notification
+    // settings has changed and refresh the feed.
+    unawaited(_refreshIfPushNotificationStateChanged());
+  }
+
+
+  @provide
+  AppLifecycleState provideLifecycleState() =>
+      WidgetsBinding.instance.lifecycleState ?? AppLifecycleState.inactive;
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    //TODO(yuehengl): move the logic to a higher level.
+    if (state == AppLifecycleState.resumed) {
+      Services.of(context).dateRangeProvider.updateIfStale();
+      setState(() {});
+    } else if (state == AppLifecycleState.paused) {
+      Services.of(context).dateRangeProvider.startTimerWhenInactive();
+    }
+  }
+
+  void _processLifecycleEvent(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.paused:
+        stopAll();
+        break;
+      default:
+        break;
+    }
+  }
+}
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        update();
+      case AppLifecycleState.detached:
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.paused:
+        // Nothing to do.
+        break;
+    }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      if (_webViewController != null) {
+        _webViewController!.runJavascript('window.onResumed()');
+      }
+      _updateConnectivity();
+    }
+  }
+
+void _notifyChanged(AppLifecycleState newState) {
+  if (_currentState == newState) {
+    return;
+  }
+  final previousState = _currentState;
+  _currentState = newState;
+  widget.onChange(previousState, newState);
+}
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.inactive:
+        appLifecycleAwareMixin.onApplicationInactive();
+        break;
+      case AppLifecycleState.paused:
+        appLifecycleAwareMixin.onApplicationPaused();
+        break;
+      case AppLifecycleState.resumed:
+        appLifecycleAwareMixin.onApplicationResumed();
+        break;
+      case AppLifecycleState.detached:
+        break;
+    }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (!_controller.isClosed) _controller.add(state);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // Stop the engine when app is backgrounded. See b/278780996.
+    if (state == AppLifecycleState.inactive ||
+        state == AppLifecycleState.paused) {
+      _lastStoppedPositionSeconds =
+          _transportState.playbackPosition.toDoubleSeconds;
+      _sendClientEvent(pb.ClientEvent()
+        ..transportEvent = (pb.TransportEvent()..stop = pb.Stop()));
+    }
+    // On foreground, the stopped engine has lost its position. Remind it by
+    // re-setting the position.
+    if (state == AppLifecycleState.resumed) {
+      transportSeek(positionSeconds: _lastStoppedPositionSeconds);
+    }
+  }
+
+  /// Checks whether the promotional page has been displayed.
+  ///
+  /// This check is performed in the didChangeAppLifecycleState hook because
+  /// tapping the "remote setup item" goes to the landing page.
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      _requestNotificationPermission();
+    }
+    _fetchHasDisplayedPromotionalPage();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state != AppLifecycleState.resumed) return;
+    _handleQueryFromIntent();
+  }

@@ -1,0 +1,132 @@
+  if (myFlag1 &&
+      state != AppLifecycleState.paused &&
+      mounted) {
+      generateOutput();
+  }
+
+  if (AppLifecycleState.paused.toString() == y) {
+    doSomething();
+  }
+
+  if ({AppLifecycleState.paused, AppLifecycleState.inactive}.contains(state)) {
+    super.didChangeAppLifecycleState(state);
+  }
+
+  final newVisibility = switch (state) {
+    AppLifecycleState.resumed || AppLifecycleState.inactive => true,
+    AppLifecycleState.paused || AppLifecycleState.detached => false,
+  };
+------------
+
+if (state == AppLifecycleState.inactive ||
+    state == AppLifecycleState.paused) {
+  _lastStoppedPositionSeconds =
+      _transportState.playbackPosition.toDoubleSeconds;
+  _sendClientEvent(pb.ClientEvent()
+    ..transportEvent = (pb.TransportEvent()..stop = pb.Stop()));
+}
+
+switch (state) {
+  case AppLifecycleState.inactive:
+    appLifecycleAwareMixin.onApplicationInactive();
+    break;
+  case AppLifecycleState.resumed:
+    appLifecycleAwareMixin.onApplicationResumed();
+    break;
+  case AppLifecycleState.detached:
+    break;
+}
+
+
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state != AppLifecycleState.resumed) return;
+    // When the app resumes from background, check if push notification
+    // settings has changed and refresh the feed.
+    unawaited(_refreshIfPushNotificationStateChanged());
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    //TODO(yuehengl): move the logic to a higher level.
+    if (state == AppLifecycleState.resumed) {
+      Services.of(context).dateRangeProvider.updateIfStale();
+      setState(() {});
+    } else if (state == AppLifecycleState.paused) {
+      Services.of(context).dateRangeProvider.startTimerWhenInactive();
+    }
+  }
+
+  @provide
+  AppLifecycleState provideLifecycleState() =>
+      WidgetsBinding.instance.lifecycleState ?? AppLifecycleState.inactive;
+
+  if (myFlag1 &&
+      state == AppLifecycleState.paused &&
+      mounted) {
+    generateOutput();
+  }
+
+  switch (state) {
+    case AppLifecycleState.resumed:
+      cancelCommands();
+      break;
+    case AppLifecycleState.paused:
+      exitApp();
+      break;
+    default:
+  }
+
+
+
+  switch (state) {
+    case AppLifecycleState.activated:
+      cancelCommands();
+      break;
+    case AppLifecycleState.paused:
+      exitApp();
+      break;
+    default:
+  }
+
+@override
+void didChangeAppLifecycleState(AppLifecycleState state) {
+  // We use 'paused' instead of 'inactive' since we want to know when the app
+  // is not visible to the user. 'inactive' is nuanced and also triggers for
+  // situations such as using TouchID, causing a lot of false positives.
+  if (state == AppLifecycleState.paused) {
+    if (_currentPlaceModel.place != null) {
+      _logPlaceView(viewedPlace: _currentPlaceModel.place!);
+    }
+    _hasBeenPaused = true;
+  } else if (state == AppLifecycleState.resumed && _hasBeenPaused) {
+    // If we have been in a paused state (application not visible to the user)
+    // we consider it being fully backgrounded and log that we have been
+    // resumed in foreground again.
+
+    _stopwatch.reset();
+
+    _activityTracker.startActivity(Activity(
+        ActivityType.INTERACTIVE, 'App.ResumedForeground',
+        isFoldable: true));
+
+    _hasBeenPaused = false;
+  }
+}
+
+@override
+void didChangeAppLifecycleState(AppLifecycleState state) {
+  // When the 'Settings' page is closed, check permissions again.
+  if (state == AppLifecycleState.resumed) {
+    submitCommand(const CheckPermissionsCommand());
+  }
+}
+
+@override
+void didChangeAppLifecycleState(AppLifecycleState state) {
+  // When the 'Settings' page is closed, check permissions again.
+  if (state == AppLifecycleState.paused) {
+    submitCommand(const CheckPermissionsCommand());
+  }
+}

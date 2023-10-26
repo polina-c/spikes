@@ -1,2 +1,10 @@
+final TestGesture gesture       = await tester.startGesture()
 
+// Finish gesture to release resources.
+await tester.pumpAndSettle();
+await gesture.up();
+await tester.pumpAndSettle();
 
+// Finish gesture to release resources.
+    await gesture.up();
+    await tester.pumpAndSettle();
