@@ -9,12 +9,12 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:leak_tracker_flutter_testing/leak_tracker_flutter_testing.dart';
 
 import 'package:router_leak/main.dart';
 
 void main() {
-  testWidgets('Leak test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
+  testWidgets('Is it leaking?', (WidgetTester tester) async {
     await tester.pumpWidget(const MyApp());
     await tester.pumpAndSettle();
 
@@ -36,5 +36,18 @@ void main() {
       rss = newRss;
     }
     debugPrint('totalDelta: $totalDelta');
+  });
+
+  testWidgets('notGCed',
+      experimentalLeakTesting:
+          LeakTesting.settings.withTracked(experimantalAllNotGCed: true),
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const MyApp());
+    await tester.pumpAndSettle();
+
+    for (var i = 0; i < 3; i++) {
+      await tester.tap(find.text('CLICK'));
+      await tester.pumpAndSettle();
+    }
   });
 }
