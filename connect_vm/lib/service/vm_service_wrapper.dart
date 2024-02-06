@@ -362,32 +362,6 @@ class VmServiceWrapper implements VmService {
   }
 
   @override
-  Future<SourceReport> getSourceReport(
-    String isolateId,
-    List<String> reports, {
-    String? scriptId,
-    int? tokenPos,
-    int? endTokenPos,
-    bool? forceCompile,
-    bool? reportLines,
-    List<String>? libraryFilters,
-  }) async {
-    return trackFuture(
-      'getSourceReport',
-      _vmService.getSourceReport(
-        isolateId,
-        reports,
-        scriptId: scriptId,
-        tokenPos: tokenPos,
-        endTokenPos: endTokenPos,
-        forceCompile: forceCompile,
-        reportLines: reportLines,
-        libraryFilters: libraryFilters,
-      ),
-    );
-  }
-
-  @override
   Future<Stack> getStack(String isolateId, {int? limit}) async {
     return trackFuture(
       'getStack',

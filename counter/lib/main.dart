@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'stream_helpers.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -58,6 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() {
+    testOprations();
     setState(() {
       _counter++;
     });
@@ -117,5 +120,54 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+}
+
+void testOprations() {
+  final write = WriteStream(chunkSizeBytes: 1);
+  write.writeInteger(0);
+  write.writeInteger(1);
+  write.writeInteger(-1);
+  write.writeInteger(255);
+  write.writeInteger(256);
+  write.writeInteger(257);
+  write.writeInteger(1025);
+  write.writeInteger(10000);
+  write.writeInteger(100000);
+  write.writeInteger(1000000);
+  write.writeInteger(10000000);
+  write.writeInteger(100000000);
+  write.writeInteger(1000000000);
+  write.writeInteger(10000000000);
+  write.writeInteger(20000000000);
+  write.writeInteger(1683218);
+  write.writeInteger(-1000000000);
+
+  final read = ReadStream(write.chunks);
+  expect(read.readInteger(), 0);
+  expect(read.readInteger(), 1);
+  expect(read.readInteger(), -1);
+  expect(read.readInteger(), 255);
+  expect(read.readInteger(), 256);
+  expect(read.readInteger(), 257);
+  expect(read.readInteger(), 1025);
+  expect(read.readInteger(), 10000);
+  expect(read.readInteger(), 100000);
+  expect(read.readInteger(), 1000000);
+  expect(read.readInteger(), 10000000);
+  expect(read.readInteger(), 100000000);
+  expect(read.readInteger(), 1000000000);
+  expect(read.readInteger(), 10000000000);
+  expect(read.readInteger(), 20000000000);
+  expect(read.readInteger(), 1683218);
+  expect(read.readInteger(), -1000000000);
+  expect(read.readInteger(), -1);
+
+  print('All tests passed');
+}
+
+void expect(readInteger, int i) {
+  if (readInteger != i) {
+    throw Exception('Expected $i, got $readInteger');
   }
 }

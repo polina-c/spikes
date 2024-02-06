@@ -1,11 +1,30 @@
+not touch: 1402929152
+null:      1408778240
+cojnst:    1411923968
+
+
+ctrl a - start
+alt b - one word left
+ctrl e - end
+alt f - one word right
+
+sdk:
+git new-branch <name>
+git rebase-update
+git cl upload -s
+
+dart test/heap_snapshot_graph_test.dart
+dart test/stream_helpers_test.dart
+
+https://dart-review.googlesource.com/c/sdk/+/348802
 
 dependency_overrides:
-  leak_tracker:
-    path: ../../../leak_tracker/pkgs/leak_tracker
   leak_tracker_flutter_testing:
     path: ../../../leak_tracker/pkgs/leak_tracker_flutter_testing
-
-dependency_overrides:
+  leak_tracker:
+    path: ../../../leak_tracker/pkgs/leak_tracker
+  leak_tracker_testing:
+    path: ../../../leak_tracker/pkgs/leak_tracker_testing
   flutter_test:
     path: ../flutter_test
 
@@ -14,12 +33,13 @@ dependency_overrides:
  ...this is hidden, collapsable content...
 </details>
 
+--update-godens
 
-Steps to repro:
-1. Remove notDisposedAllowList added by the PR
-2. Run the updated test library with 'flutter run <path to the library>'
-3. Observe the test failure
+  // TODO(polina-c): Remove when PageView is fixed, https://github.com/flutter/flutter/issues/141119
+  experimentalLeakTesting: LeakTesting.settings.withIgnoredAll(),
 
-if (kFlutterMemoryAllocationsEnabled) {
-      maybeDispatchObjectCreation();
-    }
+  // TODO(polina-c): make sure images are disposed, https://github.com/flutter/flutter/issues/141388
+  experimentalLeakTesting: LeakTesting.settings.withIgnoredAll(),
+
+  // TODO(polina-c): clean up leaks, https://github.com/flutter/flutter/issues/134787
+  experimentalLeakTesting: LeakTesting.settings.withIgnoredAll(),
