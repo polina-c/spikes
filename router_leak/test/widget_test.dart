@@ -14,40 +14,47 @@ import 'package:leak_tracker_flutter_testing/leak_tracker_flutter_testing.dart';
 import 'package:router_leak/main.dart';
 
 void main() {
-  testWidgets('Is it leaking?', (WidgetTester tester) async {
-    await tester.pumpWidget(const MyApp());
-    await tester.pumpAndSettle();
+  // testWidgets('Is it leaking?', (WidgetTester tester) async {
+  //   await tester.pumpWidget(const MyApp());
+  //   await tester.pumpAndSettle();
 
-    // Warm up
-    for (var i = 0; i < 20; i++) {
-      await tester.tap(find.text('CLICK'));
+  //   // Warm up
+  //   for (var i = 0; i < 20; i++) {
+  //     await tester.tap(find.text('CLICK'));
+  //     await tester.pumpAndSettle();
+  //   }
+
+  //   var rss = ProcessInfo.currentRss;
+  //   var totalDelta = 0;
+  //   for (var i = 0; i < 100; i++) {
+  //     await tester.tap(find.text('CLICK'));
+  //     await tester.pumpAndSettle();
+
+  //     final newRss = ProcessInfo.currentRss;
+  //     debugPrint('diff: ${newRss - rss}');
+  //     totalDelta += newRss - rss;
+  //     rss = newRss;
+  //   }
+  //   debugPrint('totalDelta: $totalDelta');
+  // });
+
+  testWidgets(
+    'notGCed',
+    // experimentalLeakTesting:
+    //     LeakTesting.settings.withTracked(experimantalAllNotGCed: true)
+    // //.withCreationStackTrace()
+    // ,
+    (WidgetTester tester) async {
+      final notifier = ValueNotifier<int>(1);
+      notifier.addListener(() {});
+
+      await tester.pumpWidget(const MyAppWithMemoryTest());
       await tester.pumpAndSettle();
-    }
 
-    var rss = ProcessInfo.currentRss;
-    var totalDelta = 0;
-    for (var i = 0; i < 100; i++) {
-      await tester.tap(find.text('CLICK'));
-      await tester.pumpAndSettle();
-
-      final newRss = ProcessInfo.currentRss;
-      debugPrint('diff: ${newRss - rss}');
-      totalDelta += newRss - rss;
-      rss = newRss;
-    }
-    debugPrint('totalDelta: $totalDelta');
-  });
-
-  testWidgets('notGCed',
-      experimentalLeakTesting:
-          LeakTesting.settings.withTracked(experimantalAllNotGCed: true),
-      (WidgetTester tester) async {
-    await tester.pumpWidget(const MyApp());
-    await tester.pumpAndSettle();
-
-    for (var i = 0; i < 3; i++) {
-      await tester.tap(find.text('CLICK'));
-      await tester.pumpAndSettle();
-    }
-  });
+      for (var i = 0; i < 30; i++) {
+        await tester.tap(find.text('CLICK'));
+        await tester.pumpAndSettle();
+      }
+    },
+  );
 }
