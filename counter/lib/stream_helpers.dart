@@ -126,10 +126,12 @@ class WriteStream {
   }
 
   /// Write one ULEB128 number.
-  void writeInteger(int value) {
+  void writeInteger(int value, [bool debug = false]) {
     // First bit in every byte is a signal if there is more data.
     // So, we split the number into 7-bit parts and write them smaller to larger,
     // prefixing with the signal.
+
+    final parts = <int>[];
 
     int bytes = 0;
     for (;;) {
@@ -142,6 +144,7 @@ class WriteStream {
       }
       bytes++;
       _writeByte(part);
+      parts.add(part);
 
       if (value == 0) {
         break;

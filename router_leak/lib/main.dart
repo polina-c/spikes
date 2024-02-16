@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyAppWithMemoryTest());
+  currentRss = ProcessInfo.currentRss;
 }
 
 class MyAppWithMemoryTest extends StatelessWidget {
@@ -21,6 +24,8 @@ class MyAppWithMemoryTest extends StatelessWidget {
   }
 }
 
+int currentRss = 0;
+
 class MemoryTest extends StatelessWidget {
   const MemoryTest({super.key});
 
@@ -29,6 +34,10 @@ class MemoryTest extends StatelessWidget {
     Widget content = OutlinedButton(
       child: const Text("CLICK"),
       onPressed: () {
+        final newRss = ProcessInfo.currentRss;
+        debugPrint(
+            'Current RSS KB: ${newRss ~/ 1024}, RSS delta KB: ${(newRss - currentRss) ~/ 1024}');
+        currentRss = newRss;
         Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (_) => const MemoryTest(),
         ));

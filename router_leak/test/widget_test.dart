@@ -39,19 +39,15 @@ void main() {
   // });
 
   testWidgets(
-    'notGCed',
-    // experimentalLeakTesting:
-    //     LeakTesting.settings.withTracked(experimantalAllNotGCed: true)
-    // //.withCreationStackTrace()
-    // ,
+    'memory test',
+    experimentalLeakTesting: LeakTesting.settings
+        .withTracked(experimantalAllNotGCed: true)
+        .withCreationStackTrace(),
     (WidgetTester tester) async {
-      final notifier = ValueNotifier<int>(1);
-      notifier.addListener(() {});
-
       await tester.pumpWidget(const MyAppWithMemoryTest());
       await tester.pumpAndSettle();
 
-      for (var i = 0; i < 30; i++) {
+      for (var i = 0; i < 3; i++) {
         await tester.tap(find.text('CLICK'));
         await tester.pumpAndSettle();
       }

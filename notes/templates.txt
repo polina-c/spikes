@@ -1,12 +1,5 @@
-not touch: 1402929152
-null:      1408778240
-cojnst:    1411923968
-
-
 ctrl a - start
-alt b - one word left
 ctrl e - end
-alt f - one word right
 
 sdk:
 git new-branch <name>
