@@ -37,7 +37,7 @@ abstract class InstrumentedParent {
 }
 
 /// This class illustrates how the macro @disposable updates the code.
-@disposableInMyTests
+@disposable
 class MyDisposable extends InstrumentedParent {
   const MyDisposable.constConst() : super.constant();
 
