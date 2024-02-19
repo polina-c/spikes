@@ -1,5 +1,7 @@
 
-../../bin/flutter test test/painting/system_fonts_test.dart --update-goldens --enable-vmservice
+
+  /// This set of flags is needed to calculate retained size for a class.
+  static Map<(PathFromRoot, HeapClassName), bool>? _pathContainsClass;
 
 
 
