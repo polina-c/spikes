@@ -6,11 +6,14 @@ git new-branch <name>
 git rebase-update
 git cl upload -s
 
-dart test/heap_snapshot_graph_test.dart
-dart test/stream_helpers_test.dart
+../../bin/flutter update-packages --cherry-pick-package leak_tracker_flutter_testing --cherry-pick-version 10.0.5
+../../bin/flutter update-packages --cherry-pick-package leak_tracker_flutter_testing --cherry-pick-version 3.0.5
+../../bin/flutter update-packages --force-upgrade
 
-https://dart-review.googlesource.com/c/sdk/+/348802
+git checkout upstream/master
 
+packages/flutter_test/pubspec.yaml
+packages/flutter/pubspec.yaml
 dependency_overrides:
   leak_tracker_flutter_testing:
     path: ../../../leak_tracker/pkgs/leak_tracker_flutter_testing
@@ -28,11 +31,15 @@ dependency_overrides:
 
 --update-godens
 
-  // TODO(polina-c): Remove when PageView is fixed, https://github.com/flutter/flutter/issues/141119
+  // TODO(polina-c): dispose TabController, https://github.com/flutter/flutter/issues/144910 [leaks-to-clean]
   experimentalLeakTesting: LeakTesting.settings.withIgnoredAll(),
 
-  // TODO(polina-c): make sure images are disposed, https://github.com/flutter/flutter/issues/141388
+  // TODO(polina-c): make sure images are disposed, https://github.com/flutter/flutter/issues/141388 [leaks-to-clean]
   experimentalLeakTesting: LeakTesting.settings.withIgnoredAll(),
 
-  // TODO(polina-c): clean up leaks, https://github.com/flutter/flutter/issues/134787
+  // TODO(polina-c): clean up leaks, https://github.com/flutter/flutter/issues/134787 [leaks-to-clean]
   experimentalLeakTesting: LeakTesting.settings.withIgnoredAll(),
+
+    experimentalLeakTesting: LeakTesting.settings.withIgnoredAll(), // leaking by design because of exception
+
+
