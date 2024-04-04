@@ -1,4 +1,4 @@
-import 'package:macro/lt_macro.dart' as macro;
+import 'package:macros_example/auto_to_string.dart';
 
 void main() {
   final jack = User('Jack', 25);
