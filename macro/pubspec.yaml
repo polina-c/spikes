@@ -1,0 +1,21 @@
+name: macro
+description: A sample command-line application.
+version: 1.0.0
+# repository: https://github.com/my_org/my_repo
+
+environment:
+  sdk: ^3.5.0-7.0.dev
+
+dependencies:
+  macros: ^0.1.0
+
+dependency_overrides:
+  macros:
+    git:
+      url: https://github.com/dart-lang/sdk.git
+      path: pkg/macros
+      ref: 3.5.0-15.0.dev
+
+dev_dependencies:
+  lints: ^3.0.0
+  test: ^1.24.0
