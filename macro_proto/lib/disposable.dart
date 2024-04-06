@@ -12,6 +12,7 @@ macro class Disposable implements ClassDefinitionMacro {
   FutureOr<void> buildDefinitionForClass(ClassDeclaration clazz, TypeDefinitionBuilder classBuilder) async {
     final constructors = await classBuilder.constructorsOf(clazz);
     for (var c in constructors) {
+
       final builder = await classBuilder.buildConstructor(c.identifier);
       builder.augment(body: FunctionBodyCode.fromParts([
         '{\n',
