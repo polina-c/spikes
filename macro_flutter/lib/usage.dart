@@ -1,7 +1,7 @@
 import 'macro/disposable.dart';
 import 'macro/auto_to_string.dart';
 
-void main() {
+void use() {
   final jack = User('Jack', 25);
   print(jack.toString());
 }

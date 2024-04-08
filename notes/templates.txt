@@ -1,6 +1,8 @@
 ctrl a - start
 ctrl e - end
 
+--enable-experiment=macros
+
 sdk:
 git new-branch <name>
 git rebase-update
