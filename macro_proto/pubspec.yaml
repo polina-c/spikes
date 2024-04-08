@@ -5,7 +5,8 @@ publish_to: none
 
 dependencies:
   macros: ^0.1.0
-
+  flutter:
+    sdk: flutter
 
 dependency_overrides:
   macros:

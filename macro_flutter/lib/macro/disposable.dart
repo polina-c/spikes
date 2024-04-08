@@ -24,7 +24,7 @@ macro class Disposable implements ClassDefinitionMacro {
           if (kFlutterMemoryAllocationsEnabled) {
             FlutterMemoryAllocations.instance.dispatchObjectCreated(
               library: '$library',
-              className: '${className}',
+              className: '$className',
               object: this,
             );
           }
