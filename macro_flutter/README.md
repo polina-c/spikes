@@ -1,2 +1,2 @@
 flutter run --enable-experiment=macros -d macos
-flutter run --enable-experiment=macros -d web
+flutter run --enable-experiment=macros -d chrome
