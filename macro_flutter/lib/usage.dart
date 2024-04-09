@@ -1,5 +1,6 @@
-import 'macro/disposable.dart';
+
 import 'macro/auto_to_string.dart';
+import 'package:macro_disposable/macro_disposable.dart';
 
 void use() {
   final jack = User('Jack', 25);

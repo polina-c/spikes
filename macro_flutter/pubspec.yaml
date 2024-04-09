@@ -10,6 +10,8 @@ dependencies:
   macros: ^0.1.0-0
   flutter:
     sdk: flutter
+  macro_disposable:
+    path: ../macro_disposable
 
 dev_dependencies:
   flutter_test:

@@ -1,14 +1,13 @@
 name: macro_disposable
-description: A starting point for Dart libraries or applications.
-version: 1.0.0
+version: 0.1.0
 
 environment:
-  sdk: ^3.4.0-140.0.dev
+  sdk: '>=3.5.0-18.0.dev <4.0.0'
 
 dependencies:
-  flutter:
-    sdk: flutter
+  macros: ^0.1.0-0
   meta: any
+  flutter_lints: ^3.0.0
 
 dev_dependencies:
   lints: ^3.0.0
