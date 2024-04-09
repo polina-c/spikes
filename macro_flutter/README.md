@@ -1,3 +1,2 @@
-# macro_flutter
-
-A new Flutter project.
+flutter run --enable-experiment=macros -d macos
+flutter run --enable-experiment=macros -d web
