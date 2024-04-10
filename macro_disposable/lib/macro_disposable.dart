@@ -1,2 +1,3 @@
 export 'src/disposables.dart';
-import 'package:flutter/foundation.dart';
+export 'package:flutter/src/foundation/memory_allocations.dart';
+export 'package:meta/meta.dart';
