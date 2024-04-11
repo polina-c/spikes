@@ -1,4 +1,0 @@
-{
-	"dart.experimentalMacroSupport": true,
-	"dart.analyzerInstrumentationLogFile": "logs/analyzer.instrum.txt",
-}
