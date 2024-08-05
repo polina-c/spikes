@@ -1,4 +1,0 @@
-# # Override to the latest version of the in progress API.
-# dependency_overrides:
-#   macros:
-#     path: ../dart-lang-sdk/sdk/pkg/macros

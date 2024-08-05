@@ -24,6 +24,16 @@
             "type": "dart",
         },
         {
+            "name": "counter (android)",
+            "cwd": "counter",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d",
+                "emulator-5554",
+            ]
+        },
+        {
             "name": "overflow",
             "cwd": "overflow",
             "request": "launch",

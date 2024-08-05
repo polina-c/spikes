@@ -1,5 +1,10 @@
+--dart-define LEAK_TRACKING=true
+
 ctrl a - start
 ctrl e - end
+
+  // TODO(polina-c): remove when fixed https://github.com/flutter/flutter/issues/145600 [leak-tracking-opt-in]
+  experimentalLeakTesting: LeakTesting.settings.withTracked(classes: <String>['CurvedAnimation']),
 
 --enable-experiment=macros
 

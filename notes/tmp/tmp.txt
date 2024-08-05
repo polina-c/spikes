@@ -1,0 +1,59 @@
+#!/bin/bash
+# Note: Forked from http://google3/experimental/users/jsimionato/earth_profiling/build_earth_release.sh;rcl=561211129
+#
+# Serves the static Web Flutter MPM build target.
+#
+# Usage:
+# Run this from within a piper client:
+#
+# sh mobile/flutter/genui/client/flutter_ddc/tools/run_flutter_mpm.sh /
+#   --folder mobile/flutter/genui/client/flutter_ddc/examples/counter/web /
+#   --target web_mpm
+
+# Exit on error.
+set -e
+
+# See go/gbash-user-guide
+source gbash.sh || exit
+DEFINE_string folder "mobile/flutter/genui/client/flutter_ddc/examples/counter/web" "Piper folder of the MPM build target"
+DEFINE_string target "web_mpm" "Target name"
+gbash::init_google "$@"
+echo "Serving MPM target as a Flutter web app: //$FLAGS_folder:$FLAGS_target"
+
+echo 'Building the app'
+
+blaze --blazerc=/dev/null build //"$FLAGS_folder:$FLAGS_target" \
+  --compilation_mode=opt \
+  --config=release \
+  --copt=-DABSL_MIN_LOG_LEVEL=1000 \
+  --copt=-DNDEBUG \
+  --copt=-Os \
+  --copt=-fdata-sections \
+  --copt=-ffunction-sections \
+  --copt=-flto \
+  --copt=-fno-caller-saves \
+  --copt=-fvisibility=hidden \
+  --cxxopt=-fvisibility-inlines-hidden \
+  --define=flutter_build_mode=release \
+  --define=prod=1 \
+  --linkopt=--Wl,--icf=all \
+  --linkopt=-Wl,--gc-sections \
+  --strip=always
+
+tmp_dir=$(mktemp -d)
+echo "Created temporary directory $tmp_dir"
+
+echo 'Unzipping assets to a temporary directory'
+unzip blaze-bin/"$FLAGS_folder"/web/main.dart.js.jar -d "$tmp_dir"/unzipped > /dev/null
+mkdir "$tmp_dir"/versions
+mv "$tmp_dir"/unzipped/"$FLAGS_folder"/web/* "$tmp_dir"/versions
+rm -rf "$tmp_dir/unzipped"
+
+echo 'Copying index.html to the temporary directory'
+cp blaze-bin/"$FLAGS_folder"/"$FLAGS_target"/index.html "$tmp_dir"/index.html
+
+echo "http://$(hostname):8000/index.html"
+(cd "$tmp_dir"; python3 -m http.server)
+
+echo 'Cleaning up the serving files'
+rm -r -f "$tmp_dir"
