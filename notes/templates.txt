@@ -1,3 +1,7 @@
+GenUI local UI:
+http://polinach1.c.googlers.com:9879
+http://polinach2.c.googlers.com:9879
+
 --dart-define LEAK_TRACKING=true
 
 ctrl a - start
@@ -13,9 +17,11 @@ git new-branch <name>
 git rebase-update
 git cl upload -s
 
-../../bin/flutter update-packages --cherry-pick-package leak_tracker_flutter_testing --cherry-pick-version 10.0.5
-../../bin/flutter update-packages --cherry-pick-package leak_tracker_flutter_testing --cherry-pick-version 3.0.5
+../../bin/flutter update-packages --cherry-pick-package leak_tracker_flutter_testing --cherry-pick-version 3.0.9
+../../bin/flutter update-packages --cherry-pick-package leak_tracker --cherry-pick-version 10.0.8
 ../../bin/flutter update-packages --force-upgrade
+packages/flutter_tools/lib/src/update_packages_pins.dart
+
 
 git checkout upstream/master
 

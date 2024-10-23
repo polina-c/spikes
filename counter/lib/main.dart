@@ -1,133 +1,188 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MyApp());
+class Item {
+  String name;
+  Item({required this.name});
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class ItemsDataModel extends ChangeNotifier {
+  List<Item> items = [Item(name: 'Item 1'), Item(name: 'Item 2')];
 
-  // This widget is the root of your application.
+  void addItem(String name) {
+    items.add(Item(name: name));
+    notifyListeners();
+  }
+
+  void removeItem(int index) {
+    items.removeAt(index);
+    notifyListeners();
+  }
+
+  void editItem(int index, String newName) {
+    items[index].name = newName;
+    notifyListeners();
+  }
+}
+
+class GenUIApp extends StatelessWidget {
+  const GenUIApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+      debugShowCheckedModeBanner: false,
+      home: ChangeNotifierProvider(
+        create: (context) => ItemsDataModel(),
+        child: const ItemListScreen(),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+class ItemListScreen extends StatelessWidget {
+  const ItemListScreen({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyClass {
-  int number = 0;
-}
-
-final _allocations = <List<_MyClass>>[];
-int count = 10; //50000000;
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-
-    try {
-      _allocations.add(List.generate(count, (_) => _MyClass()));
-    } catch (e) {
-      print('!!!!!!!!!! Error: $e');
-    }
-
-    print(
-        'ProcessInfo.currentRss: ${ProcessInfo.currentRss}, _allocations.length: ${_allocations.length}');
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Item List'),
+      ),
+      body: Consumer<ItemsDataModel>(
+        builder: (context, itemDataModel, child) {
+          return ListView.builder(
+            itemCount: itemDataModel.items.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(itemDataModel.items[index].name),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.edit),
+                      onPressed: () async {
+                        final newName = await showDialog<String>(
+                          context: context,
+                          builder: (context) => EditItemDialog(
+                            itemName: itemDataModel.items[index].name,
+                          ),
+                        );
+                        if (newName != null) {
+                          itemDataModel.editItem(index, newName);
+                        }
+                      },
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.delete),
+                      onPressed: () {
+                        itemDataModel.removeItem(index);
+                      },
+                    ),
+                  ],
+                ),
+              );
+            },
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          final dataModel = context.read<ItemsDataModel>();
+          final newName = await showDialog<String>(
+            context: context,
+            builder: (context) => const AddItemDialog(),
+          );
+          if (newName != null && newName.isNotEmpty) {
+            dataModel.addItem(newName);
+          }
+        },
+        child: const Icon(Icons.add),
+      ),
+    );
   }
+}
 
-  void _clearAllocations() {
-    _allocations.clear();
-    print(
-        'ProcessInfo.currentRss: ${ProcessInfo.currentRss}, _allocations.length: ${_allocations.length}');
+class AddItemDialog extends StatefulWidget {
+  const AddItemDialog({super.key});
+
+  @override
+  State<AddItemDialog> createState() => _AddItemDialogState();
+}
+
+class _AddItemDialogState extends State<AddItemDialog> {
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Add Item'),
+      content: TextField(
+        controller: _controller,
+        autofocus: true,
+      ),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: const Text('Cancel'),
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop(_controller.text);
+          },
+          child: const Text('Add'),
+        ),
+      ],
+    );
+  }
+}
+
+class EditItemDialog extends StatefulWidget {
+  final String itemName;
+
+  const EditItemDialog({super.key, required this.itemName});
+
+  @override
+  State<EditItemDialog> createState() => _EditItemDialogState();
+}
+
+class _EditItemDialogState extends State<EditItemDialog> {
+  late TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: widget.itemName);
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+    return AlertDialog(
+      title: const Text('Edit Item'),
+      content: TextField(
+        controller: _controller,
+        autofocus: true,
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            TextButton(
-                onPressed: _clearAllocations, child: const Text('clear')),
-          ],
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: const Text('Cancel'),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop(_controller.text);
+          },
+          child: const Text('Save'),
+        ),
+      ],
     );
   }
+}
+
+void main() {
+  runApp(const GenUIApp());
 }

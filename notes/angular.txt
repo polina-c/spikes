@@ -1,0 +1,8 @@
+<div ng-app="" ng-init="name='lightblue'">
+
+
+<p>Name : <input type="text" ng-model="name"></p>
+<p ng-bind="name"></p> == <h1>{{name}}</h1>
+{{ 5 + 5 }} or {{ firstName + " " + lastName }}
+
+selector is an element name
