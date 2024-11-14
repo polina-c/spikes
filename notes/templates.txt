@@ -1,6 +1,10 @@
+kill $(lsof -t -i:5001)
+
 GenUI local UI:
 http://polinach1.c.googlers.com:9879
 http://polinach2.c.googlers.com:9879
+
+http://polinach4.c.googlers.com:9879
 
 --dart-define LEAK_TRACKING=true
 

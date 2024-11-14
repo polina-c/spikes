@@ -1,188 +1,190 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:vector_math/vector_math_64.dart' hide Colors;
 
-class Item {
-  String name;
-  Item({required this.name});
+void main() {
+  runApp(const MyApp());
 }
 
-class ItemsDataModel extends ChangeNotifier {
-  List<Item> items = [Item(name: 'Item 1'), Item(name: 'Item 2')];
-
-  void addItem(String name) {
-    items.add(Item(name: name));
-    notifyListeners();
-  }
-
-  void removeItem(int index) {
-    items.removeAt(index);
-    notifyListeners();
-  }
-
-  void editItem(int index, String newName) {
-    items[index].name = newName;
-    notifyListeners();
-  }
-}
-
-class GenUIApp extends StatelessWidget {
-  const GenUIApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: ChangeNotifierProvider(
-        create: (context) => ItemsDataModel(),
-        child: const ItemListScreen(),
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
-class ItemListScreen extends StatelessWidget {
-  const ItemListScreen({super.key});
+class MyHomePage extends StatelessWidget {
+  final String title;
+
+  const MyHomePage({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Item List'),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(title),
       ),
-      body: Consumer<ItemsDataModel>(
-        builder: (context, itemDataModel, child) {
-          return ListView.builder(
-            itemCount: itemDataModel.items.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(itemDataModel.items[index].name),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.edit),
-                      onPressed: () async {
-                        final newName = await showDialog<String>(
-                          context: context,
-                          builder: (context) => EditItemDialog(
-                            itemName: itemDataModel.items[index].name,
-                          ),
-                        );
-                        if (newName != null) {
-                          itemDataModel.editItem(index, newName);
-                        }
-                      },
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.delete),
-                      onPressed: () {
-                        itemDataModel.removeItem(index);
-                      },
-                    ),
-                  ],
-                ),
-              );
-            },
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          final dataModel = context.read<ItemsDataModel>();
-          final newName = await showDialog<String>(
-            context: context,
-            builder: (context) => const AddItemDialog(),
-          );
-          if (newName != null && newName.isNotEmpty) {
-            dataModel.addItem(newName);
-          }
-        },
-        child: const Icon(Icons.add),
+      body: const Center(
+        child: MemoryPressureWidget(),
       ),
     );
   }
 }
 
-class AddItemDialog extends StatefulWidget {
-  const AddItemDialog({super.key});
+class MemoryPressureWidget extends StatefulWidget {
+  const MemoryPressureWidget({super.key});
 
   @override
-  State<AddItemDialog> createState() => _AddItemDialogState();
+  State<MemoryPressureWidget> createState() => _MemoryPressureWidgetState();
 }
 
-class _AddItemDialogState extends State<AddItemDialog> {
-  final TextEditingController _controller = TextEditingController();
+class _MemoryPressureWidgetState extends State<MemoryPressureWidget>
+//with SingleTickerProviderStateMixin
+{
+  // late AnimationController _controller;
+
+  final List<PairedWanderer> wanderers = [];
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text('Add Item'),
-      content: TextField(
-        controller: _controller,
-        autofocus: true,
-      ),
-      actions: [
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: const Text('Cancel'),
-        ),
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop(_controller.text);
-          },
-          child: const Text('Add'),
-        ),
+    return Stack(
+      children: [
+        for (final wanderer in wanderers)
+          PairedWandererWidget(wanderer: wanderer),
       ],
     );
   }
-}
-
-class EditItemDialog extends StatefulWidget {
-  final String itemName;
-
-  const EditItemDialog({super.key, required this.itemName});
 
   @override
-  State<EditItemDialog> createState() => _EditItemDialogState();
-}
-
-class _EditItemDialogState extends State<EditItemDialog> {
-  late TextEditingController _controller;
+  void dispose() {
+    // _controller.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController(text: widget.itemName);
+    _createBatch(1000, const Size(500, 500));
+
+    // _controller = AnimationController(vsync: this);
+  }
+
+  void _createBatch(int batchSize, Size worldSize) {
+    assert(batchSize.isEven);
+    final random = Random(42);
+    for (var i = 0; i < batchSize / 2; i++) {
+      final a = PairedWanderer(
+        velocity: (Vector2.random() - Vector2.all(0.5))..scale(100),
+        worldSize: worldSize,
+        position: Vector2(worldSize.width * random.nextDouble(),
+            worldSize.height * random.nextDouble()),
+      );
+      final b = PairedWanderer(
+        velocity: (Vector2.random() - Vector2.all(0.5))..scale(100),
+        worldSize: worldSize,
+        position: Vector2(worldSize.width * random.nextDouble(),
+            worldSize.height * random.nextDouble()),
+      );
+      a.otherWanderer = b;
+      b.otherWanderer = a;
+      wanderers.add(a);
+      wanderers.add(b);
+    }
+  }
+}
+
+class PairedWanderer {
+  PairedWanderer? otherWanderer;
+
+  final Vector2 position;
+
+  final Vector2 velocity;
+
+  final Size worldSize;
+
+  PairedWanderer({
+    required this.position,
+    required this.velocity,
+    required this.worldSize,
+  });
+
+  void update(double dt) {
+    position.addScaled(velocity, dt);
+    if (otherWanderer != null) {
+      position.addScaled(otherWanderer!.velocity, dt * 0.25);
+    }
+
+    if (position.x < 0 && velocity.x < 0) {
+      velocity.x = -velocity.x;
+    } else if (position.x > worldSize.width && velocity.x > 0) {
+      velocity.x = -velocity.x;
+    }
+    if (position.y < 0 && velocity.y < 0) {
+      velocity.y = -velocity.y;
+    } else if (position.y > worldSize.height && velocity.y > 0) {
+      velocity.y = -velocity.y;
+    }
+  }
+}
+
+class PairedWandererWidget extends StatefulWidget {
+  final PairedWanderer wanderer;
+
+  const PairedWandererWidget({required this.wanderer, super.key});
+
+  @override
+  State<PairedWandererWidget> createState() => _PairedWandererWidgetState();
+}
+
+class _PairedWandererWidgetState extends State<PairedWandererWidget>
+    with SingleTickerProviderStateMixin {
+  late Ticker _ticker;
+
+  Duration _lastElapsed = Duration.zero;
+
+  @override
+  void initState() {
+    super.initState();
+    _ticker = createTicker(_onTick);
+    _ticker.start();
+  }
+
+  @override
+  void dispose() {
+    _ticker.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text('Edit Item'),
-      content: TextField(
-        controller: _controller,
-        autofocus: true,
+    return Positioned(
+      left: widget.wanderer.position.x - 128 / 4,
+      top: widget.wanderer.position.y - 128 / 4,
+      child: const SizedBox(
+        width: 8,
+        height: 8,
+        child: Placeholder(),
       ),
-      actions: [
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: const Text('Cancel'),
-        ),
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop(_controller.text);
-          },
-          child: const Text('Save'),
-        ),
-      ],
     );
   }
-}
 
-void main() {
-  runApp(const GenUIApp());
+  void _onTick(Duration elapsed) {
+    var dt = (elapsed - _lastElapsed).inMicroseconds / 1000000;
+    dt = min(dt, 1 / 60);
+    widget.wanderer.update(dt);
+    _lastElapsed = elapsed;
+    setState(() {});
+  }
 }
