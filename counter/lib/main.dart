@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -50,11 +51,7 @@ class MemoryPressureWidget extends StatefulWidget {
   State<MemoryPressureWidget> createState() => _MemoryPressureWidgetState();
 }
 
-class _MemoryPressureWidgetState extends State<MemoryPressureWidget>
-//with SingleTickerProviderStateMixin
-{
-  // late AnimationController _controller;
-
+class _MemoryPressureWidgetState extends State<MemoryPressureWidget> {
   final List<PairedWanderer> wanderers = [];
 
   @override
@@ -68,17 +65,9 @@ class _MemoryPressureWidgetState extends State<MemoryPressureWidget>
   }
 
   @override
-  void dispose() {
-    // _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   void initState() {
     super.initState();
     _createBatch(1000, const Size(500, 500));
-
-    // _controller = AnimationController(vsync: this);
   }
 
   void _createBatch(int batchSize, Size worldSize) {
@@ -97,8 +86,8 @@ class _MemoryPressureWidgetState extends State<MemoryPressureWidget>
         position: Vector2(worldSize.width * random.nextDouble(),
             worldSize.height * random.nextDouble()),
       );
-      a.otherWanderer = b;
-      b.otherWanderer = a;
+      // a.otherWanderer = a;
+      // b.otherWanderer = b;
       wanderers.add(a);
       wanderers.add(b);
     }
@@ -149,21 +138,22 @@ class PairedWandererWidget extends StatefulWidget {
 }
 
 class _PairedWandererWidgetState extends State<PairedWandererWidget>
-    with SingleTickerProviderStateMixin {
-  late Ticker _ticker;
-
-  Duration _lastElapsed = Duration.zero;
+//with SingleTickerProviderStateMixin
+{
+  late Duration _lastElapsed = Duration.zero;
+  late Timer _ticker;
+  final startTime = DateTime.now();
 
   @override
   void initState() {
     super.initState();
-    _ticker = createTicker(_onTick);
-    _ticker.start();
+
+    _ticker = Timer.periodic(const Duration(milliseconds: 16), _onTick);
   }
 
   @override
   void dispose() {
-    _ticker.dispose();
+    _ticker.cancel();
     super.dispose();
   }
 
@@ -180,7 +170,8 @@ class _PairedWandererWidgetState extends State<PairedWandererWidget>
     );
   }
 
-  void _onTick(Duration elapsed) {
+  void _onTick(Timer timer) {
+    final elapsed = DateTime.now().difference(startTime);
     var dt = (elapsed - _lastElapsed).inMicroseconds / 1000000;
     dt = min(dt, 1 / 60);
     widget.wanderer.update(dt);
