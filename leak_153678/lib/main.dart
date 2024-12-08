@@ -1,11 +1,13 @@
-import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:vector_math/vector_math_64.dart' hide Colors;
 
 void main() {
+  LeakTesting.enable();
+  LeakTracking.declareNotDisposedObjectsAsLeaks();
   runApp(const MyApp());
 }
 
