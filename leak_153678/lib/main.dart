@@ -6,8 +6,8 @@ import 'package:flutter/scheduler.dart';
 import 'package:vector_math/vector_math_64.dart' hide Colors;
 
 void main() {
-  LeakTesting.enable();
-  LeakTracking.declareNotDisposedObjectsAsLeaks();
+  // LeakTesting.enable();
+  // LeakTracking.declareNotDisposedObjectsAsLeaks();
   runApp(const MyApp());
 }
 

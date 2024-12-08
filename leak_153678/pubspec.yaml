@@ -11,6 +11,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.8
   vector_math: ^2.1.4
+  leak_tracker: any
 
 dev_dependencies:
   flutter_lints: ^5.0.0
