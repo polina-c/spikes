@@ -45,8 +45,8 @@ class MyHomePage extends StatelessWidget {
       body: Column(
         children: [
           const SizedBox(
-            width: 300,
-            height: 300,
+            width: 500,
+            height: 500,
             child: MemoryPressureWidget(),
           ),
           ElevatedButton(onPressed: () {}, child: Text('print details')),
