@@ -19,7 +19,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FocusNode();
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -43,7 +42,17 @@ class MyHomePage extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(title),
       ),
-      body: const Center(child: MemoryPressureWidget()),
+      body: Column(
+        children: [
+          const SizedBox(
+            width: 300,
+            height: 300,
+            child: MemoryPressureWidget(),
+          ),
+          ElevatedButton(onPressed: () {}, child: Text('print details')),
+          ElevatedButton(onPressed: () {}, child: Text('print footprint')),
+        ],
+      ),
     );
   }
 }
@@ -166,6 +175,8 @@ class _PairedWandererWidgetState extends State<PairedWandererWidget>
 
   @override
   Widget build(BuildContext context) {
+    FocusNode();
+
     return Positioned(
       left: widget.wanderer.position.x - 128 / 4,
       top: widget.wanderer.position.y - 128 / 4,
