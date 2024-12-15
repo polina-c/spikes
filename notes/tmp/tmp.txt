@@ -1,5 +1,17 @@
-firstpartygenui
+blaze test //javatests/com/google/mobile/flutter/genui/server/firstpartygenui/service:MediumTests
+blaze test //javatests/com/google/mobile/flutter/genui/server/genui/service:MediumTests
+
+blaze test //javatests/com/google/mobile/flutter/genui/server/firstpartygenui/service:smoke_test.lite
 
 
-
+rpc_endpoint_interface(
+    name = "genui_endpoint",
+    default_provider = "//java/com/google/mobile/flutter/genui/server/firstpartygenui/service:tin_sut_component",
+    metadata = [accepted_request_extensions(boq_common_extensions = True)],
+    rpc_services = [RpcService(
+        name = "internal.flutter.genui.api.proto.genui.GenuiFirstPartyService",
+        proto_library = "//google/internal/flutter/genui/api/proto:genui",
+    )],
+    visibility = ["//visibility:public"],
+)
 
