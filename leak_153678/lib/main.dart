@@ -7,11 +7,10 @@ import 'package:leak_tracker/leak_tracker.dart';
 import 'package:vector_math/vector_math_64.dart' hide Colors;
 
 void main() {
-  LeakTracking.start();
   FlutterMemoryAllocations.instance.addListener(
     (ObjectEvent event) => LeakTracking.dispatchObjectEvent(event.toMap()),
   );
-
+  LeakTracking.start();
   runApp(const MyApp());
 }
 
