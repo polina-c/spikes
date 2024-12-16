@@ -14,4 +14,3 @@ rpc_endpoint_interface(
     )],
     visibility = ["//visibility:public"],
 )
-

@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:counter/memory.dart';
+// import 'package:counter/memory.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
@@ -89,7 +89,8 @@ class _MemoryPressureWidgetState extends State<MemoryPressureWidget> {
   void initState() {
     super.initState();
     _createBatch(1000, const Size(500, 500));
-    MemoryChecker();
+
+    // MemoryChecker();
   }
 
   void _createBatch(int batchSize, Size worldSize) {
