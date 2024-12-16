@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:counter/memory.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
@@ -10,7 +11,7 @@ void main() {
   FlutterMemoryAllocations.instance.addListener(
     (ObjectEvent event) => LeakTracking.dispatchObjectEvent(event.toMap()),
   );
-  LeakTracking.phase = PhaseSettings(baselining: MemoryBaselining());
+
   LeakTracking.start();
   runApp(const MyApp());
 }
@@ -88,6 +89,7 @@ class _MemoryPressureWidgetState extends State<MemoryPressureWidget> {
   void initState() {
     super.initState();
     _createBatch(1000, const Size(500, 500));
+    MemoryChecker();
   }
 
   void _createBatch(int batchSize, Size worldSize) {
