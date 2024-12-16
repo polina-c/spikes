@@ -49,7 +49,13 @@ class MyHomePage extends StatelessWidget {
             height: 500,
             child: MemoryPressureWidget(),
           ),
-          ElevatedButton(onPressed: () {}, child: Text('print details')),
+          ElevatedButton(
+            onPressed: () async {
+              final leaks = await LeakTracking.collectLeaks();
+              print(leaks);
+            },
+            child: Text('print details'),
+          ),
           ElevatedButton(onPressed: () {}, child: Text('print footprint')),
         ],
       ),
