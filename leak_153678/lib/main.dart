@@ -10,6 +10,7 @@ void main() {
   FlutterMemoryAllocations.instance.addListener(
     (ObjectEvent event) => LeakTracking.dispatchObjectEvent(event.toMap()),
   );
+  LeakTracking.phase = PhaseSettings(baselining: MemoryBaselining());
   LeakTracking.start();
   runApp(const MyApp());
 }
@@ -52,7 +53,7 @@ class MyHomePage extends StatelessWidget {
           ElevatedButton(
             onPressed: () async {
               final leaks = await LeakTracking.collectLeaks();
-              print(leaks);
+              print(leaks.toYaml(phasesAreTests: false));
             },
             child: Text('print details'),
           ),
