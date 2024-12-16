@@ -182,8 +182,6 @@ class _PairedWandererWidgetState extends State<PairedWandererWidget>
 
   @override
   Widget build(BuildContext context) {
-    FocusNode();
-
     return Positioned(
       left: widget.wanderer.position.x - 128 / 4,
       top: widget.wanderer.position.y - 128 / 4,
