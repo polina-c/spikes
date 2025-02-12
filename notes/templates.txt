@@ -1,4 +1,4 @@
-kill $(lsof -t -i:5001)
+kill $(lsof -t -i:9887)
 
 GenUI local UI:
 http://polinach1.c.googlers.com:9879
