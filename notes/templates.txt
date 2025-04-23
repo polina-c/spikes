@@ -21,8 +21,8 @@ git new-branch <name>
 git rebase-update
 git cl upload -s
 
-../../bin/flutter update-packages --cherry-pick-package leak_tracker_flutter_testing --cherry-pick-version 3.0.9
-../../bin/flutter update-packages --cherry-pick-package leak_tracker --cherry-pick-version 10.0.8
+../../bin/flutter update-packages --cherry-pick-package leak_tracker_flutter_testing --cherry-pick-version 3.0.10
+../../bin/flutter update-packages --cherry-pick-package leak_tracker --cherry-pick-version 11.0.1
 ../../bin/flutter update-packages --force-upgrade
 packages/flutter_tools/lib/src/update_packages_pins.dart
 
