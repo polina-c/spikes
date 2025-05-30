@@ -6,6 +6,10 @@ void main() {
   FlutterMemoryAllocations.instance.addListener(
     (ObjectEvent event) => LeakTracking.dispatchObjectEvent(event.toMap()),
   );
+  LeakTracking.phase = PhaseSettings(
+    leakDiagnosticConfig: LeakDiagnosticConfig(collectStackTraceOnStart: true),
+    ignoredLeaks: IgnoredLeaks(experimentalNotGCed: IgnoredLeaksSet()),
+  );
   LeakTracking.start();
   runApp(const MyApp());
 }
